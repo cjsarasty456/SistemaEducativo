@@ -1,0 +1,31 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ordesignerObjectsDiagram dslVersion="1.0.0.0" absoluteBounds="0, 0, 11, 8.5" name="GeneralModel">
+  <DataContextMoniker Name="/GeneralModelDataContext" />
+  <nestedChildShapes>
+    <classShape Id="fc68530c-7c42-4805-b7f0-c796624134a7" absoluteBounds="0.5, 2.375, 2, 1.3862939453125">
+      <DataClassMoniker Name="/GeneralModelDataContext/Sede" />
+      <nestedChildShapes>
+        <elementListCompartment Id="ba6f08a2-9270-4b72-a3b3-26fca8325da8" absoluteBounds="0.51499999999999968, 2.835, 1.9700000000000002, 0.8262939453125" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="025a8e7f-9f35-407f-af69-50db14e92282" absoluteBounds="0.5, 0.625, 2, 1.3862939453125">
+      <DataClassMoniker Name="/GeneralModelDataContext/Departamento" />
+      <nestedChildShapes>
+        <elementListCompartment Id="e22074d4-2038-4cc4-bace-10ad7df8194c" absoluteBounds="0.51500000000000012, 1.085, 1.9700000000000002, 0.8262939453125" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="8a018ddf-946f-4c2e-931a-affd7d616940" absoluteBounds="3.25, 0.5, 2, 1.5785953776041664">
+      <DataClassMoniker Name="/GeneralModelDataContext/Municipio" />
+      <nestedChildShapes>
+        <elementListCompartment Id="d0266dae-9d22-4a4c-bf9d-b55b30dbc25e" absoluteBounds="3.2649999999999997, 0.96, 1.9700000000000002, 1.0185953776041665" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <associationConnector edgePoints="[(2.5 : 1.31814697265625); (3.25 : 1.31814697265625)]" fixedFrom="Algorithm" fixedTo="Algorithm">
+      <AssociationMoniker Name="/GeneralModelDataContext/Departamento/Departamento_Municipio" />
+      <nodes>
+        <classShapeMoniker Id="025a8e7f-9f35-407f-af69-50db14e92282" />
+        <classShapeMoniker Id="8a018ddf-946f-4c2e-931a-affd7d616940" />
+      </nodes>
+    </associationConnector>
+  </nestedChildShapes>
+</ordesignerObjectsDiagram>

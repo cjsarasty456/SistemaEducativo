@@ -1,0 +1,76 @@
+﻿@{
+    ViewBag.Title = "Lista Estudiante";
+    var mensaje = ViewData["Mensaje"] as SistemaEducativo.Models.General.Objetos.ObjMensaje;
+}
+    <div class="row">
+        <div class="col col-md-12">
+            <div class="card">
+                <div class="card-header">
+                    <h1 class="m-0 text-dark">Lista Estudiantes</h1>
+                </div>
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col col-md-4 col-12">
+                            <label>Tipo Documento</label>
+                            <select id="CmpTipoDocumentoIdentidad" class="form-control" onchange="CargarListaEstudiante();">
+                                <option selected value="">Seleccione una opción</option>
+                                @{
+                                    var TipoDocumento = ViewData["TipoDocumento"] as List<SistemaEducativo.Models.Constantes.ObjTipoDocumento>;
+                                    foreach (var Item in TipoDocumento)
+                                    {
+                                        <option value=@Item.Tipo> @Item.Desc_Tipo </option>
+                                    }
+                                }
+                            </select>
+                        </div>
+                        <div class="col col-md-4 col-12">
+                            <label>Documento</label>
+                            <input id="CmpDocumentoIdentidad" class="form-control" oninput="CargarListaEstudiante();" />
+                        </div>
+                        <div class="col col-md-4 col-12">
+                            <label>Sede</label>
+                            <select id="CmpSede" class="form-control" onchange="CargarListaEstudiante();">
+                                <option value="">Seleccione sede</option>
+                                @{
+                                    var Sedes = ViewData["Sede"] as List<SistemaEducativo.Models.General.SedeViewModel>;
+                                    foreach (var Item in Sedes)
+                                    {
+                                        <option value=@Item.Id> @Item.Nombre </option>
+                                    }
+                                }
+                            </select>
+                        </div>
+                    </div>
+                    <hr />
+                    <br>
+                    <div id="contenedor" />
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Modal Eliminar -->
+    <div class="modal fade" id="ModalEliminar" tabindex="-1" aria-labelledby="ModalEliminar" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <form id="Forms" action="/Estudiante/Delete" method="post">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">Eliminar Estudiante</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <input id="IdItem" name="Id" type="text" hidden>
+                        ¿Desea eliminar el registro del estudiante?
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal"><i class="far fa-window-close"></i> No</button>
+                        <button type="button" class="btn btn-danger" onclick="EliminarEstudiante();"data-dismiss="modal"><i class="fas fa-trash-alt"></i> Si</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    <section Script>
+        <script src="~/Scripts/Estudiante/index.js"></script>
+    </section>

@@ -1,0 +1,180 @@
+﻿@{ 
+    Layout = null;
+    var ListaNivelEducativo = ViewData["NivelEducativo"] as List<SistemaEducativo.Models.Constantes.ObjNivelEducativo>;
+}
+<div class="row">
+    <div class="col col-md-6 col-12">
+        <div class="form-group">
+            <label for="CmpDependenciaPersona">¿Depende de alguna persona?</label>
+            <select id="CmpDependenciaPersona" name="DependenciaPersona" class="form-control">
+                @{
+                    if (Model.DependenciaPersona)
+                    {
+                        <option value="true" selected>Si</option>
+                        <option value="false">No</option>
+                    }
+                    else
+                    {
+                        <option value="true">Si</option>
+                        <option value="false" selected>No</option>
+                    }
+                }
+            </select>
+            <small id="CmpDependenciaPersonaHelp">¿Indique Si o No?</small>
+        </div>
+    </div>
+    <div class="col col-md-6 col-12">
+        <div class="form-group">
+            <label for="CmpDependenciaPersonaQuien">¿De Quién?</label>
+            <input id="CmpDependenciaPersonaQuien" name="DependenciaPersonaQuien" class="form-control" min="0" max="100" value="@Model.DependenciaPersonaQuien">
+            <small id="CmpDependenciaPersonaQuienHelp">Ingrese el nombre</small>
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div class="col col-md-6 col-12">
+        <div class="form-group">
+            <label for="CmpDependenciaPersonaNivelEducativo">Nivel Educativo de quien depende</label>
+            <select id="CmpDependenciaPersonaNivelEducativo" name="DependenciaPersonaNivelEducativo" class="form-control">
+                <option value="" selected>Selecciones una opción</option>
+                @{
+                    
+                    foreach (var item in ListaNivelEducativo)
+                    {
+                        if (Model.DependenciaPersonaNivelEducativo != null)
+                        {
+                            if (Model.DependenciaPersonaNivelEducativo.Equals(item.Nivel))
+                            {
+                                <option selected>@item.Nivel</option>
+                            }
+                            else
+                            {
+                                <option>@item.Nivel</option>
+                            }
+                        }
+                        else
+                        {
+                            <option>@item.Nivel</option>
+                        }
+                    }
+                }
+            </select>
+            <small id="CmpDependenciaPersonaNivelEducativoHelp">¿Indique el nivel educativo?</small>
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div class="col col-md-6 col-12">
+        <div class="form-group">
+            <label for="CmpPersonaCargo">¿El estudiante tiene personas a cargo?</label>
+            <select id="CmpPersonaCargo" name="PersonaCargo" class="form-control">
+                @{
+                    if (Model.PersonaCargo)
+                    {
+                        <option value="true" selected>Si</option>
+                        <option value="false">No</option>
+                    }
+                    else
+                    {
+                        <option value="true">Si</option>
+                        <option value="false" selected>No</option>
+                    }
+                }
+            </select>
+            <small id="CmpPersonaCargoHelp">¿Indique Si o No?</small>
+        </div>
+    </div>
+    <div class="col col-md-6 col-12">
+        <div class="form-group">
+            <label for="CmpPersonaCargoQuien">¿Quién?</label>
+            <input id="CmpPersonaCargoQuien" name="PersonaCargoQuien" class="form-control" min="0" max="100" value="@Model.PersonaCargoQuien">
+            <small id="CmpPersonaCargoQuienHelp">Ingrese de quíen está acargo</small>
+        </div>
+    </div>
+</div>
+<hr />
+<h3>Nombre de la persona Cuidadora del estudiante * (si aplica)</h3>
+<div class="row">
+    <div class="col col-md-6 col-12">
+        <div class="form-group">
+            <label for="CmpPersonaCuidadoraParentesco">¿Parentesco con el estudiante?</label>
+            <input id="CmpPersonaCuidadoraParentesco" name="PersonaCuidadoraParentesco" class="form-control" min="0" max="100" value="@Model.PersonaCuidadoraParentesco">
+            <small id="CmpPersonaCuidadoraParentescoHelp">Ingrese el Parentesco</small>
+        </div>
+    </div>
+    <div class="col col-md-6 col-12">
+        <div class="form-group">
+            <label for="CmpPersonaCuidadoraNivelEducativo">Nivel Educativo de quien depende</label>
+            <select id="CmpPersonaCuidadoraNivelEducativo" name="PersonaCuidadoraNivelEducativo" class="form-control">
+                <option value="" selected>Selecciones una opción</option>
+                @{
+                    foreach (var item in ListaNivelEducativo)
+                    {
+                        if (Model.PersonaCuidadoraNivelEducativo != null)
+                        {
+                            if (Model.PersonaCuidadoraNivelEducativo.Equals(item.Nivel))
+                            {
+                                <option selected>@item.Nivel</option>
+                            }
+                            else
+                            {
+                                <option>@item.Nivel</option>
+                            }
+                        }
+                        else
+                        {
+                            <option>@item.Nivel</option>
+                        }
+                    }
+                }
+            </select>
+            <small id="CmpPersonaCuidadoraNivelEducativoHelp">¿Indique el nivel educativo?</small>
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div class="col col-md-6 col-12">
+        <div class="form-group">
+            <label for="CmpPersonaCuidadoraTelefono">Teléfono Cuidador</label>
+            <input id="CmpPersonaCuidadoraTelefono" name="PersonaCuidadoraTelefono" class="form-control" min="0" max="100" value="@Model.PersonaCuidadoraTelefono">
+            <small id="CmpPersonaCuidadoraTelefonoHelp">Ingrese el Parentesco</small>
+        </div>
+    </div>
+    <div class="col col-md-6 col-12">
+        <div class="form-group">
+            <label for="CmpPersonaCuidadoraEmail">Correo electronico Cuidador</label>
+            <input id="CmpPersonaCuidadoraEmail" type="email" name="PersonaCuidadoraEmail" class="form-control" min="0" max="100" value="@Model.PersonaCuidadoraEmail">
+            <small id="CmpPersonaCuidadoraEmailHelp">Ingrese el Parentesco</small>
+        </div>
+    </div>
+</div>
+<hr />
+<div class="row">
+    <div class="col col-md-6 col-12">
+        <div class="form-group">
+            <label for="CmpRecibeSubsidio">La familia recibe subsidio de alguna entidad o institución</label>
+            <select id="CmpRecibeSubsidio" name="RecibeSubsidio" class="form-control">
+                @{
+                    if (Model.RecibeSubsidio)
+                    {
+                        <option value="true" selected>Si</option>
+                        <option value="false">No</option>
+                    }
+                    else
+                    {
+                        <option value="true">Si</option>
+                        <option value="false" selected>No</option>
+                    }
+                }
+            </select>
+            <small id="CmpRecibeSubsidio">¿Indique Si o No?</small>
+        </div>
+    </div>
+    <div class="col col-md-6 col-12">
+        <div class="form-group">
+            <label for="CmpRecibeSubsidioCual">¿Cuál?</label>
+            <input id="CmpRecibeSubsidioCual" name="RecibeSubsidioCual" class="form-control" min="0" max="100" value="@Model.RecibeSubsidioCual">
+            <small id="CmpRecibeSubsidioCualHelp">(Ejemplos: Prosperidad Social, ICBF, Fundaciones, ONG, etc.)</small>
+        </div>
+    </div>
+</div>

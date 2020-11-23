@@ -1,0 +1,363 @@
+﻿@model SistemaEducativo.Models.Estudiante.ObjEstudiante
+@{
+    Layout = null;
+    var Departamentos = ViewData["Departamento"] as List<SistemaEducativo.Models.General.ObDepartamento>;
+    var municipios = ViewData["Municipio"] as List<SistemaEducativo.Models.General.ObjMunicipio>;
+}
+<br />
+<div class="row">
+    <div class="col col-md-6 col-12">
+        <div class="form-group">
+            <label for="CmpPrimerNombre">Primer Nombre</label>
+            <input id="CmpPrimerNombre" class="form-control" name="PrimerNombre" value="@Model.PrimerNombre" type="text" minlength="3" maxlength="50" required style='text-transform:uppercase' />
+            <small id="CmpPrimerNombreHelp">Registre Primer Nombre</small>
+        </div>
+    </div>
+    <div class="col col-md-6 col-12">
+        <div class="form-group">
+            <label for="CmpSegundoNombre">Segundo Nombre</label>
+            <input id="CmpSegundoNombre" name="SegundoNombre" class="form-control" value="@Model.SegundoNombre" type="text" minlength="3" maxlength="50" required style='text-transform:uppercase' />
+            <small id="CmpSegundoNombreHelp">Registre Segundo Nombre</small>
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div class="col col-md-6 col-12">
+        <div class="form-group">
+            <label for="CmpPrimerApellido">Primer Apellido</label>
+            <input id="CmpPrimerApellido" name="PrimerApellido" class="form-control" value="@Model.PrimerApellido" type="text" minlength="3" maxlength="50" required style='text-transform:uppercase' />
+            <small id="CmpPrimerApellidoHelp">Registre Primer Apellido</small>
+        </div>
+    </div>
+    <div class="col col-md-6 col-12">
+        <div class="form-group">
+            <label for="CmpSegundoApellido">Segundo Apellido</label>
+            <input id="CmpSegundoApellido" name="SegundoApellido" class="form-control" value="@Model.SegundoApellido" type="text" minlength="3" maxlength="50" required style='text-transform:uppercase' />
+            <small id="CmpSegundoApellidoHelp">Registre Segundo Apellido</small>
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div class="col col-md-6 col-12">
+        <div class="form-group">
+            <input id="CmpId" name="Id" value="@Model.Id" hidden />
+            <label for="CmpTipoDocumentoIdentidad">Tipo de Documento</label>
+            <select id="CmpTipoDocumentoIdentidad" name="TipoDocumentoIdentidad" class="form-control" required>
+                <option selected disabled>Seleccione una opción</option>
+                @{
+                    var TipoDocumento = ViewData["TipoDocumento"] as List<SistemaEducativo.Models.Constantes.ObjTipoDocumento>;
+                    foreach (var Item in TipoDocumento)
+                    {
+                        if (Model.TipoDocumentoIdentidad.Equals(Item.Tipo))
+                        {
+                            <option value=@Item.Tipo selected> @Item.Desc_Tipo </option>
+                        }
+                        else
+                        {
+                            <option value=@Item.Tipo> @Item.Desc_Tipo </option>
+                        }
+                    }
+                }
+            </select>
+            <small id="CmpTipoDocumentoIdentidadHelp">Selecione su tipo de Documento</small>
+        </div>
+    </div>
+    <div class="col col-md-6 col-12">
+        <div class="form-group">
+            @Html.LabelFor(model => model.DocumentoIdentidad, htmlAttributes: new { @class = "control-label" })
+            @Html.EditorFor(model => model.DocumentoIdentidad, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.DocumentoIdentidad, "", new { @class = "text-danger" })
+            @*<label for="CmpDocumentoIdentidad">Documento</label>
+                <input id="CmpDocumentoIdentidad" name="DocumentoIdentidad" class="form-control" value="@Model.DocumentoIdentidad" minlength="3" maxlength="15" required />*@
+            @*<small id="CmpDocumentoIdentidadHelp">Registre su Documento</small>*@
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div class="col col-md-6 col-12">
+        <div class="form-group">
+            <label for="CmpFechaNacimiento">Fecha Nacimiento</label>
+            <div class="input-group date" id="FechaNacimiento" data-target-input="nearest">
+                <input type="date" id="CmpFechaNacimiento" name="FechaNacimiento" class="form-control" min="1960-01-01" value="@Model.FechaNacimiento.ToString("yyyy-MM-dd")" required>
+            </div>
+            <small id="CmpIdSedeHelp">Ingrese su Fecha Nacimiento (DD/MM/AAAA)</small>
+        </div>
+    </div>
+    <div class="col col-md-6 col-12">
+        <label for="CmpEdad">Edad</label>
+        <input id="CmpEdad" type="number" class="form-control" value="@Model.Edad" disabled />
+    </div>
+</div>
+<div class="row">
+    <div class="col col-md-6 col-12">
+        <div class="form-group">
+            <label for="CmpDepartamentoNacimiento">Departamento Nacimiento</label>
+            <select id="CmpDepartamentoNacimiento" name="DepartamentoNacimiento" class="form-control" onchange="CargarMunicipioNacimiento(this);" required>
+                <option selected disabled>Seleccione una opción</option>
+                @{
+                    foreach (var Item in Departamentos)
+                    {
+                        if (Model.DepartamentoNacimiento == Item.CodDepartamento)
+                        {
+                            <option value="@Item.CodDepartamento" selected> @Item.NomDepartamento</option>
+                        }
+                        else
+                        {
+                            <option value="@Item.CodDepartamento"> @Item.NomDepartamento</option>
+                        }
+                    }
+                }
+            </select>
+            <small id="CmpDepartamentoNacimientoHelp">Seleccione su departamento de nacimiento</small>
+        </div>
+    </div>
+    <div class="col col-md-6 col-12">
+        <div id="CampoNacimiento" class="form-group">
+            <label for="CmpMunicipioNacimiento">Municipio de nacimiento</label>
+            <select id="CmpMunicipioNacimiento" name="MunicipioNacimiento" class="form-control" onload="CargarMunicipioNacimiento(@Model.DepartamentoNacimiento, @Model.MunicipioNacimiento);" required>
+                <option selected disabled>Seleccione una opción</option>
+                @{
+                    var municipiosNacimiento = municipios.Where(m => m.CodDepartamento.Equals(Model.DepartamentoNacimiento)).ToList();
+                    foreach (var Item in municipiosNacimiento)
+                    {
+                        if (Model.MunicipioNacimiento == Item.CodMunicipio)
+                        {
+                            <option value="@Item.CodMunicipio" selected> @Item.NomMunicipio </option>
+                        }
+                        else
+                        {
+                            <option value="@Item.CodMunicipio"> @Item.NomMunicipio </option>
+                        }
+                    }
+                }
+            </select>
+            <small id="CmpMunicipioNacimientoHelp">Seleccione su Municipio de nacimiento</small>
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div class="col col-md-6 col-12">
+        <div class="form-group">
+            <label for="CmpDepartamentoDomicilio">Departamento donde vive</label>
+            <select id="CmpDepartamentoDomicilio" name="DepartamentoDomicilio" class="form-control" onchange="CargarMunicipioDomicilio(this);" required>
+                <option selected disabled>Seleccione una opción</option>
+                @{
+                    foreach (var Item in Departamentos)
+                    {
+                        if (Model.DepartamentoDomicilio == Item.CodDepartamento)
+                        {
+                            <option value="@Item.CodDepartamento" selected> @Item.NomDepartamento </option>
+                        }
+                        else
+                        {
+                            <option value="@Item.CodDepartamento"> @Item.NomDepartamento </option>
+                        }
+                    }
+                }
+            </select>
+            <small id="CmpDepartamentoDomicilioHelp">Seleccione su departamento de domicilio</small>
+        </div>
+    </div>
+    <div class="col col-md-6 col-12">
+        <div class="form-group">
+            <label for="CmpMunicipioDomicilio">Municipio donde vive</label>
+            <select id="CmpMunicipioDomicilio" name="MunicipioDomicilio" class="form-control" required>
+                <option selected disabled>Seleccione una opción</option>
+                @{
+                    var municipiosDomicilio = municipios.Where(m => m.CodDepartamento.Equals(Model.DepartamentoDomicilio)).ToList();
+                    foreach (var Item in municipiosDomicilio)
+                    {
+                        if (Model.MunicipioDomicilio == Item.CodMunicipio)
+                        {
+                            <option value="@Item.CodMunicipio" selected> @Item.NomMunicipio </option>
+                        }
+                        else
+                        {
+                            <option value="@Item.CodMunicipio"> @Item.NomMunicipio </option>
+                        }
+                    }
+
+                }
+            </select>
+            <small id="CmpMunicipioDomicilioHelp">Seleccione su Municipio de domicilio</small>
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div class="col col-md-6 col-12">
+        <div class="form-group">
+            <label for="CmpDireccion">Dirección Vivienda</label>
+            <input id="CmpDireccion" name="Direccion" class="form-control" value="@Model.Direccion" minlength="5" maxlength="20" />
+            <small id="CmpDireccionHelp">Digite su dirección de residencia</small>
+        </div>
+    </div>
+    <div class="col col-md-6 col-12">
+        <div class="form-group">
+            <label for="CmpBarrio">Barrio/Vereda</label>
+            <input id="CmpBarrio" name="BarrioVereda" class="form-control" value="@Model.BarrioVereda" minlength="3" maxlength="30">
+            <small id="CmpBarrioHelp">Digite su Barrio o Vereda</small>
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div class="col col-md-6 col-12">
+        <div class="form-group">
+            <label for="CmpCelular">Telefono/Celular</label>
+            <input id="CmpCelular" type="tel" name="Telefono" class="form-control" value="@Model.Telefono" minlength="7" maxlength="10" />
+            <small id="CmpCelularHelp">Digite su Telefono</small>
+        </div>
+    </div>
+    <div class="col col-md-6 col-12">
+        <div class="form-group">
+            <label for="CmpEmail">Correo Electrónico</label>
+            <input id="CmpEmail" name="CorreoElectronico" class="form-control" type="email" value="@Model.CorreoElectronico" minlength="5" maxlength="50">
+            <small id="CmpEmailHelp">Ingrese su Correo electronico ejemplo@dominio.com</small>
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div class="col col-md-6 col-12">
+        <div class="form-group">
+            <label for="CmpGrupoEtnico">¿Pertenece a un Grupo Étnico?</label>
+            <select id="CmpGrupoEtnico" name="GrupoEtnico" class="form-control">
+                @if (Model.GrupoEtnico)
+                {
+                    <option value="true" selected>SI</option>
+                    <option value="false">No</option>
+                }
+                else
+                {
+                    <option value="true">SI</option>
+                    <option value="false" selected>No</option>
+                }
+            </select>
+            <small id="CmpCelularHelp">Indique si pertenece a un grupo étnico</small>
+        </div>
+    </div>
+    <div class="col col-md-6 col-12">
+        <div class="form-group">
+            <label for="CmpGrupoEtnicoCual">¿Cual?</label>
+            <input id="CmpGrupoEtnicoCual" name="GrupoEtnicoCual" class="form-control" value="@Model.GrupoEtnicoCual">
+            <small id="CmpGrupoEtnicoCualHelp">Ingrese su Grupo Etino</small>
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div class="col col-md-6 col-12">
+        <div class="form-group">
+            <label for="CmpVictimaConflictoArmado">¿Se reconoce como víctima del conflicto armado?</label>
+            <select id="CmpVictimaConflictoArmado" name="VictimaConflictoArmado" class="form-control">
+                @if (Model.VictimaConflictoArmado)
+                {
+                    <option value="true" selected>SI</option>
+                    <option value="false">No</option>
+                }
+                else
+                {
+                    <option value="true">SI</option>
+                    <option value="false" selected>No</option>
+                }
+            </select>
+            <small id="CmpVictimaConflictoArmadoHelp">Indique si es víctima del conflicto armado</small>
+        </div>
+    </div>
+    <div class="col col-md-6 col-12">
+        <div class="form-group">
+            <label for="CmpVictimaConflictoArmadoCertificado">¿Cuenta con el respectivo registro?</label>
+            <select id="CmpVictimaConflictoArmadoCertificado" name="VictimaConflictoArmadoCertificado" class="form-control">
+                @if (Model.VictimaConflictoArmadoCertificado)
+                {
+                    <option value="true" selected>SI</option>
+                    <option value="false">No</option>
+                }
+                else
+                {
+                    <option value="true">SI</option>
+                    <option value="false" selected>No</option>
+                }
+            </select>
+            <small id="CmpVictimaConflictoArmadoCertificadoHelp">Indique si tiene el registro de víctima</small>
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div class="col col-md-6 col-12">
+        <div class="form-group">
+            <label for="CmpDiscapacidad">¿Se reconoce como Persona con Discapacidad?</label>
+            <select id="CmpDiscapacidad" name="Discapacidad" class="form-control">
+                @if (Model.Discapacidad)
+                {
+                    <option value="true" selected>SI</option>
+                    <option value="false">No</option>
+                }
+                else
+                {
+                    <option value="true">SI</option>
+                    <option value="false" selected>No</option>
+                }
+            </select>
+            <small id="CmpDiscapacidadHelp">Indique si presenta discapacidad</small>
+        </div>
+    </div>
+    <div class="col col-md-6 col-12">
+        <div class="form-group">
+            <label for="CmpDiscapacidadCertificado">¿Cuenta con certificación de discapacidad?</label>
+            <select id="CmpDiscapacidadCertificado" name="DiscapacidadCertificado" class="form-control">
+                @if (Model.DiscapacidadCertificado)
+                {
+                    <option value="true" selected>SI</option>
+                    <option value="false">No</option>
+                }
+                else
+                {
+                    <option value="true">SI</option>
+                    <option value="false" selected>No</option>
+                }
+            </select>
+            <small id="CmpDiscapacidadCertificadoHelp">Indique si tiene certificado</small>
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div class="col col-md-6 col-12">
+        <div class="form-group">
+            <label for="CmpRegistroCaracterizacionDiscapacidad">Registro para la localización y caracterización</label>
+            <select id="CmpRegistroCaracterizacionDiscapacidad" name="RegistroCaracterizacionDiscapacidad" class="form-control">
+                @if (Model.RegistroCaracterizacionDiscapacidad)
+                {
+                    <option value="true" selected>SI</option>
+                    <option value="false">No</option>
+                }
+                else
+                {
+                    <option value="true">SI</option>
+                    <option value="false" selected>No</option>
+                }
+            </select>
+            <small id="CmpRegistroCaracterizacionDiscapacidadHelp">Se encuentra inscrito en el Registro para la Localización y Caracterización de Personas con Discapacidad</small>
+        </div>
+    </div>
+    <div class="col col-md-6 col-12">
+        <div class="form-group">
+            <label for="CmpGenero">Genero</label>
+            <select id="CmpGenero" name="Genero" class="form-control">
+                <option disabled="disabled">Selecciones una opción</option>
+                @{
+                    var Generos = ViewData["Genero"] as List<SistemaEducativo.Models.Constantes.ObjGenero>;
+                    foreach (var Item in Generos)
+                    {
+                        if (Model.Genero.Equals(Item.Genero))
+                        {
+                            <option value=@Item.Genero selected> @Item.Desc_Genero </option>
+                        }
+                        else
+                        {
+                            <option value=@Item.Genero> @Item.Desc_Genero </option>
+                        }
+                    }
+                }
+            </select>
+            <small id="CmpGenero">Selecciones su genero</small>
+        </div>
+    </div>
+</div>

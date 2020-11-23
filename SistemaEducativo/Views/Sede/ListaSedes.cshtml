@@ -1,0 +1,51 @@
+﻿@model IEnumerable<SistemaEducativo.Models.General.SedeViewModel>
+@{
+    ViewBag.Title = "Lista Sedes";
+}
+<div class="row">
+    <div class="col col-md-12">
+        <div class="card">
+            <div class="card-header">
+                <h1 class="m-0 text-dark">Lista Sedes</h1>
+            </div>
+            <div class="card-body">
+                <table class="table table-bordered table-hover">
+                    <thead>
+                        <tr>
+                            <th>
+                                @Html.DisplayNameFor(model => model.Nombre)
+                            </th>
+                            <th>
+                                <a id="btnNuevo" class="btn btn-success" href="@Url.Action("NuevaSede", "Sede")"><i class="fas fa-plus-square"></i> Nuevo</a>
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var item in Model)
+                        {
+                            <tr>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.Nombre)
+                                </td>
+                                <td>
+                                    <a id="btnEditar" class="btn" href="/Sede/Details?id=@item.Id">
+                                        <i class="fas fa-edit fa-1x"></i>
+                                    </a>
+                                    <button class="btn" onclick="ModalEliminar(@item.Id);" data-toggle="modal" data-target="#ModalEliminar">
+                                        <i class="fas fa-trash-alt fa-1x"></i>
+                                    </button>
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+                @{
+                    Html.RenderPartial("_Paginador", ViewData["Paginacion"] as SistemaEducativo.Models.Estudiante.Objetos.ObjPaginacion);
+                }
+            </div>
+        </div>
+    </div>
+</div>
+<section scripts>
+    <script src="~/Scripts/Sede/ListaSedes.js"></script>
+</section>

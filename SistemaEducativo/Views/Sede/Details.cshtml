@@ -1,0 +1,23 @@
+﻿@model SistemaEducativo.Models.Estudiante.ObjSede
+@{
+    Layout = null;
+}
+<form action="/Estudiante/Edit" method="post">
+    <div class="row">
+        <div class="col col-md-12 col-12">
+            <div class="form-group">
+                <input id="CmpId" name="Id" hidden />
+                <label for="CmpNombre">Nombre Sede</label>
+                <input id="CmpNombre" name="Nombre" class="form-control" value="@Model.Nombre" />
+                <small id="CmpNombreHelp">Escriba el nombre de la sede</small>
+            </div>
+        </div>
+        @*<div class="col col-md-6 col-12">
+                <div class="form-group">
+                    <label for="CmpDocumentoIdentidad">Documento</label>
+                    <input id="CmpDocumentoIdentidad" name="DocumentoIdentidad" class="form-control"/>
+                    <small id="CmpDocumentoIdentidadHelp">Registre su Documento</small>
+                </div>
+            </div>*@
+    </div>
+</form>

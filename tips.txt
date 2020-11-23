@@ -1,0 +1,7 @@
+modalidad
+cada sede puede tener una modalidad distinta
+
+escuela nueva primero-quinto
+post primaria rural sexto-noveno julia
+3011 sabatino: clei 3 - clei 6
+tradicional sexto-once

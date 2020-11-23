@@ -1,0 +1,113 @@
+﻿@model SistemaEducativo.Models.Estudiante.ObjEstudiante
+@{
+    ViewBag.Title = "Editar Estudiante";
+}
+<div class="row">
+    <div class="col col-12">
+        <div class="card">
+            <div class="card-header">
+                <h1 class="m-0 text-dark"><i class="fas fa-edit"></i> Editar Estudiante</h1>
+            </div>
+            <div class="card-body">
+                <ul class="nav nav-tabs" id="myTab" role="tablist">
+                    <li class="nav-item">
+                        <a class="nav-link active" id="InfoGeneral-tab" data-toggle="tab" href="#InfoGeneral" role="tab" aria-controls="InfoGeneral" aria-selected="true">
+                            <i class="fas fa-address-card"></i>
+                            Información General
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" id="EntornoSalud-tab" data-toggle="tab" href="#EntornoSalud" role="tab" aria-controls="EntornoSalud" aria-selected="false">
+                            <i class="fas fa-hospital-user"></i> Salud
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" id="EntornoHogar-tab" data-toggle="tab" href="#EntornoHogar" role="tab" aria-controls="EntornoHogar" aria-selected="false">
+                            <i class="fas fa-house-user"></i> Hogar
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" id="InformacionInstitucion-tab" data-toggle="tab" href="#InformacionInstitucion" role="tab" aria-controls="InformacionInstitucion" aria-selected="false">
+                            <i class="fas fa-school"></i> Educación
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" id="ValoracionPedagogica-tab" data-toggle="tab" href="#ValoracionPedagogica" role="tab" aria-controls="ValoracionPedagogica" aria-selected="false">
+                            <i class="fas fa-calendar-check"></i> Valoración Pedagógica
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" id="ActaAcuerdo-tab" data-toggle="tab" href="#ActaAcuerdo" role="tab" aria-controls="ActaAcuerdo" aria-selected="false">
+                            <i class="fas fa-file-alt"></i> Acta de Acuerdo
+                        </a>
+                    </li>
+                </ul>
+                @using (Html.BeginForm("Edit", "Estudiante", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+                {
+                    @Html.AntiForgeryToken()
+                    <div class="d-flex flex-row-reverse bd-highlight">
+                        <div class="p-2 bd-highlight">
+                            @{
+                                string VistaPrevia = ViewData["VistaPrevia"] as string;
+                            }
+                            @if (VistaPrevia.Equals("No"))
+                            {
+                                <button class="btn btn-success" type="submit"><i class="fas fa-save"></i> Guardar</button>
+                            }
+                        </div>
+                        <div class="p-2 bd-highlight">
+                            <a class="btn btn-danger" href="~/Estudiante/index"><i class="far fa-window-close"></i> Cancelar</a>
+                        </div>
+                    </div>
+                    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                    <div class="tab-content" id="myTabContent">
+                        <div class="tab-pane fade show active" id="InfoGeneral" role="tabpanel" aria-labelledby="InfoGeneral-tab">
+                            @{
+                                Html.RenderPartial("_InformacionGeneral");
+                            }
+                        </div>
+                        <div class="tab-pane fade" id="EntornoSalud" role="tabpanel" aria-labelledby="EntornoSalud-tab">
+                            @{
+                                Html.RenderPartial("_EntornoSalud");
+                            }
+                        </div>
+                        <div class="tab-pane fade" id="EntornoHogar" role="tabpanel" aria-labelledby="EntornoHogar-tab">
+                            @{
+                                Html.RenderPartial("_EntornoHogar");
+                            }
+                        </div>
+                        <div class="tab-pane fade" id="InformacionInstitucion" role="tabpanel" aria-labelledby="InformacionInstitucion-tab">
+                            @{
+                                Html.RenderPartial("_EntornoEducativo");
+                            }
+                        </div>
+                        <div class="tab-pane fade" id="ValoracionPedagogica" role="tabpanel" aria-labelledby="ValoracionPedagogica-tab">
+                            @{
+                                Html.RenderPartial("_ValoracionPedagogica");
+                            }
+                        </div>
+                        <div class="tab-pane fade" id="ActaAcuerdo" role="tabpanel" aria-labelledby="ActaAcuerdo-tab">
+                            @{
+                                Html.RenderPartial("_ActaAcuerdo");
+                            }
+                        </div>
+                    </div>
+                    <div class="d-flex flex-row-reverse bd-highlight">
+                        <div class="p-2 bd-highlight">
+                            @if (VistaPrevia.Equals("No"))
+                            {
+                                <button class="btn btn-success" type="submit"><i class="fas fa-save"></i> Guardar</button>
+                            }
+                        </div>
+                        <div class="p-2 bd-highlight">
+                            <a class="btn btn-danger" href="~/Estudiante/index"><i class="far fa-window-close"></i> Cancelar</a>
+                        </div>
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+</div>
+<section Script>
+    <script src="~/Scripts/Estudiante/Details.js"></script>
+</section>

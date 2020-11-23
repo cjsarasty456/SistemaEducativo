@@ -1,0 +1,142 @@
+﻿@{
+    Layout = null;
+}
+<div class="row">
+    <div class="col col-md-6 col-12">
+        <div class="form-group">
+            <label for="CmpFechaElaboración">Fecha de Elaboración</label>
+            <div class="input-group date" id="CmpFechaElaboración" data-target-input="nearest">
+                <input type="date" class="form-control" value="@Model.FechaModificacion.ToString("yyyy-MM-dd")" disabled>
+            </div>
+        </div>
+    </div>
+    <div class="col col-md-6 col-12">
+        <div class="form-group">
+            <label for="CmpIdInstitucion">Institución Educativa</label>
+            <select id="CmpIdInstitucion" class="form-control" disabled value="@Model.Id">
+                <option value=1>San Luis Beltrán</option>
+            </select>
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div class="col col-md-6 col-12">
+        <div class="form-group">
+            <label for="CmpIdSede">Sede</label>
+            <select id="CmpIdSede" class="form-control" disabled>
+                @{
+                    var Sedes = ViewData["Sede"] as List<SistemaEducativo.Models.General.SedeViewModel>;
+                    foreach (var Item in Sedes)
+                    {
+                        if (Model.IdSede == Item.Id)
+                        {
+                            <option value=@Item.Id selected> @Item.Nombre </option>
+                        }
+                        else
+                        {
+                            <option value=@Item.Id> @Item.Nombre </option>
+                        }
+                    }
+                }
+            </select>
+        </div>
+    </div>
+    <div class="col col-md-6 col-12">
+        <div class="form-group">
+            <label for="CmpIdJornada">Jordada</label>
+            <select id="CmpIdJornada" class="form-control" disabled>
+                @{
+                    var Jornadas = ViewData["Jornada"] as List<SistemaEducativo.Models.Constantes.ObjJornada>;
+                    foreach (var Item in Jornadas)
+                    {
+                        if (Model.Jornada == Item.Jornada)
+                        {
+                            <option selected> @Item.Jornada </option>
+                        }
+                        else
+                        {
+                            <option> @Item.Jornada </option>
+                        }
+                    }
+                }
+            </select>
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div class="col col-md-6 col-12">
+        <div class="form-group">
+            <label for="CmpGrado">Grado</label>
+            <select id="CmpGrado" class="form-control" disabled>
+                <option selected disabled>Seleccione una opción</option>
+                @{
+                    var grados = ViewData["Grado"] as List<SistemaEducativo.Models.Constantes.ObjGrado>;
+                    foreach (var Item in grados)
+                    {
+                        if (Model.Grado == Item.Grado)
+                        {
+                            <option selected> @Item.Grado </option>
+                        }
+                        else
+                        {
+                            <option> @Item.Grado </option>
+                        }
+                    }
+                }
+            </select>
+        </div>
+    </div>
+    <div class="col col-md-6 col-12">
+        <div class="form-group">
+            <label for="CmpGrado">Modelo</label>
+            <input id="CmpGrado" disabled class="form-control" />
+        </div>
+    </div>
+</div>
+<hr />
+<h3>DATOS DEL ESTUDIANTE</h3>
+<div class="row">
+    <div class="col col-md-6 col-12">
+        <div class="form-group">
+            <label for="CmpTipoDocumentoIdentidad">Tipo de Documento</label>
+            <select id="CmpTipoDocumentoIdentidad" class="form-control" disabled>
+                <option selected disabled>Seleccione una opción</option>
+                @{
+                    var TipoDocumento = ViewData["TipoDocumento"] as List<SistemaEducativo.Models.Constantes.ObjTipoDocumento>;
+                    foreach (var Item in TipoDocumento)
+                    {
+                        if (Model.TipoDocumentoIdentidad.Equals(Item.Tipo))
+                        {
+                            <option value=@Item.Tipo selected>@Item.Tipo - @Item.Desc_Tipo</option>
+                        }
+                        else
+                        {
+                            <option value=@Item.Tipo>@Item.Tipo - @Item.Desc_Tipo</option>
+                        }
+                    }
+                }
+            </select>
+        </div>
+    </div>
+    <div class="col col-md-6 col-12">
+        <div class="form-group">
+            <label for="CmpNombre">Número documento</label>
+            <input id="CmpNombre" class="form-control" value="@Model.DocumentoIdentidad" disabled />
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div class="col col-md-6 col-12">
+        <div class="form-group">
+            <label for="CmpNombre">Nombres y Apellidos</label>
+            <input id="CmpNombre" class="form-control" value="@Model.PrimerNombre @Model.SegundoNombre @Model.PrimerApellido @Model.SegundoApellido" disabled />
+        </div>
+    </div>
+    <div class="col col-md-6 col-12">
+        <label for="CmpEdad">Edad</label>
+        <input id="CmpEdad" class="form-control" value="@Model.Edad Años" disabled />
+    </div>
+</div>
+@{
+    Html.RenderPartial("ListaAjusteRazonable");
+}

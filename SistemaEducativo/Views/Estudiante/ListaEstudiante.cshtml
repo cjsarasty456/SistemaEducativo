@@ -1,0 +1,46 @@
+﻿@model IEnumerable<SistemaEducativo.Models.Estudiante.ObjEstudiante>
+@{
+    Layout = null;
+}
+<table id="example2" class="table table-bordered table-hover" runat="server">
+    <thead>
+        <tr>
+            <th scope="col">Identificación</th>
+            <th scope="col">Nombres</th>
+            <th scope="col">Apellidos</th>
+            <th scope="col">Sede</th>
+            <th scope="col">Jornada</th>
+            <th scope="col">Grado</th>
+            <th scope="col">
+                <a id="btnNuevo" class="btn btn-success" data-toggle="modal" data-target="#ModalGuardar" onclick="nuevoEstudiante();"><i class="fas fa-plus-square"></i> Nuevo</a>
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr id=@item.Id>
+                <td>@item.TipoDocumentoIdentidad - @item.DocumentoIdentidad</td>
+                <td>@item.PrimerNombre  @item.SegundoNombre</td>
+                <td>@item.PrimerApellido  @item.SegundoApellido</td>
+                <td>@item.NombreSede</td>
+                <td>@item.Jornada</td>
+                <td>@item.Grado</td>
+                <td>
+                    <a id="btnEditar" class="btn" href="/Estudiante/Details?id=@item.Id&VistaPrevia=Si">
+                        <i class="fas fa-eye"></i>
+                    </a>
+                    <a id="btnEditar" class="btn" href="/Estudiante/Details?id=@item.Id&VistaPrevia=No">
+                        <i class="fas fa-edit fa-1x"></i>
+                    </a>
+                    <button class="btn" onclick="CargarIdEstudianteEliminar('@item.Id');" data-toggle="modal" data-target="#ModalEliminar">
+                        <i class="fas fa-trash-alt fa-1x"></i>
+                    </button>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+@{
+    Html.RenderPartial("_Paginador", ViewData["Paginacion"] as SistemaEducativo.Models.Estudiante.Objetos.ObjPaginacion);
+}

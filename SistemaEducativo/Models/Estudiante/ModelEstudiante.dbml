@@ -1,0 +1,90 @@
+﻿<?xml version="1.0" encoding="utf-8"?><Database Name="PIAR" Class="ModelEstudianteDataContext" xmlns="http://schemas.microsoft.com/linqtosql/dbml/2007">
+  <Connection Mode="WebSettings" ConnectionString="Data Source=ESCRITORIO-CARL\SQLSERVEREXPRESS;Initial Catalog=PIAR;User ID=sa" SettingsObjectName="System.Configuration.ConfigurationManager.ConnectionStrings" SettingsPropertyName="PIARConnectionString" Provider="System.Data.SqlClient" />
+  <Table Name="dbo.Estudiante" Member="Estudiante">
+    <Type Name="Estudiante">
+      <Column Name="id" Type="System.String" DbType="VarChar(50) NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="TipoDocumentoIdentidad" Type="System.String" DbType="VarChar(3) NOT NULL" CanBeNull="false" />
+      <Column Name="DocumentoIdentidad" Type="System.String" DbType="VarChar(15) NOT NULL" CanBeNull="false" />
+      <Column Name="PrimerApellido" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="SegundoApellido" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="PrimerNombre" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="SegundoNombre" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="Genero" Type="System.String" DbType="VarChar(2) NOT NULL" CanBeNull="false" />
+      <Column Name="FechaNacimiento" Type="System.DateTime" DbType="Date NOT NULL" CanBeNull="false" />
+      <Column Name="DepartamentoNacimiento" Type="System.String" DbType="VarChar(2)" CanBeNull="true" />
+      <Column Name="MunicipioNacimiento" Type="System.String" DbType="VarChar(3)" CanBeNull="true" />
+      <Column Name="DepartamentoDomicilio" Type="System.String" DbType="VarChar(2)" CanBeNull="true" />
+      <Column Name="MunicipioDomicilio" Type="System.String" DbType="VarChar(3)" CanBeNull="true" />
+      <Column Name="Direccion" Type="System.String" DbType="VarChar(20)" CanBeNull="true" />
+      <Column Name="BarrioVereda" Type="System.String" DbType="VarChar(30)" CanBeNull="true" />
+      <Column Name="Telefono" Type="System.String" DbType="VarChar(10)" CanBeNull="true" />
+      <Column Name="CorreoElectronico" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="ModalidadProteccion" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="ModalidadProtecciónCual" Type="System.String" DbType="VarChar(30)" CanBeNull="true" />
+      <Column Name="Ocupacion" Type="System.String" DbType="VarChar(30)" CanBeNull="true" />
+      <Column Name="GrupoEtnico" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="GrupoEtnicoCual" Type="System.String" DbType="VarChar(30)" CanBeNull="true" />
+      <Column Name="VictimaConflictoArmado" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="VictimaConflictoArmadoCertificado" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="Discapacidad" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="DiscapacidadCertificado" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="RegistroCaracterizacionDiscapacidad" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="AfiliacionSistemaSalud" Type="System.String" DbType="VarChar(15)" CanBeNull="true" />
+      <Column Name="EPS" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="AtendidoSalud" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="AtendidoSaludCual" Type="System.String" DbType="VarChar(20)" CanBeNull="true" />
+      <Column Name="AtendidoSaludFrecuencia" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="DiagnosticoMedico" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="DiagnosticoMedicoCual" Type="System.String" DbType="VarChar(20)" CanBeNull="true" />
+      <Column Name="TerapiaMedica" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="TerapiaMedicaCual" Type="System.String" DbType="VarChar(20)" CanBeNull="true" />
+      <Column Name="TerapiaMedicaFrecuencia" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="RecibeTratamientoMedico" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="RecibeTratamientoMedicoCual" Type="System.String" DbType="VarChar(20)" CanBeNull="true" />
+      <Column Name="ConsumeMedicamento" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="ConsumeMedicamentoFrecuencia" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="ConsumeMedicamentoHorario" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="NombreMedicamento" Type="System.String" DbType="VarChar(20)" CanBeNull="true" />
+      <Column Name="ConsumeMedicamentoHorarioClase" Type="System.String" DbType="VarChar(20)" CanBeNull="true" />
+      <Column Name="ElementoApoyo" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="ElementoApoyoCual" Type="System.String" DbType="VarChar(20)" CanBeNull="true" />
+      <Column Name="DependenciaPersona" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="DependenciaPersonaQuien" Type="System.String" DbType="VarChar(20)" CanBeNull="true" />
+      <Column Name="DependenciaPersonaNivelEducativo" Type="System.String" DbType="VarChar(20)" CanBeNull="true" />
+      <Column Name="PersonaCargo" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="PersonaCargoQuien" Type="System.String" DbType="VarChar(20)" CanBeNull="true" />
+      <Column Name="PersonaCuidadora" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="PersonaCuidadoraNombre" Type="System.String" DbType="VarChar(20)" CanBeNull="true" />
+      <Column Name="PersonaCuidadoraParentesco" Type="System.String" DbType="VarChar(20)" CanBeNull="true" />
+      <Column Name="PersonaCuidadoraNivelEducativo" Type="System.String" DbType="VarChar(20)" CanBeNull="true" />
+      <Column Name="PersonaCuidadoraTelefono" Type="System.String" DbType="VarChar(15)" CanBeNull="true" />
+      <Column Name="PersonaCuidadoraEmail" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="NombrePersonaCrianza" Type="System.String" DbType="VarChar(20)" CanBeNull="true" />
+      <Column Name="RecibeSubsidio" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="RecibeSubsidioCual" Type="System.String" DbType="VarChar(20)" CanBeNull="true" />
+      <Column Name="MatriculadoInstitucionAnterior" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="MatriculadoInstitucionAnteriorCual" Type="System.String" DbType="VarChar(20)" CanBeNull="true" />
+      <Column Name="MatriculadoInstitucionAnteriorPorque" Type="System.String" DbType="VarChar(20)" CanBeNull="true" />
+      <Column Name="CuantoSinEstudiar" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="QueAprendio" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="UltimoGrado" Type="System.String" DbType="VarChar(20)" CanBeNull="true" />
+      <Column Name="Aprobo" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="ObservacionCambio" Type="System.String" DbType="Text" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="RazonNoEstudio" Type="System.String" DbType="VarChar(20)" CanBeNull="true" />
+      <Column Name="ProgramaComplementario" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="ProgramaComplementarioCual" Type="System.String" DbType="VarChar(20)" CanBeNull="true" />
+      <Column Name="IdInstitucion" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="IdSede" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="Jornada" Type="System.String" DbType="VarChar(20) NOT NULL" CanBeNull="false" />
+      <Column Name="MedioTransporte" Type="System.String" DbType="VarChar(20)" CanBeNull="true" />
+      <Column Name="Grado" Type="System.String" DbType="VarChar(10) NOT NULL" CanBeNull="false" />
+      <Column Name="DepartamentoDiligencia" Type="System.String" DbType="VarChar(2)" CanBeNull="true" />
+      <Column Name="MunicipioDiligencia" Type="System.String" DbType="VarChar(3)" CanBeNull="true" />
+      <Column Name="NombreApellidoDiligencia" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="RolDiligencia" Type="System.String" DbType="VarChar(30)" CanBeNull="true" />
+      <Column Name="FechaDiligencia" Type="System.DateTime" DbType="Date" CanBeNull="true" />
+      <Column Name="FechaModificacion" Type="System.DateTime" DbType="Date" CanBeNull="true" />
+      <Column Name="Eliminado" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+    </Type>
+  </Table>
+</Database>

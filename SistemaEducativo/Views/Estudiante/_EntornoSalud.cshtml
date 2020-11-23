@@ -1,0 +1,250 @@
+﻿@{
+    Layout = null;
+}
+<br />
+<div class="row">
+    <div class="col col-md-6 col-12">
+        <div class="form-group">
+            <label for="CmpAfiliacionSistemaSalud">Afiliación sistema General Salud</label>
+            <select id="CmpAfiliacionSistemaSalud" name="AfiliacionSistemaSalud" class="form-control">
+                <option selected disabled>Seleccione un opción</option>
+                @{
+                    var AfiliacionSalud = ViewData["AfiliacionSalud"] as List<SistemaEducativo.Models.Constantes.ObjAfiliacionSalud>;
+                    foreach (var item in AfiliacionSalud)
+                    {
+                        if (Model.AfiliacionSistemaSalud != null)
+                        {
+                            if (Model.AfiliacionSistemaSalud.Equals(item.Afiliacion))
+                            {
+                                <option selected>@item.Afiliacion</option>
+                            }
+                            else
+                            {
+                                <option>@item.Afiliacion</option>
+                            }
+                        }
+                        else
+                        {
+                            <option>@item.Afiliacion</option>
+                        }
+
+                    }
+                }
+            </select>
+            <small id="CmpAfiliacionSistemaSalud">¿Indique si está afiliado al sistema General de Seguridad Social en Salud?</small>
+        </div>
+    </div>
+    <div class="col col-md-6 col-12">
+        <div class="form-group">
+            <label for="CmpEPS">EPS</label>
+            <input type="text" id="CmpEPS" name="EPS" class="form-control" value="@Model.EPS" maxlength="50"/>
+            <small id="CmpEPS">Seleccion su EPS</small>
+        </div>
+    </div>
+</div>
+<hr />
+<h5>Lugar donde le atienden en caso de emergencia</h5>
+<div class="row">
+    <div class="col col-md-4">
+        <div class="form-group">
+            <label for="CmpAtendidoSalud">¿El estudiante es atendido por el sector salud?</label>
+            <select id="CmpAtendidoSalud" name="AtendidoSalud" class="form-control">
+                @{
+                    if (Model.AtendidoSalud)
+                    {
+                        <option value="true" selected>Si</option>
+                        <option value="false">No</option>
+                    }
+                    else
+                    {
+                        <option value="true">Si</option>
+                        <option value="false" selected>No</option>
+                    }
+                }
+            </select>
+            <small id="CmpAtendidoSaludHelp">Selecciones si está siendo atendido en el sistema de salud</small>
+        </div>
+    </div>
+    <div class="col col-md-4 col-12">
+        <div class="form-group">
+            <label for="CmpAtendidoSaludCual">¿CUAL?</label>
+            <input id="CmpAtendidoSaludCual" name="AtendidoSaludCual" class="form-control" minlength="5" maxlength="20" value="@Model.AtendidoSaludCual">
+            <small id="CmpAtendidoSaludCualHelp">Indique cual</small>
+        </div>
+    </div>
+    <div class="col col-md-4">
+        <div class="form-group">
+            <label for="CmpAtendidoSaludFrecuencia">¿Frecuencia?</label>
+            <input id="CmpAtendidoSaludFrecuencia" name="AtendidoSaludFrecuencia" type="number" class="form-control" min="0" max="100" value="@Model.AtendidoSaludFrecuencia">
+            <small id="CmpAtendidoSaludFrecuenciaHelp">Indique la frecuencia con la que es atendido</small>
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div class="col col-md-6 col-12">
+        <div class="form-group">
+            <label for="CmpDiagnosticoMedico">¿Tiene diagnóstico médico?</label>
+            <select id="CmpDiagnosticoMedico" name="DiagnosticoMedico" class="form-control">
+                @{
+                    if (Model.DiagnosticoMedico)
+                    {
+                        <option value="true" selected>Si</option>
+                        <option value="false">No</option>
+                    }
+                    else
+                    {
+                        <option value="true">Si</option>
+                        <option value="false" selected>No</option>
+                    }
+                }
+            </select>
+            <small id="CmpDiagnosticoMedicoHelp">Seleccione si tiene diagnóstico médico</small>
+        </div>
+    </div>
+    <div class="col col-md-6 col-12">
+        <div class="form-group">
+            <label for="CmpDiagnosticoMedicoCual">¿CUAL?</label>
+            <input id="CmpDiagnosticoMedicoCual" name="DiagnosticoMedicoCual" class="form-control" minlength="5" maxlength="20" value="@Model.DiagnosticoMedicoCual">
+            <small id="CmpDiagnosticoMedicoCualHelp">Registre cual es su diagnóstico</small>
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div class="col col-md-4 col-12">
+        <div class="form-group">
+            <label for="CmpTerapiaMedica">¿El estudiante está asistiendo a terapias?</label>
+            <select id="CmpTerapiaMedica" name="TerapiaMedica" class="form-control">
+                @{
+                    if (Model.TerapiaMedica)
+                    {
+                        <option value="true" selected>Si</option>
+                        <option value="false">No</option>
+                    }
+                    else
+                    {
+                        <option value="true">Si</option>
+                        <option value="false" selected>No</option>
+                    }
+                }
+            </select>
+            <small id="CmpTerapiaMedicaHelp">Marque Si o No</small>
+        </div>
+    </div>
+    <div class="col col-md-4 col-12">
+        <div class="form-group">
+            <label for="CmpTerapiaMedicaCual">¿CUAL?</label>
+            <input id="CmpTerapiaMedicaCual" name="TerapiaMedicaCual" class="form-control" minlength="5" maxlength="20" value="@Model.TerapiaMedicaCual">
+            <small id="CmpTerapiaMedicaCualHelp">Digite que tipo de terapia</small>
+        </div>
+    </div>
+    <div class="col col-md-4">
+        <div class="form-group">
+            <label for="CmpTerapiaMedicaFrecuencia">¿Frecuencia?</label>
+            <input id="CmpTerapiaMedicaFrecuencia" name="TerapiaMedicaFrecuencia" type="number" class="form-control" min="0" max="20" value="@Model.TerapiaMedicaFrecuencia">
+            <small id="CmpTerapiaMedicaFrecuenciaHelp">Indique la frecuencia de las terapias</small>
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div class="col col-md-6 col-12">
+        <div class="form-group">
+            <label for="CmpRecibeTratamientoMedico">¿Recibe Tratamiento Médico?</label>
+            <select id="CmpRecibeTratamientoMedico" name="RecibeTratamientoMedico" class="form-control">
+                @{
+                    if (Model.RecibeTratamientoMedico)
+                    {
+                        <option value="true" selected>Si</option>
+                        <option value="false">No</option>
+                    }
+                    else
+                    {
+                        <option value="true">Si</option>
+                        <option value="false" selected>No</option>
+                    }
+                }
+            </select>
+            <small id="CmpRecibeTratamientoMedicoHelp">¿Actualmente recibe tratamiento médico por alguna enfermedad en particular?</small>
+        </div>
+    </div>
+    <div class="col col-md-6 col-12">
+        <div class="form-group">
+            <label for="CmpRecibeTratamientoMedicoCual">¿CUAL?</label>
+            <input id="CmpRecibeTratamientoMedicoCual" name="RecibeTratamientoMedicoCual" class="form-control" minlength="5" maxlength="20" value="@Model.RecibeTratamientoMedicoCual">
+            <small id="CmpRecibeTratamientoMedicoCualHelp">Ejemplo: para controlar epilepsia, uso de oxígeno, insulina, etc.)</small>
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div class="col col-md-6 col-12">
+        <div class="form-group">
+            <label for="CmpConsumeMedicamento">¿Consume Medicamentos?</label>
+            <select id="CmpConsumeMedicamento" name="RecibeTratamientoMedico" class="form-control">
+                @{
+                    if (Model.ConsumeMedicamento)
+                    {
+                        <option value="true" selected>Si</option>
+                        <option value="false">No</option>
+                    }
+                    else
+                    {
+                        <option value="true">Si</option>
+                        <option value="false" selected>No</option>
+                    }
+                }
+            </select>
+            <small id="CmpConsumeMedicamentoHelp">¿Indique si consume medicamentos?</small>
+        </div>
+    </div>
+    <div class="col col-md-6 col-12">
+        <div class="form-group">
+            <label for="CmpConsumeMedicamentoFrecuencia">Frecuencia</label>
+            <input id="CmpConsumeMedicamentoFrecuencia" name="ConsumeMedicamentoFrecuencia" class="form-control" min="0" max="100" value="@Model.ConsumeMedicamentoFrecuencia">
+            <small id="CmpConsumeMedicamentoFrecuenciaHelp">Indique la frecuencia del medicamento</small>
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div class="col col-md-6 col-12">
+        <div class="form-group">
+            <label for="CmpConsumeMedicamentoHorario">Horario</label>
+            <input id="CmpConsumeMedicamentoHorario" name="ConsumeMedicamentoHorario" class="form-control" maxlength="50" value="@Model.ConsumeMedicamentoHorario">
+            <small id="CmpConsumeMedicamentoHorarioHelp">¿Indique el horario de los medicamentos?</small>
+        </div>
+    </div>
+    <div class="col col-md-6 col-12">
+        <div class="form-group">
+            <label for="CmpNombreMedicamento">Nombre del Medicamento</label>
+            <input id="CmpNombreMedicamento" name="NombreMedicamento" class="form-control" minlength="5" maxlength="20" value="@Model.NombreMedicamento">
+            <small id="CmpNombreMedicamentoHelp">Indique el nombre del medicamento</small>
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div class="col col-md-6 col-12">
+        <div class="form-group">
+            <label for="CmpElementoApoyo">Utiliza elementos de apoyo</label>
+            <select id="CmpElementoApoyo" name="ElementoApoyo" class="form-control">
+                @{
+                    if (Model.ElementoApoyo)
+                    {
+                        <option value="true" selected>Si</option>
+                        <option value="false">No</option>
+                    }
+                    else
+                    {
+                        <option value="true">Si</option>
+                        <option value="false" selected>No</option>
+                    }
+                }
+            </select>
+            <small id="CmpElementoApoyoHelp">¿Cuenta con productos de apoyo para favorecer su movilidad, comunicación e independencia?  </small>
+        </div>
+    </div>
+    <div class="col col-md-6 col-12">
+        <div class="form-group">
+            <label for="CmpElementoApoyoCual">¿Cuales?</label>
+            <input id="CmpElementoApoyoCual" name="ElementoApoyoCual" class="form-control" minlength="5" maxlength="20" value="@Model.ElementoApoyoCual">
+            <small id="CmpElementoApoyoCualHelp">Ejemplos: Sillas de ruedas, bastones, tableros de comunicación, audífonos etc.</small>
+        </div>
+    </div>
+</div>

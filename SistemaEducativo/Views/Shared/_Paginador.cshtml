@@ -1,0 +1,27 @@
+﻿@model SistemaEducativo.Models.Estudiante.Objetos.ObjPaginacion
+@{
+    
+    var Paginacion = ViewData["Paginacion"] as SistemaEducativo.Models.Estudiante.Objetos.ObjPaginacion;
+    var NumPages = (int)Math.Ceiling((double)Paginacion.TotalRegistros / Paginacion.RegistrosPagina);
+}
+
+<nav aria-label="Page navigation example">
+    <ul class="pagination justify-content-end">
+        @if (Paginacion.PaginaActual == 1)
+        {
+            <li class="page-item disabled"><a class="page-link" href="?pagina=1">Anterior</a> </li>
+        }
+        else
+        {
+            <li class="page-item"><a class="page-link" href="?pagina=@(Paginacion.PaginaActual-1)">Anterior</a> </li>
+        }
+        @if (Paginacion.PaginaActual == NumPages)
+        {
+            <li class="page-item disabled"><a class="page-link" href="?pagina=@NumPages">Siguiente</a> </li>
+        }
+        else
+        {
+            <li class="page-item"><a class="page-link" href="?pagina=@(Paginacion.PaginaActual+1)">Siguiente</a> </li>
+        }
+    </ul>
+</nav>

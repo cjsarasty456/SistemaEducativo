@@ -1,0 +1,253 @@
+﻿@{
+    Layout = null;
+    var grados = ViewData["Grado"] as List<SistemaEducativo.Models.Constantes.ObjGrado>;
+}
+<hr />
+<h3>Información de la Trayectoria Educativa</h3>
+<div class="row">
+    <div class="col col-md-6 col-12">
+        <div class="form-group">
+            <label for="CmpMatriculadoInstitucionAnterior">Matriculado en otra Institución Educativa</label>
+            <select id="CmpMatriculadoInstitucionAnterior" name="MatriculadoInstitucionAnterior" class="form-control" onchange="MatriculaInstiucionAnterior();">
+                <option selected disabled>Seleccione una opción</option>
+                @{
+                    if (Model.MatriculadoInstitucionAnterior)
+                    {
+                        <option value="true" selected>Si</option>
+                        <option value="false">No</option>
+                    }
+                    else
+                    {
+                        <option value="true">Si</option>
+                        <option value="false" selected>No</option>
+                    }
+                }
+            </select>
+            <small id="CmpMatriculadoInstitucionAnteriorHelp">¿Ha estado matriculado en otra institución educativa, fundación u otra modalidad de educación?</small>
+        </div>
+    </div>
+    <div class="col col-md-6 col-12">
+        @if (Model.MatriculadoInstitucionAnterior)
+        {
+            <div id="ContenedorMatriculadoInstitucionAnteriorCual" class="form-group">
+                <label for="CmpMatriculadoInstitucionAnteriorCual">¿Cual?</label>
+                <input id="CmpMatriculadoInstitucionAnteriorCual" name="MatriculadoInstitucionAnteriorCual" class="form-control" value="@Model.MatriculadoInstitucionAnteriorCual" />
+                <small id="CmpMatriculadoInstitucionAnteriorCualHelp">Ingrese nombre de la institución anterior</small>
+            </div>
+            <div id="ContenedorMatriculadoInstitucionAnteriorPorque" class="form-group" style="display:none;">
+                <label for="CmpMatriculadoInstitucionAnteriorPorque">¿Por qué?</label>
+                <input id="CmpMatriculadoInstitucionAnteriorPorque" name="MatriculadoInstitucionAnteriorPorque" class="form-control" value="@Model.MatriculadoInstitucionAnteriorPorque" />
+                <small id="CmpMatriculadoInstitucionAnteriorPorqueHelp">Ingrese Por qué no estuvo matricula</small>
+            </div>
+        }
+        else
+        {
+            <div id="ContenedorMatriculadoInstitucionAnteriorCual" class="form-group" style="display:none;">
+                <label for="CmpMatriculadoInstitucionAnteriorCual">¿Cual?</label>
+                <input id="CmpMatriculadoInstitucionAnteriorCual" name="MatriculadoInstitucionAnteriorCual" class="form-control" value="@Model.MatriculadoInstitucionAnteriorCual" />
+                <small id="CmpMatriculadoInstitucionAnteriorCualHelp">Ingrese nombre de la institución anterior</small>
+            </div>
+            <div id="ContenedorMatriculadoInstitucionAnteriorPorque" class="form-group">
+                <label for="CmpMatriculadoInstitucionAnteriorPorque">¿Por qué?</label>
+                <input id="CmpMatriculadoInstitucionAnteriorPorque" name="MatriculadoInstitucionAnteriorPorque" class="form-control" value="@Model.MatriculadoInstitucionAnteriorPorque" />
+                <small id="CmpMatriculadoInstitucionAnteriorPorqueHelp">Ingrese Por qué no estuvo matricula</small>
+            </div>
+        }
+
+    </div>
+</div>
+<div class="row">
+    <div class="col col-md-6 col-12">
+        <div class="form-group">
+            <label for="CmpCuantoSinEstudiar">¿Hace cuánto no está estudiando?</label>
+            <input id="CmpCuantoSinEstudiar" type="number" name="CuantoSinEstudiar" class="form-control" value="@Model.CuantoSinEstudiar" />
+            <small id="CmpCuantoSinEstudiarHelp">Ingrese el valor en años</small>
+        </div>
+    </div>
+    <div class="col col-md-6 col-12">
+        <div class="form-group">
+            <label for="CmpQueAprendio">¿QUE APRENDIO?</label>
+            <input id="CmpQueAprendio" name="QueAprendio" class="form-control" value="@Model.QueAprendio" />
+            <small id="CmpQueAprendioHelp">Ingrese nombre de la institución anterior</small>
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div class="col col-md-6 col-12">
+        <div class="form-group">
+            <label for="CmpUltimoGrado">Ultimo grado Cursado</label>
+            <select id="CmpUltimoGrado" name="UltimoGrado" class="form-control">
+                <option selected disabled>Seleccione una opción</option>
+                @{
+                    foreach (var Item in grados)
+                    {
+                        if (Model.UltimoGrado == Item.Grado)
+                        {
+                            <option selected> @Item.Grado </option>
+                        }
+                        else
+                        {
+                            <option> @Item.Grado </option>
+                        }
+                    }
+                }
+            </select>
+            <small id="CmpUltimoGradoHelp">Seleccione el ultimo grado Cursado</small>
+        </div>
+    </div>
+    <div class="col col-md-6 col-12">
+        <div class="form-group">
+            <label for="CmpAprobo">¿QUE APRENDIO?</label>
+            <select id="CmpAprobo" name="Aprobo" class="form-control">
+                <option selected disabled>Seleccione una opción</option>
+                @{
+                    if (Model.Aprobo)
+                    {
+                        <option value="true" selected>Si</option>
+                        <option value="false">No</option>
+                    }
+                    else
+                    {
+                        <option value="true">Si</option>
+                        <option value="false" selected>No</option>
+                    }
+                }
+            </select>
+            <small id="CmpAproboHelp">Ingrese nombre de la institución anterior</small>
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div class="col col-12">
+        <div class="form-group">
+            <label for="CmpObervacionCambio">Observaciones: (incluir motivos del cambio de la modalidad o de la institución educativa)</label>
+            <textarea id="CmpObervacionCambio" name="ObervacionCambio" class="form-control" maxlength="300">
+                @Model.ObervacionCambio
+            </textarea>
+            @*<small id="CmpObervacionCambioHelp">Ingrese nombre de la institución anterior</small>*@
+        </div>
+    </div>
+</div>
+<hr />
+<h3>Razones por las cuales dejó de estudiar o nunca estudió</h3>
+<div class="row">
+    <div class="col col-md-6 col-12">
+        <div class="form-group">
+            <label for="CmpProgramasComplementario">¿Cursa Programas complementarios?</label>
+            <select id="CmpProgramasComplementario" name="ProgramasComplementario" class="form-control">
+                <option selected disabled>Seleccione una opción</option>
+                @{
+                    if (Model.ProgramasComplementario)
+                    {
+                        <option value="true" selected>Si</option>
+                        <option value="false">No</option>
+                    }
+                    else
+                    {
+                        <option value="true">Si</option>
+                        <option value="false" selected>No</option>
+                    }
+                }
+            </select>
+            <small id="CmpProgramasComplementarioHelp">¿Está asistiendo en la actualidad a programas complementarios?</small>
+        </div>
+    </div>
+    <div class="col col-md-6 col-12">
+        <div class="form-group">
+            <label for="CmpProgramasComplementarioCual">¿Cuáles?</label>
+            <input id="CmpProgramasComplementarioCual" name="ProgramasComplementarioCual" class="form-control" value="@Model.ProgramasComplementarioCual" />
+            <small id="CmpProgramasComplementarioCualHelp">(Ejemplo: Deportes, danzas, música, pintura, recreación, laboral, otros cursos)</small>
+        </div>
+    </div>
+</div>
+
+<hr />
+<h3>Información de la institución educativa en la que se matricula</h3>
+<div class="row">
+    <div class="col col-md-6 col-12">
+        <div class="form-group">
+            <label for="CmpIdInstitucion">Institución Educativa</label>
+            <select id="CmpIdInstitucion" name="IdInstitucion" class="form-control" readonly value="@Model.Id">
+                <option value=1>San Luis Beltrán</option>
+            </select>
+            <small id="CmpIdInstitucionHelp">Selecione su Institución</small>
+        </div>
+    </div>
+    <div class="col col-md-6 col-12">
+        <div class="form-group">
+            <label for="CmpIdSede">Sede</label>
+            <select id="CmpIdSede" name="IdSede" class="form-control">
+                @{
+                    var Sedes = ViewData["Sede"] as List<SistemaEducativo.Models.General.SedeViewModel>;
+                    foreach (var Item in Sedes)
+                    {
+                        if (Model.IdSede == Item.Id)
+                        {
+                            <option value=@Item.Id selected> @Item.Nombre </option>
+                        }
+                        else
+                        {
+                            <option value=@Item.Id> @Item.Nombre </option>
+                        }
+                    }
+                }
+            </select>
+            <small id="CmpIdSedeHelp">Seleccione su Jornada</small>
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div class="col col-md-6 col-12">
+        <div class="form-group">
+            <label for="CmpIdJornada">Jordada</label>
+            <select id="CmpIdJornada" name="Jornada" class="form-control">
+                @{
+                    var Jornadas = ViewData["Jornada"] as List<SistemaEducativo.Models.Constantes.ObjJornada>;
+                    foreach (var Item in Jornadas)
+                    {
+                        if (Model.Jornada == Item.Jornada)
+                        {
+                            <option selected> @Item.Jornada </option>
+                        }
+                        else
+                        {
+                            <option> @Item.Jornada </option>
+                        }
+                    }
+                }
+            </select>
+            <small id="CmpIdJornadaHelp">Seleccione su Jornada</small>
+        </div>
+    </div>
+    <div class="col col-md-6 col-12">
+        <div class="form-group">
+            <label for="CmpGrado">Grado</label>
+            <select id="CmpGrado" name="Grado" class="form-control">
+                <option selected disabled>Seleccione una opción</option>
+                @{
+                    foreach (var Item in grados)
+                    {
+                        if (Model.Grado == Item.Grado)
+                        {
+                            <option selected> @Item.Grado </option>
+                        }
+                        else
+                        {
+                            <option> @Item.Grado </option>
+                        }
+                    }
+                }
+            </select>
+            <small id="CmpGradoHelp">Selecione su Grado</small>
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div class="col col-md-6 col-12">
+        <div class="form-group">
+            <label for="CmpMedioTransporte">Medio Transporte</label>
+            <input id="CmpMedioTransporte" name="MedioTransporte" class="form-control" value="@Model.MedioTransporte" />
+            <small id="CmpMedioTransporteHelp">Ingrese Medio que usa el estudiante para transportarse a las clases</small>
+        </div>
+    </div>
+</div>
