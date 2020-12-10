@@ -5,6 +5,7 @@ using System.Security.Claims;
 using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
+using System.Web.Security;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
@@ -20,6 +21,18 @@ namespace SistemaEducativo.Controllers
 
         public AccountController()
         {
+        }
+
+        public ActionResult Usuario()
+        {
+            var prueba = User.Identity.GetUserId();
+            return View();
+        }
+
+        //GET
+        public ActionResult Registrar()
+        {
+            return View();
         }
 
         public AccountController(ApplicationUserManager userManager, ApplicationSignInManager signInManager )
