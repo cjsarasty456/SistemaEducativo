@@ -36,7 +36,7 @@ namespace SistemaEducativo.Models.Estudiante
     #endregion
 		
 		public ModelEstudianteDataContext() : 
-				base(global::System.Configuration.ConfigurationManager.ConnectionStrings["PIARConnectionString"].ConnectionString, mappingSource)
+				base(global::System.Configuration.ConfigurationManager.ConnectionStrings["PIARConnectionString2"].ConnectionString, mappingSource)
 		{
 			OnCreated();
 		}
@@ -503,7 +503,7 @@ namespace SistemaEducativo.Models.Estudiante
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_SegundoApellido", DbType="VarChar(50) NOT NULL", CanBeNull=false)]
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_SegundoApellido", DbType="VarChar(50)")]
 		public string SegundoApellido
 		{
 			get
@@ -543,7 +543,7 @@ namespace SistemaEducativo.Models.Estudiante
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_SegundoNombre", DbType="VarChar(50) NOT NULL", CanBeNull=false)]
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_SegundoNombre", DbType="VarChar(50)")]
 		public string SegundoNombre
 		{
 			get
@@ -683,7 +683,7 @@ namespace SistemaEducativo.Models.Estudiante
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Direccion", DbType="VarChar(20)")]
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Direccion", DbType="VarChar(50)")]
 		public string Direccion
 		{
 			get
@@ -983,7 +983,7 @@ namespace SistemaEducativo.Models.Estudiante
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_EPS", DbType="VarChar(50)")]
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_EPS", DbType="VarChar(10)")]
 		public string EPS
 		{
 			get
@@ -1243,7 +1243,7 @@ namespace SistemaEducativo.Models.Estudiante
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ConsumeMedicamentoHorario", DbType="VarChar(50)")]
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ConsumeMedicamentoHorario", DbType="VarChar(20)")]
 		public string ConsumeMedicamentoHorario
 		{
 			get

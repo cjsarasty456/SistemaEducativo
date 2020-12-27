@@ -363,8 +363,8 @@ D:\desarrollo\ASP.NET\SistemaEducativo\SistemaEducativo\SistemaEducativo\bin\es\
 D:\desarrollo\ASP.NET\SistemaEducativo\SistemaEducativo\SistemaEducativo\bin\es\Microsoft.Owin.Security.Google.resources.dll
 D:\desarrollo\ASP.NET\SistemaEducativo\SistemaEducativo\SistemaEducativo\bin\es\Microsoft.Owin.Security.Twitter.resources.dll
 D:\desarrollo\ASP.NET\SistemaEducativo\SistemaEducativo\SistemaEducativo\bin\es\Microsoft.Owin.Security.MicrosoftAccount.resources.dll
-D:\desarrollo\ASP.NET\SistemaEducativo\SistemaEducativo\SistemaEducativo\obj\Debug\SistemaEducativo.csprojAssemblyReference.cache
 D:\desarrollo\ASP.NET\SistemaEducativo\SistemaEducativo\SistemaEducativo\obj\Debug\SistemaEducativo.csproj.CoreCompileInputs.cache
 D:\desarrollo\ASP.NET\SistemaEducativo\SistemaEducativo\SistemaEducativo\obj\Debug\SistemaEducativo.csproj.CopyComplete
 D:\desarrollo\ASP.NET\SistemaEducativo\SistemaEducativo\SistemaEducativo\obj\Debug\SistemaEducativo.dll
 D:\desarrollo\ASP.NET\SistemaEducativo\SistemaEducativo\SistemaEducativo\obj\Debug\SistemaEducativo.pdb
+D:\desarrollo\ASP.NET\SistemaEducativo\SistemaEducativo\SistemaEducativo\obj\Debug\SistemaEducativo.csprojAssemblyReference.cache

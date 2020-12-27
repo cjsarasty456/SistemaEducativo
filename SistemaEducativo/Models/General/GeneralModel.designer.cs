@@ -30,15 +30,18 @@ namespace SistemaEducativo.Models.General
 		
     #region Definiciones de métodos de extensibilidad
     partial void OnCreated();
-    partial void InsertSede(Sede instance);
-    partial void UpdateSede(Sede instance);
-    partial void DeleteSede(Sede instance);
     partial void InsertDepartamento(Departamento instance);
     partial void UpdateDepartamento(Departamento instance);
     partial void DeleteDepartamento(Departamento instance);
     partial void InsertMunicipio(Municipio instance);
     partial void UpdateMunicipio(Municipio instance);
     partial void DeleteMunicipio(Municipio instance);
+    partial void InsertInstitucionEducativa(InstitucionEducativa instance);
+    partial void UpdateInstitucionEducativa(InstitucionEducativa instance);
+    partial void DeleteInstitucionEducativa(InstitucionEducativa instance);
+    partial void InsertSede(Sede instance);
+    partial void UpdateSede(Sede instance);
+    partial void DeleteSede(Sede instance);
     #endregion
 		
 		public GeneralModelDataContext() : 
@@ -71,14 +74,6 @@ namespace SistemaEducativo.Models.General
 			OnCreated();
 		}
 		
-		public System.Data.Linq.Table<Sede> Sede
-		{
-			get
-			{
-				return this.GetTable<Sede>();
-			}
-		}
-		
 		public System.Data.Linq.Table<Departamento> Departamento
 		{
 			get
@@ -94,114 +89,20 @@ namespace SistemaEducativo.Models.General
 				return this.GetTable<Municipio>();
 			}
 		}
-	}
-	
-	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.Sede")]
-	public partial class Sede : INotifyPropertyChanging, INotifyPropertyChanged
-	{
 		
-		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
-		
-		private int _Id;
-		
-		private string _Nombre;
-		
-		private bool _Eliminado;
-		
-    #region Definiciones de métodos de extensibilidad
-    partial void OnLoaded();
-    partial void OnValidate(System.Data.Linq.ChangeAction action);
-    partial void OnCreated();
-    partial void OnIdChanging(int value);
-    partial void OnIdChanged();
-    partial void OnNombreChanging(string value);
-    partial void OnNombreChanged();
-    partial void OnEliminadoChanging(bool value);
-    partial void OnEliminadoChanged();
-    #endregion
-		
-		public Sede()
-		{
-			OnCreated();
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Id", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
-		public int Id
+		public System.Data.Linq.Table<InstitucionEducativa> InstitucionEducativa
 		{
 			get
 			{
-				return this._Id;
-			}
-			set
-			{
-				if ((this._Id != value))
-				{
-					this.OnIdChanging(value);
-					this.SendPropertyChanging();
-					this._Id = value;
-					this.SendPropertyChanged("Id");
-					this.OnIdChanged();
-				}
+				return this.GetTable<InstitucionEducativa>();
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Nombre", DbType="VarChar(20) NOT NULL", CanBeNull=false)]
-		public string Nombre
+		public System.Data.Linq.Table<Sede> Sede
 		{
 			get
 			{
-				return this._Nombre;
-			}
-			set
-			{
-				if ((this._Nombre != value))
-				{
-					this.OnNombreChanging(value);
-					this.SendPropertyChanging();
-					this._Nombre = value;
-					this.SendPropertyChanged("Nombre");
-					this.OnNombreChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Eliminado", DbType="Bit NOT NULL")]
-		public bool Eliminado
-		{
-			get
-			{
-				return this._Eliminado;
-			}
-			set
-			{
-				if ((this._Eliminado != value))
-				{
-					this.OnEliminadoChanging(value);
-					this.SendPropertyChanging();
-					this._Eliminado = value;
-					this.SendPropertyChanged("Eliminado");
-					this.OnEliminadoChanged();
-				}
-			}
-		}
-		
-		public event PropertyChangingEventHandler PropertyChanging;
-		
-		public event PropertyChangedEventHandler PropertyChanged;
-		
-		protected virtual void SendPropertyChanging()
-		{
-			if ((this.PropertyChanging != null))
-			{
-				this.PropertyChanging(this, emptyChangingEventArgs);
-			}
-		}
-		
-		protected virtual void SendPropertyChanged(String propertyName)
-		{
-			if ((this.PropertyChanged != null))
-			{
-				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+				return this.GetTable<Sede>();
 			}
 		}
 	}
@@ -494,6 +395,319 @@ namespace SistemaEducativo.Models.General
 						this._CodDepartamento = default(string);
 					}
 					this.SendPropertyChanged("Departamento");
+				}
+			}
+		}
+		
+		public event PropertyChangingEventHandler PropertyChanging;
+		
+		public event PropertyChangedEventHandler PropertyChanged;
+		
+		protected virtual void SendPropertyChanging()
+		{
+			if ((this.PropertyChanging != null))
+			{
+				this.PropertyChanging(this, emptyChangingEventArgs);
+			}
+		}
+		
+		protected virtual void SendPropertyChanged(String propertyName)
+		{
+			if ((this.PropertyChanged != null))
+			{
+				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+			}
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.InstitucionEducativa")]
+	public partial class InstitucionEducativa : INotifyPropertyChanging, INotifyPropertyChanged
+	{
+		
+		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+		
+		private int _Id;
+		
+		private string _NombreInstitucion;
+		
+		private bool _Eliminado;
+		
+		private EntitySet<Sede> _Sede;
+		
+    #region Definiciones de métodos de extensibilidad
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void OnIdChanging(int value);
+    partial void OnIdChanged();
+    partial void OnNombreInstitucionChanging(string value);
+    partial void OnNombreInstitucionChanged();
+    partial void OnEliminadoChanging(bool value);
+    partial void OnEliminadoChanged();
+    #endregion
+		
+		public InstitucionEducativa()
+		{
+			this._Sede = new EntitySet<Sede>(new Action<Sede>(this.attach_Sede), new Action<Sede>(this.detach_Sede));
+			OnCreated();
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Id", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
+		public int Id
+		{
+			get
+			{
+				return this._Id;
+			}
+			set
+			{
+				if ((this._Id != value))
+				{
+					this.OnIdChanging(value);
+					this.SendPropertyChanging();
+					this._Id = value;
+					this.SendPropertyChanged("Id");
+					this.OnIdChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_NombreInstitucion", DbType="VarChar(50) NOT NULL", CanBeNull=false)]
+		public string NombreInstitucion
+		{
+			get
+			{
+				return this._NombreInstitucion;
+			}
+			set
+			{
+				if ((this._NombreInstitucion != value))
+				{
+					this.OnNombreInstitucionChanging(value);
+					this.SendPropertyChanging();
+					this._NombreInstitucion = value;
+					this.SendPropertyChanged("NombreInstitucion");
+					this.OnNombreInstitucionChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Eliminado", DbType="Bit NOT NULL")]
+		public bool Eliminado
+		{
+			get
+			{
+				return this._Eliminado;
+			}
+			set
+			{
+				if ((this._Eliminado != value))
+				{
+					this.OnEliminadoChanging(value);
+					this.SendPropertyChanging();
+					this._Eliminado = value;
+					this.SendPropertyChanged("Eliminado");
+					this.OnEliminadoChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="InstitucionEducativa_Sede", Storage="_Sede", ThisKey="Id", OtherKey="IdInstitucion")]
+		public EntitySet<Sede> Sede
+		{
+			get
+			{
+				return this._Sede;
+			}
+			set
+			{
+				this._Sede.Assign(value);
+			}
+		}
+		
+		public event PropertyChangingEventHandler PropertyChanging;
+		
+		public event PropertyChangedEventHandler PropertyChanged;
+		
+		protected virtual void SendPropertyChanging()
+		{
+			if ((this.PropertyChanging != null))
+			{
+				this.PropertyChanging(this, emptyChangingEventArgs);
+			}
+		}
+		
+		protected virtual void SendPropertyChanged(String propertyName)
+		{
+			if ((this.PropertyChanged != null))
+			{
+				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+			}
+		}
+		
+		private void attach_Sede(Sede entity)
+		{
+			this.SendPropertyChanging();
+			entity.InstitucionEducativa = this;
+		}
+		
+		private void detach_Sede(Sede entity)
+		{
+			this.SendPropertyChanging();
+			entity.InstitucionEducativa = null;
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.Sede")]
+	public partial class Sede : INotifyPropertyChanging, INotifyPropertyChanged
+	{
+		
+		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+		
+		private int _Id;
+		
+		private int _IdInstitucion;
+		
+		private string _Nombre;
+		
+		private bool _Eliminado;
+		
+		private EntityRef<InstitucionEducativa> _InstitucionEducativa;
+		
+    #region Definiciones de métodos de extensibilidad
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void OnIdChanging(int value);
+    partial void OnIdChanged();
+    partial void OnIdInstitucionChanging(int value);
+    partial void OnIdInstitucionChanged();
+    partial void OnNombreChanging(string value);
+    partial void OnNombreChanged();
+    partial void OnEliminadoChanging(bool value);
+    partial void OnEliminadoChanged();
+    #endregion
+		
+		public Sede()
+		{
+			this._InstitucionEducativa = default(EntityRef<InstitucionEducativa>);
+			OnCreated();
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Id", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
+		public int Id
+		{
+			get
+			{
+				return this._Id;
+			}
+			set
+			{
+				if ((this._Id != value))
+				{
+					this.OnIdChanging(value);
+					this.SendPropertyChanging();
+					this._Id = value;
+					this.SendPropertyChanged("Id");
+					this.OnIdChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_IdInstitucion", DbType="Int NOT NULL")]
+		public int IdInstitucion
+		{
+			get
+			{
+				return this._IdInstitucion;
+			}
+			set
+			{
+				if ((this._IdInstitucion != value))
+				{
+					if (this._InstitucionEducativa.HasLoadedOrAssignedValue)
+					{
+						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+					}
+					this.OnIdInstitucionChanging(value);
+					this.SendPropertyChanging();
+					this._IdInstitucion = value;
+					this.SendPropertyChanged("IdInstitucion");
+					this.OnIdInstitucionChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Nombre", DbType="VarChar(20) NOT NULL", CanBeNull=false)]
+		public string Nombre
+		{
+			get
+			{
+				return this._Nombre;
+			}
+			set
+			{
+				if ((this._Nombre != value))
+				{
+					this.OnNombreChanging(value);
+					this.SendPropertyChanging();
+					this._Nombre = value;
+					this.SendPropertyChanged("Nombre");
+					this.OnNombreChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Eliminado", DbType="Bit NOT NULL")]
+		public bool Eliminado
+		{
+			get
+			{
+				return this._Eliminado;
+			}
+			set
+			{
+				if ((this._Eliminado != value))
+				{
+					this.OnEliminadoChanging(value);
+					this.SendPropertyChanging();
+					this._Eliminado = value;
+					this.SendPropertyChanged("Eliminado");
+					this.OnEliminadoChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="InstitucionEducativa_Sede", Storage="_InstitucionEducativa", ThisKey="IdInstitucion", OtherKey="Id", IsForeignKey=true)]
+		public InstitucionEducativa InstitucionEducativa
+		{
+			get
+			{
+				return this._InstitucionEducativa.Entity;
+			}
+			set
+			{
+				InstitucionEducativa previousValue = this._InstitucionEducativa.Entity;
+				if (((previousValue != value) 
+							|| (this._InstitucionEducativa.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._InstitucionEducativa.Entity = null;
+						previousValue.Sede.Remove(this);
+					}
+					this._InstitucionEducativa.Entity = value;
+					if ((value != null))
+					{
+						value.Sede.Add(this);
+						this._IdInstitucion = value.Id;
+					}
+					else
+					{
+						this._IdInstitucion = default(int);
+					}
+					this.SendPropertyChanged("InstitucionEducativa");
 				}
 			}
 		}

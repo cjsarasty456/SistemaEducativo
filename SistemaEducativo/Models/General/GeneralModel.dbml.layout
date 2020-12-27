@@ -2,12 +2,6 @@
 <ordesignerObjectsDiagram dslVersion="1.0.0.0" absoluteBounds="0, 0, 11, 8.5" name="GeneralModel">
   <DataContextMoniker Name="/GeneralModelDataContext" />
   <nestedChildShapes>
-    <classShape Id="fc68530c-7c42-4805-b7f0-c796624134a7" absoluteBounds="0.5, 2.375, 2, 1.3862939453125">
-      <DataClassMoniker Name="/GeneralModelDataContext/Sede" />
-      <nestedChildShapes>
-        <elementListCompartment Id="ba6f08a2-9270-4b72-a3b3-26fca8325da8" absoluteBounds="0.51499999999999968, 2.835, 1.9700000000000002, 0.8262939453125" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
-      </nestedChildShapes>
-    </classShape>
     <classShape Id="025a8e7f-9f35-407f-af69-50db14e92282" absoluteBounds="0.5, 0.625, 2, 1.3862939453125">
       <DataClassMoniker Name="/GeneralModelDataContext/Departamento" />
       <nestedChildShapes>
@@ -25,6 +19,25 @@
       <nodes>
         <classShapeMoniker Id="025a8e7f-9f35-407f-af69-50db14e92282" />
         <classShapeMoniker Id="8a018ddf-946f-4c2e-931a-affd7d616940" />
+      </nodes>
+    </associationConnector>
+    <classShape Id="f27e06e3-c844-4246-b429-bffebae42f69" absoluteBounds="0.5, 2.375, 2, 1.3862939453125005">
+      <DataClassMoniker Name="/GeneralModelDataContext/InstitucionEducativa" />
+      <nestedChildShapes>
+        <elementListCompartment Id="215cd07c-d9e5-4d0b-90d8-e7c78a7d6591" absoluteBounds="0.515, 2.835, 1.9700000000000002, 0.8262939453125" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="d02122da-7664-4625-b3b9-2a21d6b0a754" absoluteBounds="3.25, 2.25, 2, 1.5785953776041666">
+      <DataClassMoniker Name="/GeneralModelDataContext/Sede" />
+      <nestedChildShapes>
+        <elementListCompartment Id="84c5ff11-97d1-491e-ba1e-3ab85a0ea1a9" absoluteBounds="3.265, 2.71, 1.9700000000000002, 1.0185953776041665" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <associationConnector edgePoints="[(2.5 : 3.06814697265625); (3.25 : 3.06814697265625)]" fixedFrom="Algorithm" fixedTo="Algorithm">
+      <AssociationMoniker Name="/GeneralModelDataContext/InstitucionEducativa/InstitucionEducativa_Sede" />
+      <nodes>
+        <classShapeMoniker Id="f27e06e3-c844-4246-b429-bffebae42f69" />
+        <classShapeMoniker Id="d02122da-7664-4625-b3b9-2a21d6b0a754" />
       </nodes>
     </associationConnector>
   </nestedChildShapes>

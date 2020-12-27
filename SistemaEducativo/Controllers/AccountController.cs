@@ -10,6 +10,9 @@ using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
 using SistemaEducativo.Models;
+using SistemaEducativo.Models.Configuracion;
+using SistemaEducativo.Models.Constantes;
+using SistemaEducativo.Models.General;
 
 namespace SistemaEducativo.Controllers
 {
@@ -23,15 +26,37 @@ namespace SistemaEducativo.Controllers
         {
         }
 
+        [Authorize]
+        [HttpPost]
+        public JsonResult ConsultaListaMunicipio(string CodDepartamento)
+        {
+            var Lista = MunicipioControlador.ConsultaListaMunicipioPorDepartamento(CodDepartamento);
+
+            return Json(Lista);
+        }
+
+        public void CargarFormulario()
+        {
+            ViewData["TipoDocumento"] = TipoDocumento.ConsultaListaTipoDocumento();
+            ViewData["Genero"] = Genero.ConsultaListaGenero();
+            ViewData["Jornada"] = Jornada.ConsultaListaJornada();
+            ViewData["Sede"] = SedeControlador.ConsultaListaSedes();
+            ViewData["Grado"] = Grado.ConsultaListaGrado();
+            ViewData["Departamento"] = MunicipioControlador.ConsultaListaDepartamentos();
+            ViewData["Municipio"] = MunicipioControlador.ConsultaListaMunicipio();
+            ViewData["AfiliacionSalud"] = AfiliacionSalud.ConsultaListaAfiliacionSalud();
+            ViewData["NivelEducativo"] = NivelEducativo.ConsultaListaNivelEducativo();
+        }
+
+        public ActionResult ListaUsuario()
+        {
+            var consulta = UsuarioControlador.ConsultaListaUsuarios();
+            return View(consulta);
+        }
+
         public ActionResult Usuario()
         {
             var prueba = User.Identity.GetUserId();
-            return View();
-        }
-
-        //GET
-        public ActionResult Registrar()
-        {
             return View();
         }
 
@@ -152,7 +177,9 @@ namespace SistemaEducativo.Controllers
         [AllowAnonymous]
         public ActionResult Register()
         {
-            return View();
+            CargarFormulario();
+            var model = new RegisterViewModel(); 
+            return View(model);
         }
 
         //
@@ -180,7 +207,7 @@ namespace SistemaEducativo.Controllers
                 }
                 AddErrors(result);
             }
-
+            CargarFormulario();
             // Si llegamos a este punto, es que se ha producido un error y volvemos a mostrar el formulario
             return View(model);
         }

@@ -276,13 +276,9 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Configuracion.dbml</DependentUpon>
     </Compile>
-    <Compile Include="Models\Configuracion\ModelConfiguracion.designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>ModelConfiguracion.dbml</DependentUpon>
-    </Compile>
     <Compile Include="Models\Configuracion\UsuarioControlador.cs" />
     <Compile Include="Models\Constantes\AfiliacionSalud.cs" />
+    <Compile Include="Models\Constantes\NivelPersonal.cs" />
     <Compile Include="Models\Constantes\NivelEducativo.cs" />
     <Compile Include="Models\Constantes\Genero.cs" />
     <Compile Include="Models\Constantes\Grado.cs" />
@@ -2037,6 +2033,7 @@
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
+    <Content Include="Scripts\Account\Register.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="fonts\FontAwesome.otf" />
@@ -2213,11 +2210,6 @@
     </Content>
     <Content Include="Content\toastr.scss" />
     <Content Include="Content\toastr.less" />
-    <Content Include="Models\Configuracion\ModelConfiguracion.dbml">
-      <Generator>MSLinqToSQLGenerator</Generator>
-      <LastGenOutput>ModelConfiguracion.designer.cs</LastGenOutput>
-      <SubType>Designer</SubType>
-    </Content>
     <Content Include="Models\Configuracion\Configuracion.dbml">
       <Generator>MSLinqToSQLGenerator</Generator>
       <LastGenOutput>Configuracion.designer.cs</LastGenOutput>
@@ -2225,9 +2217,6 @@
     </Content>
     <None Include="Models\Configuracion\Configuracion.dbml.layout">
       <DependentUpon>Configuracion.dbml</DependentUpon>
-    </None>
-    <None Include="Models\Configuracion\ModelConfiguracion.dbml.layout">
-      <DependentUpon>ModelConfiguracion.dbml</DependentUpon>
     </None>
     <None Include="Models\Estudiante\ModelEstudiante.dbml.layout">
       <DependentUpon>ModelEstudiante.dbml</DependentUpon>
@@ -2317,6 +2306,7 @@
     <Content Include="Views\Sede\ListaSedes.cshtml" />
     <Content Include="Views\Sede\NuevaSede.cshtml" />
     <Content Include="Views\Account\Usuario.cshtml" />
+    <Content Include="Views\Account\ListaUsuario.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

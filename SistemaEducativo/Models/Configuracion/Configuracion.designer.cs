@@ -36,15 +36,18 @@ namespace SistemaEducativo.Models.Configuracion
     partial void InsertSede(Sede instance);
     partial void UpdateSede(Sede instance);
     partial void DeleteSede(Sede instance);
-    partial void InsertPerfilUsuario(PerfilUsuario instance);
-    partial void UpdatePerfilUsuario(PerfilUsuario instance);
-    partial void DeletePerfilUsuario(PerfilUsuario instance);
     partial void InsertInstitucionEducativa(InstitucionEducativa instance);
     partial void UpdateInstitucionEducativa(InstitucionEducativa instance);
     partial void DeleteInstitucionEducativa(InstitucionEducativa instance);
     partial void InsertTipoVInculacion(TipoVInculacion instance);
     partial void UpdateTipoVInculacion(TipoVInculacion instance);
     partial void DeleteTipoVInculacion(TipoVInculacion instance);
+    partial void InsertAspNetUsers(AspNetUsers instance);
+    partial void UpdateAspNetUsers(AspNetUsers instance);
+    partial void DeleteAspNetUsers(AspNetUsers instance);
+    partial void InsertPerfilUsuario(PerfilUsuario instance);
+    partial void UpdatePerfilUsuario(PerfilUsuario instance);
+    partial void DeletePerfilUsuario(PerfilUsuario instance);
     #endregion
 		
 		public ConfiguracionDataContext() : 
@@ -93,14 +96,6 @@ namespace SistemaEducativo.Models.Configuracion
 			}
 		}
 		
-		public System.Data.Linq.Table<PerfilUsuario> PerfilUsuario
-		{
-			get
-			{
-				return this.GetTable<PerfilUsuario>();
-			}
-		}
-		
 		public System.Data.Linq.Table<InstitucionEducativa> InstitucionEducativa
 		{
 			get
@@ -114,6 +109,22 @@ namespace SistemaEducativo.Models.Configuracion
 			get
 			{
 				return this.GetTable<TipoVInculacion>();
+			}
+		}
+		
+		public System.Data.Linq.Table<AspNetUsers> AspNetUsers
+		{
+			get
+			{
+				return this.GetTable<AspNetUsers>();
+			}
+		}
+		
+		public System.Data.Linq.Table<PerfilUsuario> PerfilUsuario
+		{
+			get
+			{
+				return this.GetTable<PerfilUsuario>();
 			}
 		}
 	}
@@ -394,6 +405,612 @@ namespace SistemaEducativo.Models.Configuracion
 		}
 	}
 	
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.InstitucionEducativa")]
+	public partial class InstitucionEducativa : INotifyPropertyChanging, INotifyPropertyChanged
+	{
+		
+		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+		
+		private int _Id;
+		
+		private string _NombreInstitucion;
+		
+		private bool _Eliminado;
+		
+		private EntitySet<PerfilUsuario> _PerfilUsuario;
+		
+    #region Definiciones de métodos de extensibilidad
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void OnIdChanging(int value);
+    partial void OnIdChanged();
+    partial void OnNombreInstitucionChanging(string value);
+    partial void OnNombreInstitucionChanged();
+    partial void OnEliminadoChanging(bool value);
+    partial void OnEliminadoChanged();
+    #endregion
+		
+		public InstitucionEducativa()
+		{
+			this._PerfilUsuario = new EntitySet<PerfilUsuario>(new Action<PerfilUsuario>(this.attach_PerfilUsuario), new Action<PerfilUsuario>(this.detach_PerfilUsuario));
+			OnCreated();
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Id", DbType="Int NOT NULL", IsPrimaryKey=true)]
+		public int Id
+		{
+			get
+			{
+				return this._Id;
+			}
+			set
+			{
+				if ((this._Id != value))
+				{
+					this.OnIdChanging(value);
+					this.SendPropertyChanging();
+					this._Id = value;
+					this.SendPropertyChanged("Id");
+					this.OnIdChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_NombreInstitucion", DbType="VarChar(50) NOT NULL", CanBeNull=false)]
+		public string NombreInstitucion
+		{
+			get
+			{
+				return this._NombreInstitucion;
+			}
+			set
+			{
+				if ((this._NombreInstitucion != value))
+				{
+					this.OnNombreInstitucionChanging(value);
+					this.SendPropertyChanging();
+					this._NombreInstitucion = value;
+					this.SendPropertyChanged("NombreInstitucion");
+					this.OnNombreInstitucionChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Eliminado", DbType="Bit NOT NULL")]
+		public bool Eliminado
+		{
+			get
+			{
+				return this._Eliminado;
+			}
+			set
+			{
+				if ((this._Eliminado != value))
+				{
+					this.OnEliminadoChanging(value);
+					this.SendPropertyChanging();
+					this._Eliminado = value;
+					this.SendPropertyChanged("Eliminado");
+					this.OnEliminadoChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="InstitucionEducativa_PerfilUsuario", Storage="_PerfilUsuario", ThisKey="Id", OtherKey="IdInstitucionEducativa")]
+		public EntitySet<PerfilUsuario> PerfilUsuario
+		{
+			get
+			{
+				return this._PerfilUsuario;
+			}
+			set
+			{
+				this._PerfilUsuario.Assign(value);
+			}
+		}
+		
+		public event PropertyChangingEventHandler PropertyChanging;
+		
+		public event PropertyChangedEventHandler PropertyChanged;
+		
+		protected virtual void SendPropertyChanging()
+		{
+			if ((this.PropertyChanging != null))
+			{
+				this.PropertyChanging(this, emptyChangingEventArgs);
+			}
+		}
+		
+		protected virtual void SendPropertyChanged(String propertyName)
+		{
+			if ((this.PropertyChanged != null))
+			{
+				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+			}
+		}
+		
+		private void attach_PerfilUsuario(PerfilUsuario entity)
+		{
+			this.SendPropertyChanging();
+			entity.InstitucionEducativa = this;
+		}
+		
+		private void detach_PerfilUsuario(PerfilUsuario entity)
+		{
+			this.SendPropertyChanging();
+			entity.InstitucionEducativa = null;
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.TipoVInculacion")]
+	public partial class TipoVInculacion : INotifyPropertyChanging, INotifyPropertyChanged
+	{
+		
+		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+		
+		private int _IdVinculacion;
+		
+		private string _TipoVinculacion1;
+		
+		private EntitySet<PerfilUsuario> _PerfilUsuario;
+		
+    #region Definiciones de métodos de extensibilidad
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void OnIdVinculacionChanging(int value);
+    partial void OnIdVinculacionChanged();
+    partial void OnTipoVinculacion1Changing(string value);
+    partial void OnTipoVinculacion1Changed();
+    #endregion
+		
+		public TipoVInculacion()
+		{
+			this._PerfilUsuario = new EntitySet<PerfilUsuario>(new Action<PerfilUsuario>(this.attach_PerfilUsuario), new Action<PerfilUsuario>(this.detach_PerfilUsuario));
+			OnCreated();
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_IdVinculacion", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
+		public int IdVinculacion
+		{
+			get
+			{
+				return this._IdVinculacion;
+			}
+			set
+			{
+				if ((this._IdVinculacion != value))
+				{
+					this.OnIdVinculacionChanging(value);
+					this.SendPropertyChanging();
+					this._IdVinculacion = value;
+					this.SendPropertyChanged("IdVinculacion");
+					this.OnIdVinculacionChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Name="TipoVinculacion", Storage="_TipoVinculacion1", DbType="VarChar(15) NOT NULL", CanBeNull=false)]
+		public string TipoVinculacion1
+		{
+			get
+			{
+				return this._TipoVinculacion1;
+			}
+			set
+			{
+				if ((this._TipoVinculacion1 != value))
+				{
+					this.OnTipoVinculacion1Changing(value);
+					this.SendPropertyChanging();
+					this._TipoVinculacion1 = value;
+					this.SendPropertyChanged("TipoVinculacion1");
+					this.OnTipoVinculacion1Changed();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="TipoVInculacion_PerfilUsuario", Storage="_PerfilUsuario", ThisKey="IdVinculacion", OtherKey="IdTipoVinculacion")]
+		public EntitySet<PerfilUsuario> PerfilUsuario
+		{
+			get
+			{
+				return this._PerfilUsuario;
+			}
+			set
+			{
+				this._PerfilUsuario.Assign(value);
+			}
+		}
+		
+		public event PropertyChangingEventHandler PropertyChanging;
+		
+		public event PropertyChangedEventHandler PropertyChanged;
+		
+		protected virtual void SendPropertyChanging()
+		{
+			if ((this.PropertyChanging != null))
+			{
+				this.PropertyChanging(this, emptyChangingEventArgs);
+			}
+		}
+		
+		protected virtual void SendPropertyChanged(String propertyName)
+		{
+			if ((this.PropertyChanged != null))
+			{
+				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+			}
+		}
+		
+		private void attach_PerfilUsuario(PerfilUsuario entity)
+		{
+			this.SendPropertyChanging();
+			entity.TipoVInculacion = this;
+		}
+		
+		private void detach_PerfilUsuario(PerfilUsuario entity)
+		{
+			this.SendPropertyChanging();
+			entity.TipoVInculacion = null;
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.AspNetUsers")]
+	public partial class AspNetUsers : INotifyPropertyChanging, INotifyPropertyChanged
+	{
+		
+		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+		
+		private string _Id;
+		
+		private string _Email;
+		
+		private bool _EmailConfirmed;
+		
+		private string _PasswordHash;
+		
+		private string _SecurityStamp;
+		
+		private string _PhoneNumber;
+		
+		private bool _PhoneNumberConfirmed;
+		
+		private bool _TwoFactorEnabled;
+		
+		private System.Nullable<System.DateTime> _LockoutEndDateUtc;
+		
+		private bool _LockoutEnabled;
+		
+		private int _AccessFailedCount;
+		
+		private string _UserName;
+		
+		private EntitySet<PerfilUsuario> _PerfilUsuario;
+		
+    #region Definiciones de métodos de extensibilidad
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void OnIdChanging(string value);
+    partial void OnIdChanged();
+    partial void OnEmailChanging(string value);
+    partial void OnEmailChanged();
+    partial void OnEmailConfirmedChanging(bool value);
+    partial void OnEmailConfirmedChanged();
+    partial void OnPasswordHashChanging(string value);
+    partial void OnPasswordHashChanged();
+    partial void OnSecurityStampChanging(string value);
+    partial void OnSecurityStampChanged();
+    partial void OnPhoneNumberChanging(string value);
+    partial void OnPhoneNumberChanged();
+    partial void OnPhoneNumberConfirmedChanging(bool value);
+    partial void OnPhoneNumberConfirmedChanged();
+    partial void OnTwoFactorEnabledChanging(bool value);
+    partial void OnTwoFactorEnabledChanged();
+    partial void OnLockoutEndDateUtcChanging(System.Nullable<System.DateTime> value);
+    partial void OnLockoutEndDateUtcChanged();
+    partial void OnLockoutEnabledChanging(bool value);
+    partial void OnLockoutEnabledChanged();
+    partial void OnAccessFailedCountChanging(int value);
+    partial void OnAccessFailedCountChanged();
+    partial void OnUserNameChanging(string value);
+    partial void OnUserNameChanged();
+    #endregion
+		
+		public AspNetUsers()
+		{
+			this._PerfilUsuario = new EntitySet<PerfilUsuario>(new Action<PerfilUsuario>(this.attach_PerfilUsuario), new Action<PerfilUsuario>(this.detach_PerfilUsuario));
+			OnCreated();
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Id", DbType="NVarChar(128) NOT NULL", CanBeNull=false, IsPrimaryKey=true)]
+		public string Id
+		{
+			get
+			{
+				return this._Id;
+			}
+			set
+			{
+				if ((this._Id != value))
+				{
+					this.OnIdChanging(value);
+					this.SendPropertyChanging();
+					this._Id = value;
+					this.SendPropertyChanged("Id");
+					this.OnIdChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Email", DbType="NVarChar(256)")]
+		public string Email
+		{
+			get
+			{
+				return this._Email;
+			}
+			set
+			{
+				if ((this._Email != value))
+				{
+					this.OnEmailChanging(value);
+					this.SendPropertyChanging();
+					this._Email = value;
+					this.SendPropertyChanged("Email");
+					this.OnEmailChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_EmailConfirmed", DbType="Bit NOT NULL")]
+		public bool EmailConfirmed
+		{
+			get
+			{
+				return this._EmailConfirmed;
+			}
+			set
+			{
+				if ((this._EmailConfirmed != value))
+				{
+					this.OnEmailConfirmedChanging(value);
+					this.SendPropertyChanging();
+					this._EmailConfirmed = value;
+					this.SendPropertyChanged("EmailConfirmed");
+					this.OnEmailConfirmedChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_PasswordHash", DbType="NVarChar(MAX)")]
+		public string PasswordHash
+		{
+			get
+			{
+				return this._PasswordHash;
+			}
+			set
+			{
+				if ((this._PasswordHash != value))
+				{
+					this.OnPasswordHashChanging(value);
+					this.SendPropertyChanging();
+					this._PasswordHash = value;
+					this.SendPropertyChanged("PasswordHash");
+					this.OnPasswordHashChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_SecurityStamp", DbType="NVarChar(MAX)")]
+		public string SecurityStamp
+		{
+			get
+			{
+				return this._SecurityStamp;
+			}
+			set
+			{
+				if ((this._SecurityStamp != value))
+				{
+					this.OnSecurityStampChanging(value);
+					this.SendPropertyChanging();
+					this._SecurityStamp = value;
+					this.SendPropertyChanged("SecurityStamp");
+					this.OnSecurityStampChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_PhoneNumber", DbType="NVarChar(MAX)")]
+		public string PhoneNumber
+		{
+			get
+			{
+				return this._PhoneNumber;
+			}
+			set
+			{
+				if ((this._PhoneNumber != value))
+				{
+					this.OnPhoneNumberChanging(value);
+					this.SendPropertyChanging();
+					this._PhoneNumber = value;
+					this.SendPropertyChanged("PhoneNumber");
+					this.OnPhoneNumberChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_PhoneNumberConfirmed", DbType="Bit NOT NULL")]
+		public bool PhoneNumberConfirmed
+		{
+			get
+			{
+				return this._PhoneNumberConfirmed;
+			}
+			set
+			{
+				if ((this._PhoneNumberConfirmed != value))
+				{
+					this.OnPhoneNumberConfirmedChanging(value);
+					this.SendPropertyChanging();
+					this._PhoneNumberConfirmed = value;
+					this.SendPropertyChanged("PhoneNumberConfirmed");
+					this.OnPhoneNumberConfirmedChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_TwoFactorEnabled", DbType="Bit NOT NULL")]
+		public bool TwoFactorEnabled
+		{
+			get
+			{
+				return this._TwoFactorEnabled;
+			}
+			set
+			{
+				if ((this._TwoFactorEnabled != value))
+				{
+					this.OnTwoFactorEnabledChanging(value);
+					this.SendPropertyChanging();
+					this._TwoFactorEnabled = value;
+					this.SendPropertyChanged("TwoFactorEnabled");
+					this.OnTwoFactorEnabledChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_LockoutEndDateUtc", DbType="DateTime")]
+		public System.Nullable<System.DateTime> LockoutEndDateUtc
+		{
+			get
+			{
+				return this._LockoutEndDateUtc;
+			}
+			set
+			{
+				if ((this._LockoutEndDateUtc != value))
+				{
+					this.OnLockoutEndDateUtcChanging(value);
+					this.SendPropertyChanging();
+					this._LockoutEndDateUtc = value;
+					this.SendPropertyChanged("LockoutEndDateUtc");
+					this.OnLockoutEndDateUtcChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_LockoutEnabled", DbType="Bit NOT NULL")]
+		public bool LockoutEnabled
+		{
+			get
+			{
+				return this._LockoutEnabled;
+			}
+			set
+			{
+				if ((this._LockoutEnabled != value))
+				{
+					this.OnLockoutEnabledChanging(value);
+					this.SendPropertyChanging();
+					this._LockoutEnabled = value;
+					this.SendPropertyChanged("LockoutEnabled");
+					this.OnLockoutEnabledChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_AccessFailedCount", DbType="Int NOT NULL")]
+		public int AccessFailedCount
+		{
+			get
+			{
+				return this._AccessFailedCount;
+			}
+			set
+			{
+				if ((this._AccessFailedCount != value))
+				{
+					this.OnAccessFailedCountChanging(value);
+					this.SendPropertyChanging();
+					this._AccessFailedCount = value;
+					this.SendPropertyChanged("AccessFailedCount");
+					this.OnAccessFailedCountChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_UserName", DbType="NVarChar(256) NOT NULL", CanBeNull=false)]
+		public string UserName
+		{
+			get
+			{
+				return this._UserName;
+			}
+			set
+			{
+				if ((this._UserName != value))
+				{
+					this.OnUserNameChanging(value);
+					this.SendPropertyChanging();
+					this._UserName = value;
+					this.SendPropertyChanged("UserName");
+					this.OnUserNameChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="AspNetUsers_PerfilUsuario", Storage="_PerfilUsuario", ThisKey="Id", OtherKey="IdUser")]
+		public EntitySet<PerfilUsuario> PerfilUsuario
+		{
+			get
+			{
+				return this._PerfilUsuario;
+			}
+			set
+			{
+				this._PerfilUsuario.Assign(value);
+			}
+		}
+		
+		public event PropertyChangingEventHandler PropertyChanging;
+		
+		public event PropertyChangedEventHandler PropertyChanged;
+		
+		protected virtual void SendPropertyChanging()
+		{
+			if ((this.PropertyChanging != null))
+			{
+				this.PropertyChanging(this, emptyChangingEventArgs);
+			}
+		}
+		
+		protected virtual void SendPropertyChanged(String propertyName)
+		{
+			if ((this.PropertyChanged != null))
+			{
+				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+			}
+		}
+		
+		private void attach_PerfilUsuario(PerfilUsuario entity)
+		{
+			this.SendPropertyChanging();
+			entity.AspNetUsers = this;
+		}
+		
+		private void detach_PerfilUsuario(PerfilUsuario entity)
+		{
+			this.SendPropertyChanging();
+			entity.AspNetUsers = null;
+		}
+	}
+	
 	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.PerfilUsuario")]
 	public partial class PerfilUsuario : INotifyPropertyChanging, INotifyPropertyChanged
 	{
@@ -442,21 +1059,23 @@ namespace SistemaEducativo.Models.Configuracion
 		
 		private string _Titulo;
 		
-		private string _CorreoElectronico;
-		
-		private string _Contrasena;
-		
 		private int _idRol;
 		
+		private System.DateTime _FechaCreacion;
+		
 		private System.DateTime _FechaModificacion;
+		
+		private bool _Eliminado;
+		
+		private EntityRef<TipoVInculacion> _TipoVInculacion;
+		
+		private EntityRef<AspNetUsers> _AspNetUsers;
+		
+		private EntityRef<InstitucionEducativa> _InstitucionEducativa;
 		
 		private EntityRef<Rol> _Rol;
 		
 		private EntityRef<Sede> _Sede;
-		
-		private EntityRef<InstitucionEducativa> _InstitucionEducativa;
-		
-		private EntityRef<TipoVInculacion> _TipoVInculacion;
 		
     #region Definiciones de métodos de extensibilidad
     partial void OnLoaded();
@@ -504,22 +1123,23 @@ namespace SistemaEducativo.Models.Configuracion
     partial void OnGradoEscalafonChanged();
     partial void OnTituloChanging(string value);
     partial void OnTituloChanged();
-    partial void OnCorreoElectronicoChanging(string value);
-    partial void OnCorreoElectronicoChanged();
-    partial void OnContrasenaChanging(string value);
-    partial void OnContrasenaChanged();
     partial void OnidRolChanging(int value);
     partial void OnidRolChanged();
+    partial void OnFechaCreacionChanging(System.DateTime value);
+    partial void OnFechaCreacionChanged();
     partial void OnFechaModificacionChanging(System.DateTime value);
     partial void OnFechaModificacionChanged();
+    partial void OnEliminadoChanging(bool value);
+    partial void OnEliminadoChanged();
     #endregion
 		
 		public PerfilUsuario()
 		{
+			this._TipoVInculacion = default(EntityRef<TipoVInculacion>);
+			this._AspNetUsers = default(EntityRef<AspNetUsers>);
+			this._InstitucionEducativa = default(EntityRef<InstitucionEducativa>);
 			this._Rol = default(EntityRef<Rol>);
 			this._Sede = default(EntityRef<Sede>);
-			this._InstitucionEducativa = default(EntityRef<InstitucionEducativa>);
-			this._TipoVInculacion = default(EntityRef<TipoVInculacion>);
 			OnCreated();
 		}
 		
@@ -554,6 +1174,10 @@ namespace SistemaEducativo.Models.Configuracion
 			{
 				if ((this._IdUser != value))
 				{
+					if (this._AspNetUsers.HasLoadedOrAssignedValue)
+					{
+						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+					}
 					this.OnIdUserChanging(value);
 					this.SendPropertyChanging();
 					this._IdUser = value;
@@ -955,46 +1579,6 @@ namespace SistemaEducativo.Models.Configuracion
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_CorreoElectronico", DbType="VarChar(50) NOT NULL", CanBeNull=false)]
-		public string CorreoElectronico
-		{
-			get
-			{
-				return this._CorreoElectronico;
-			}
-			set
-			{
-				if ((this._CorreoElectronico != value))
-				{
-					this.OnCorreoElectronicoChanging(value);
-					this.SendPropertyChanging();
-					this._CorreoElectronico = value;
-					this.SendPropertyChanged("CorreoElectronico");
-					this.OnCorreoElectronicoChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Contrasena", DbType="VarChar(50) NOT NULL", CanBeNull=false)]
-		public string Contrasena
-		{
-			get
-			{
-				return this._Contrasena;
-			}
-			set
-			{
-				if ((this._Contrasena != value))
-				{
-					this.OnContrasenaChanging(value);
-					this.SendPropertyChanging();
-					this._Contrasena = value;
-					this.SendPropertyChanged("Contrasena");
-					this.OnContrasenaChanged();
-				}
-			}
-		}
-		
 		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_idRol", DbType="Int NOT NULL")]
 		public int idRol
 		{
@@ -1019,6 +1603,26 @@ namespace SistemaEducativo.Models.Configuracion
 			}
 		}
 		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_FechaCreacion", DbType="Date NOT NULL")]
+		public System.DateTime FechaCreacion
+		{
+			get
+			{
+				return this._FechaCreacion;
+			}
+			set
+			{
+				if ((this._FechaCreacion != value))
+				{
+					this.OnFechaCreacionChanging(value);
+					this.SendPropertyChanging();
+					this._FechaCreacion = value;
+					this.SendPropertyChanged("FechaCreacion");
+					this.OnFechaCreacionChanged();
+				}
+			}
+		}
+		
 		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_FechaModificacion", DbType="Date NOT NULL")]
 		public System.DateTime FechaModificacion
 		{
@@ -1035,6 +1639,128 @@ namespace SistemaEducativo.Models.Configuracion
 					this._FechaModificacion = value;
 					this.SendPropertyChanged("FechaModificacion");
 					this.OnFechaModificacionChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Eliminado", DbType="Bit NOT NULL")]
+		public bool Eliminado
+		{
+			get
+			{
+				return this._Eliminado;
+			}
+			set
+			{
+				if ((this._Eliminado != value))
+				{
+					this.OnEliminadoChanging(value);
+					this.SendPropertyChanging();
+					this._Eliminado = value;
+					this.SendPropertyChanged("Eliminado");
+					this.OnEliminadoChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="TipoVInculacion_PerfilUsuario", Storage="_TipoVInculacion", ThisKey="IdTipoVinculacion", OtherKey="IdVinculacion", IsForeignKey=true)]
+		public TipoVInculacion TipoVInculacion
+		{
+			get
+			{
+				return this._TipoVInculacion.Entity;
+			}
+			set
+			{
+				TipoVInculacion previousValue = this._TipoVInculacion.Entity;
+				if (((previousValue != value) 
+							|| (this._TipoVInculacion.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._TipoVInculacion.Entity = null;
+						previousValue.PerfilUsuario.Remove(this);
+					}
+					this._TipoVInculacion.Entity = value;
+					if ((value != null))
+					{
+						value.PerfilUsuario.Add(this);
+						this._IdTipoVinculacion = value.IdVinculacion;
+					}
+					else
+					{
+						this._IdTipoVinculacion = default(int);
+					}
+					this.SendPropertyChanged("TipoVInculacion");
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="AspNetUsers_PerfilUsuario", Storage="_AspNetUsers", ThisKey="IdUser", OtherKey="Id", IsForeignKey=true)]
+		public AspNetUsers AspNetUsers
+		{
+			get
+			{
+				return this._AspNetUsers.Entity;
+			}
+			set
+			{
+				AspNetUsers previousValue = this._AspNetUsers.Entity;
+				if (((previousValue != value) 
+							|| (this._AspNetUsers.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._AspNetUsers.Entity = null;
+						previousValue.PerfilUsuario.Remove(this);
+					}
+					this._AspNetUsers.Entity = value;
+					if ((value != null))
+					{
+						value.PerfilUsuario.Add(this);
+						this._IdUser = value.Id;
+					}
+					else
+					{
+						this._IdUser = default(string);
+					}
+					this.SendPropertyChanged("AspNetUsers");
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="InstitucionEducativa_PerfilUsuario", Storage="_InstitucionEducativa", ThisKey="IdInstitucionEducativa", OtherKey="Id", IsForeignKey=true)]
+		public InstitucionEducativa InstitucionEducativa
+		{
+			get
+			{
+				return this._InstitucionEducativa.Entity;
+			}
+			set
+			{
+				InstitucionEducativa previousValue = this._InstitucionEducativa.Entity;
+				if (((previousValue != value) 
+							|| (this._InstitucionEducativa.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._InstitucionEducativa.Entity = null;
+						previousValue.PerfilUsuario.Remove(this);
+					}
+					this._InstitucionEducativa.Entity = value;
+					if ((value != null))
+					{
+						value.PerfilUsuario.Add(this);
+						this._IdInstitucionEducativa = value.Id;
+					}
+					else
+					{
+						this._IdInstitucionEducativa = default(int);
+					}
+					this.SendPropertyChanged("InstitucionEducativa");
 				}
 			}
 		}
@@ -1107,74 +1833,6 @@ namespace SistemaEducativo.Models.Configuracion
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="InstitucionEducativa_PerfilUsuario", Storage="_InstitucionEducativa", ThisKey="IdInstitucionEducativa", OtherKey="Id", IsForeignKey=true)]
-		public InstitucionEducativa InstitucionEducativa
-		{
-			get
-			{
-				return this._InstitucionEducativa.Entity;
-			}
-			set
-			{
-				InstitucionEducativa previousValue = this._InstitucionEducativa.Entity;
-				if (((previousValue != value) 
-							|| (this._InstitucionEducativa.HasLoadedOrAssignedValue == false)))
-				{
-					this.SendPropertyChanging();
-					if ((previousValue != null))
-					{
-						this._InstitucionEducativa.Entity = null;
-						previousValue.PerfilUsuario.Remove(this);
-					}
-					this._InstitucionEducativa.Entity = value;
-					if ((value != null))
-					{
-						value.PerfilUsuario.Add(this);
-						this._IdInstitucionEducativa = value.Id;
-					}
-					else
-					{
-						this._IdInstitucionEducativa = default(int);
-					}
-					this.SendPropertyChanged("InstitucionEducativa");
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="TipoVInculacion_PerfilUsuario", Storage="_TipoVInculacion", ThisKey="IdTipoVinculacion", OtherKey="IdVinculacion", IsForeignKey=true)]
-		public TipoVInculacion TipoVInculacion
-		{
-			get
-			{
-				return this._TipoVInculacion.Entity;
-			}
-			set
-			{
-				TipoVInculacion previousValue = this._TipoVInculacion.Entity;
-				if (((previousValue != value) 
-							|| (this._TipoVInculacion.HasLoadedOrAssignedValue == false)))
-				{
-					this.SendPropertyChanging();
-					if ((previousValue != null))
-					{
-						this._TipoVInculacion.Entity = null;
-						previousValue.PerfilUsuario.Remove(this);
-					}
-					this._TipoVInculacion.Entity = value;
-					if ((value != null))
-					{
-						value.PerfilUsuario.Add(this);
-						this._IdTipoVinculacion = value.IdVinculacion;
-					}
-					else
-					{
-						this._IdTipoVinculacion = default(int);
-					}
-					this.SendPropertyChanged("TipoVInculacion");
-				}
-			}
-		}
-		
 		public event PropertyChangingEventHandler PropertyChanging;
 		
 		public event PropertyChangedEventHandler PropertyChanged;
@@ -1193,258 +1851,6 @@ namespace SistemaEducativo.Models.Configuracion
 			{
 				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
 			}
-		}
-	}
-	
-	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.InstitucionEducativa")]
-	public partial class InstitucionEducativa : INotifyPropertyChanging, INotifyPropertyChanged
-	{
-		
-		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
-		
-		private int _Id;
-		
-		private string _NombreInstitucion;
-		
-		private bool _Eliminado;
-		
-		private EntitySet<PerfilUsuario> _PerfilUsuario;
-		
-    #region Definiciones de métodos de extensibilidad
-    partial void OnLoaded();
-    partial void OnValidate(System.Data.Linq.ChangeAction action);
-    partial void OnCreated();
-    partial void OnIdChanging(int value);
-    partial void OnIdChanged();
-    partial void OnNombreInstitucionChanging(string value);
-    partial void OnNombreInstitucionChanged();
-    partial void OnEliminadoChanging(bool value);
-    partial void OnEliminadoChanged();
-    #endregion
-		
-		public InstitucionEducativa()
-		{
-			this._PerfilUsuario = new EntitySet<PerfilUsuario>(new Action<PerfilUsuario>(this.attach_PerfilUsuario), new Action<PerfilUsuario>(this.detach_PerfilUsuario));
-			OnCreated();
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Id", DbType="Int NOT NULL", IsPrimaryKey=true)]
-		public int Id
-		{
-			get
-			{
-				return this._Id;
-			}
-			set
-			{
-				if ((this._Id != value))
-				{
-					this.OnIdChanging(value);
-					this.SendPropertyChanging();
-					this._Id = value;
-					this.SendPropertyChanged("Id");
-					this.OnIdChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_NombreInstitucion", DbType="VarChar(50) NOT NULL", CanBeNull=false)]
-		public string NombreInstitucion
-		{
-			get
-			{
-				return this._NombreInstitucion;
-			}
-			set
-			{
-				if ((this._NombreInstitucion != value))
-				{
-					this.OnNombreInstitucionChanging(value);
-					this.SendPropertyChanging();
-					this._NombreInstitucion = value;
-					this.SendPropertyChanged("NombreInstitucion");
-					this.OnNombreInstitucionChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Eliminado", DbType="Bit NOT NULL")]
-		public bool Eliminado
-		{
-			get
-			{
-				return this._Eliminado;
-			}
-			set
-			{
-				if ((this._Eliminado != value))
-				{
-					this.OnEliminadoChanging(value);
-					this.SendPropertyChanging();
-					this._Eliminado = value;
-					this.SendPropertyChanged("Eliminado");
-					this.OnEliminadoChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="InstitucionEducativa_PerfilUsuario", Storage="_PerfilUsuario", ThisKey="Id", OtherKey="IdInstitucionEducativa")]
-		public EntitySet<PerfilUsuario> PerfilUsuario
-		{
-			get
-			{
-				return this._PerfilUsuario;
-			}
-			set
-			{
-				this._PerfilUsuario.Assign(value);
-			}
-		}
-		
-		public event PropertyChangingEventHandler PropertyChanging;
-		
-		public event PropertyChangedEventHandler PropertyChanged;
-		
-		protected virtual void SendPropertyChanging()
-		{
-			if ((this.PropertyChanging != null))
-			{
-				this.PropertyChanging(this, emptyChangingEventArgs);
-			}
-		}
-		
-		protected virtual void SendPropertyChanged(String propertyName)
-		{
-			if ((this.PropertyChanged != null))
-			{
-				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
-			}
-		}
-		
-		private void attach_PerfilUsuario(PerfilUsuario entity)
-		{
-			this.SendPropertyChanging();
-			entity.InstitucionEducativa = this;
-		}
-		
-		private void detach_PerfilUsuario(PerfilUsuario entity)
-		{
-			this.SendPropertyChanging();
-			entity.InstitucionEducativa = null;
-		}
-	}
-	
-	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.TipoVInculacion")]
-	public partial class TipoVInculacion : INotifyPropertyChanging, INotifyPropertyChanged
-	{
-		
-		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
-		
-		private int _IdVinculacion;
-		
-		private string _TipoVinculacion1;
-		
-		private EntitySet<PerfilUsuario> _PerfilUsuario;
-		
-    #region Definiciones de métodos de extensibilidad
-    partial void OnLoaded();
-    partial void OnValidate(System.Data.Linq.ChangeAction action);
-    partial void OnCreated();
-    partial void OnIdVinculacionChanging(int value);
-    partial void OnIdVinculacionChanged();
-    partial void OnTipoVinculacion1Changing(string value);
-    partial void OnTipoVinculacion1Changed();
-    #endregion
-		
-		public TipoVInculacion()
-		{
-			this._PerfilUsuario = new EntitySet<PerfilUsuario>(new Action<PerfilUsuario>(this.attach_PerfilUsuario), new Action<PerfilUsuario>(this.detach_PerfilUsuario));
-			OnCreated();
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_IdVinculacion", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
-		public int IdVinculacion
-		{
-			get
-			{
-				return this._IdVinculacion;
-			}
-			set
-			{
-				if ((this._IdVinculacion != value))
-				{
-					this.OnIdVinculacionChanging(value);
-					this.SendPropertyChanging();
-					this._IdVinculacion = value;
-					this.SendPropertyChanged("IdVinculacion");
-					this.OnIdVinculacionChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Name="TipoVinculacion", Storage="_TipoVinculacion1", DbType="VarChar(15) NOT NULL", CanBeNull=false)]
-		public string TipoVinculacion1
-		{
-			get
-			{
-				return this._TipoVinculacion1;
-			}
-			set
-			{
-				if ((this._TipoVinculacion1 != value))
-				{
-					this.OnTipoVinculacion1Changing(value);
-					this.SendPropertyChanging();
-					this._TipoVinculacion1 = value;
-					this.SendPropertyChanged("TipoVinculacion1");
-					this.OnTipoVinculacion1Changed();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="TipoVInculacion_PerfilUsuario", Storage="_PerfilUsuario", ThisKey="IdVinculacion", OtherKey="IdTipoVinculacion")]
-		public EntitySet<PerfilUsuario> PerfilUsuario
-		{
-			get
-			{
-				return this._PerfilUsuario;
-			}
-			set
-			{
-				this._PerfilUsuario.Assign(value);
-			}
-		}
-		
-		public event PropertyChangingEventHandler PropertyChanging;
-		
-		public event PropertyChangedEventHandler PropertyChanged;
-		
-		protected virtual void SendPropertyChanging()
-		{
-			if ((this.PropertyChanging != null))
-			{
-				this.PropertyChanging(this, emptyChangingEventArgs);
-			}
-		}
-		
-		protected virtual void SendPropertyChanged(String propertyName)
-		{
-			if ((this.PropertyChanged != null))
-			{
-				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
-			}
-		}
-		
-		private void attach_PerfilUsuario(PerfilUsuario entity)
-		{
-			this.SendPropertyChanging();
-			entity.TipoVInculacion = this;
-		}
-		
-		private void detach_PerfilUsuario(PerfilUsuario entity)
-		{
-			this.SendPropertyChanging();
-			entity.TipoVInculacion = null;
 		}
 	}
 }

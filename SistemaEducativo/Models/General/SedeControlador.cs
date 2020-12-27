@@ -5,9 +5,21 @@ using System.Data.Entity;
 using System.Linq;
 using System.Web;
 using SistemaEducativo.Models.General;
+using System.ComponentModel.DataAnnotations;
 
 namespace SistemaEducativo.Models.General
 {
+    //falta agregar la parte de la institución educativa
+    public class SedeViewModel
+    {
+        public int? Id { get; set; }
+        public int IdInstitucionEducativa { get; set; }
+        [Required(ErrorMessage = "El Valor es Requerido")]
+        [StringLength(30, ErrorMessage = "El nombre de la sede debe ser maximo 30")]
+        [Display(Name = "Nombre Sede")]
+        public string Nombre { get; set; }
+        public string Modalidad { get; set; }
+    }
     public class SedeControlador
     {
         public static List<SedeViewModel> ConsultaListaSedes()
@@ -76,6 +88,7 @@ namespace SistemaEducativo.Models.General
                 try
                 {
                     Sede sede = new Sede();
+                    sede.IdInstitucion= ObjSede.IdInstitucionEducativa;
                     sede.Nombre= ObjSede.Nombre;
                     
                     db.Sede.InsertOnSubmit(sede);

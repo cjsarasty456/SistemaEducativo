@@ -1,12 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?><Database Name="PIAR" Class="GeneralModelDataContext" xmlns="http://schemas.microsoft.com/linqtosql/dbml/2007">
   <Connection Mode="WebSettings" ConnectionString="Data Source=ESCRITORIO-CARL\SQLSERVEREXPRESS;Initial Catalog=PIAR;Persist Security Info=True;User ID=sa" SettingsObjectName="System.Configuration.ConfigurationManager.ConnectionStrings" SettingsPropertyName="PIARConnectionString1" Provider="System.Data.SqlClient" />
-  <Table Name="dbo.Sede" Member="Sede">
-    <Type Name="Sede">
-      <Column Name="Id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
-      <Column Name="Nombre" Type="System.String" DbType="VarChar(20) NOT NULL" CanBeNull="false" />
-      <Column Name="Eliminado" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
-    </Type>
-  </Table>
   <Table Name="dbo.Departamento" Member="Departamento">
     <Type Name="Departamento">
       <Column Name="id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
@@ -22,6 +15,23 @@
       <Column Name="CodMunicipio" Type="System.String" DbType="VarChar(3) NOT NULL" CanBeNull="false" />
       <Column Name="NomMunicipio" Type="System.String" DbType="VarChar(20) NOT NULL" CanBeNull="false" />
       <Association Name="Departamento_Municipio" Member="Departamento" ThisKey="CodDepartamento" OtherKey="CodDepartamento" Type="Departamento" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.InstitucionEducativa" Member="InstitucionEducativa">
+    <Type Name="InstitucionEducativa">
+      <Column Name="Id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="NombreInstitucion" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="Eliminado" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Association Name="InstitucionEducativa_Sede" Member="Sede" ThisKey="Id" OtherKey="IdInstitucion" Type="Sede" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Sede" Member="Sede">
+    <Type Name="Sede">
+      <Column Name="Id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="IdInstitucion" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="Nombre" Type="System.String" DbType="VarChar(20) NOT NULL" CanBeNull="false" />
+      <Column Name="Eliminado" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Association Name="InstitucionEducativa_Sede" Member="InstitucionEducativa" ThisKey="IdInstitucion" OtherKey="Id" Type="InstitucionEducativa" IsForeignKey="true" />
     </Type>
   </Table>
 </Database>

@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
 namespace SistemaEducativo.Models
@@ -64,6 +65,24 @@ namespace SistemaEducativo.Models
 
     public class RegisterViewModel
     {
+        public string IdUser { get; set; }
+
+        [Required]
+        [Display(Name = "Tipo de Documento")]
+        public string TipoDocumento { get; set; }
+
+        [Required]
+        [Display(Name = "Documento")]
+        public string Documento { get; set; }
+
+        [Required]
+        [Display(Name = "Departamento Expedición")]
+        public string CodDepartamentoExpedicion { get; set; }
+
+        [Required]
+        [Display(Name = "Municipio Expedición")]
+        public string CodMunicipioExpedicion { get; set; }
+
         [Required]
         [Display(Name = "Nombres")]
         public string FirstName { get; set; }
@@ -71,6 +90,9 @@ namespace SistemaEducativo.Models
         [Required]
         [Display(Name = "Apellidos")]
         public string LastName { get; set; }
+        [Required]
+        [Display(Name = "Fecha Nacimiento")]
+        public DateTime FechaNacimiento { get; set; }
 
         [Required]
         [EmailAddress]
@@ -88,6 +110,49 @@ namespace SistemaEducativo.Models
         [Compare("Password", ErrorMessage = "La contraseña y la contraseña de confirmación no coinciden.")]
         public string ConfirmPassword { get; set; }
 
+        [Required]
+        [Display(Name = "Tipo Vinculación")]
+        public int idTipoVinculacion { get; set; }
+
+        [Required]
+        [Display(Name = "Fecha Vinculación")]
+        public DateTime FechaVinculacion { get; set; }
+
+        [Required]
+        [Display(Name = "Zona Atender")]
+        public string ZonaAtender { get; set; }
+
+        [Required]
+        [Display(Name = "Cargo Base")]
+        public string CargoBase { get; set; }
+
+        [Required]
+        [Display(Name = "Nivel")]
+        public string Nivel { get; set; }
+
+        [Required]
+        [Display(Name = "Área Desempeño")]
+        public string AreaDesempeno { get; set; }
+
+        [Required]
+        [Display(Name = "Institución Educativa")]
+        public int IdInstitucionEducativa { get; set; }
+
+        [Required]
+        [Display(Name = "Sede")]
+        public int IdSede { get; set; }
+
+        [Required]
+        [Display(Name = "Escalafón")]
+        public int GradoEscalafon { get; set; }
+
+        [Required]
+        [Display(Name = "Titulo")]
+        public int Titulo { get; set; }
+
+        [Required]
+        [Display(Name = "Rol")]
+        public int IdRol { get; set; }
 
     }
 
