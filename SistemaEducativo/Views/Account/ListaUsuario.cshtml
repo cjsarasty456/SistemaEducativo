@@ -1,0 +1,51 @@
+﻿@model IEnumerable<SistemaEducativo.Models.Configuracion.ViewListaUsuario>
+
+<table class="table table-bordered table-hover">
+    <tr>
+        <th>
+            Nombres
+        </th>
+        <th>
+            Apellidos
+        </th>
+        <th>
+            Documento Identidad
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.InstitucionEducativa)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Sede)
+        </th>
+        <th><a id="btnNuevo" class="btn btn-success" href="~/Account/Register"><i class="fas fa-user-plus"></i> Nuevo</a></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.PrimerNombre)
+            @Html.DisplayFor(modelItem => item.SegundoNombre)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.PrimerApellido)
+            @Html.DisplayFor(modelItem => item.SegundoApellido)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.TipoDocumento)
+            @Html.DisplayFor(modelItem => item.Documento)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.InstitucionEducativa)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Sede)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.Id }) |
+            @Html.ActionLink("Details", "Details", new { id=item.Id }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.Id })
+        </td>
+    </tr>
+}
+
+</table>

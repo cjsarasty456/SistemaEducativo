@@ -35,17 +35,31 @@ namespace SistemaEducativo.Controllers
             return Json(Lista);
         }
 
+        [Authorize]
+        [HttpPost]
+        public JsonResult ConsultaListaSedes(int Institucion)
+        {
+            var Lista = SedeControlador.ConsultaListaSedesPorIntitucion(Institucion);
+
+            return Json(Lista);
+        }
+
         public void CargarFormulario()
         {
             ViewData["TipoDocumento"] = TipoDocumento.ConsultaListaTipoDocumento();
             ViewData["Genero"] = Genero.ConsultaListaGenero();
             ViewData["Jornada"] = Jornada.ConsultaListaJornada();
+            ViewData["InstitucionEducativa"] = InstitucionEducativaControlador.ConsultaListaInstitucionEducativa();
             ViewData["Sede"] = SedeControlador.ConsultaListaSedes();
             ViewData["Grado"] = Grado.ConsultaListaGrado();
+            ViewData["GradoEscalafon"] = GradoEscalafonControlador.ConsultaListaInstitucionEducativa();
+            ViewData["TipoVinculacion"] = TipoVinculacionControlador.ConsultaListaTipoVinculacion();
+            ViewData["Nivel"] = NivelDocente.ConsultaListaNivelDocente();
             ViewData["Departamento"] = MunicipioControlador.ConsultaListaDepartamentos();
             ViewData["Municipio"] = MunicipioControlador.ConsultaListaMunicipio();
             ViewData["AfiliacionSalud"] = AfiliacionSalud.ConsultaListaAfiliacionSalud();
             ViewData["NivelEducativo"] = NivelEducativo.ConsultaListaNivelEducativo();
+            ViewData["Rol"] = RolControlador.ConsultaListaRoles();
         }
 
         public ActionResult ListaUsuario()

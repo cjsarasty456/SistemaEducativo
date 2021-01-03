@@ -16,6 +16,7 @@ namespace SistemaEducativo.Controllers
             ViewData["TipoDocumento"] = TipoDocumento.ConsultaListaTipoDocumento();
             ViewData["Genero"] = Genero.ConsultaListaGenero();
             ViewData["Jornada"] = Jornada.ConsultaListaJornada();
+            ViewData["InstitucionEducativa"] = InstitucionEducativaControlador.ConsultaListaInstitucionEducativa();
             ViewData["Sede"] = SedeControlador.ConsultaListaSedes();
             ViewData["Grado"] = Grado.ConsultaListaGrado();
             ViewData["Departamento"] = MunicipioControlador.ConsultaListaDepartamentos();

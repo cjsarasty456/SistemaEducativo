@@ -32,11 +32,30 @@ namespace SistemaEducativo.Models.General
                                select new SedeViewModel
                                {
                                    Id = S.Id,
+                                   Nombre = S.Nombre,
+                                   IdInstitucionEducativa=S.IdInstitucion
+                               };
+                return consulta.ToList();
+            }
+        }
+
+        public static List<SedeViewModel> ConsultaListaSedesPorIntitucion(int Institucion)
+        {
+            using (GeneralModelDataContext db = new GeneralModelDataContext())
+            {
+                var consulta = from S in db.Sede
+                               where S.IdInstitucion== Institucion
+                               && S.Eliminado == false
+                               orderby S.Nombre ascending
+                               select new SedeViewModel
+                               {
+                                   Id = S.Id,
                                    Nombre = S.Nombre
                                };
                 return consulta.ToList();
             }
         }
+
         public static List<SedeViewModel> ConsultaListaSedes(ref ObjPaginacion Paginacion)
         {
             using (GeneralModelDataContext db = new GeneralModelDataContext())

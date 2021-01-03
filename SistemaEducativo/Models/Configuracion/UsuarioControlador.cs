@@ -76,7 +76,7 @@ namespace SistemaEducativo.Models.Configuracion
         [Required]
         public DateTime FechaVinculacion { get; set; }
         public string ZonaAtender { get; set; }
-        public string CargoBase { get; set; }
+        public int CargoBase { get; set; }
         public string Nivel { get; set; }
         public int GradoEscalafon { get; set; }
         public string Titulo { get; set; }

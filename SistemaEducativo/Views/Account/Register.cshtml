@@ -1,6 +1,8 @@
 ﻿@model SistemaEducativo.Models.RegisterViewModel
 @{
     ViewBag.Title = "Registrar Usuario";
+    var TipoDocumento = ViewData["TipoDocumento"] as List<SistemaEducativo.Models.Constantes.ObjTipoDocumento>;
+    var Departamentos = ViewData["Departamento"] as List<SistemaEducativo.Models.General.ObDepartamento>;
 }
 
 @using (Html.BeginForm("Register", "Account", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
@@ -16,80 +18,29 @@
                     <hr />
                     @Html.AntiForgeryToken()
                     @Html.ValidationSummary("", new { @class = "text-danger" })
+                    <div class="callout callout-info">
+                        <h5>Nota:</h5>
+                        <p>Todos los campos con Asterisco son obligatorios</p>
+                    </div>
                     <div class="row">
                         <div class="col col-md-6 col-12">
-                            @Html.LabelFor(m => m.TipoDocumento, new { @class = "control-label" })
-                            <select id="CmpTipoDocumento" name="TipoDocumento" class="form-control" required>
+                            @Html.LabelFor(m => m.TipoDocumento, new { @class = "control-label" })<span>&#42;</span>
+                            @Html.DropDownListFor(m => m.TipoDocumento, new SelectList(TipoDocumento, "Tipo", "Desc_Tipo"), new { @class = "form-control select2" })
+                        </div>
+                        <div class="col col-md-6 col-12">
+                            @Html.LabelFor(m => m.Documento, new { @class = "control-label" })<span>&#42;</span>
+                            @Html.TextBoxFor(m => m.Documento, new { @class = "form-control", @onchange = "ContrasenaPredeterminado();" })
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col col-md-6 col-12">
+                            @Html.LabelFor(m => m.CodDepartamentoExpedicion, new { @class = "control-label" })<span>&#42;</span>
+                            @*@Html.DropDownListFor(m => m.TipoDocumento, new SelectList(Departamentos, "CodDepartamento", "NomDepartamento"), new { @class = "form-control select2" })*@
+                            <select id="CmpCodDepartamentoExpedicion" name="CodDepartamentoExpedicion" class="form-control select2" onchange="CargarMunicipioExpedicion(this);" required>
                                 <option selected disabled>Seleccione una opción</option>
                                 @{
-                                    var TipoDocumento = ViewData["TipoDocumento"] as List<SistemaEducativo.Models.Constantes.ObjTipoDocumento>;
-                                    foreach (var Item in TipoDocumento)
-                                    {
-
-                                        if (Model.TipoDocumento != null && Model.TipoDocumento.Equals(Item.Tipo))
-                                        {
-                                            <option value=@Item.Tipo selected> @Item.Desc_Tipo </option>
-                                        }
-                                        else
-                                        {
-                                            <option value=@Item.Tipo> @Item.Desc_Tipo </option>
-                                        }
-                                    }
-                                }
-                            </select>
-                        </div>
-                        <div class="col col-md-6 col-12">
-                            @Html.LabelFor(m => m.Documento, new { @class = "control-label" })
-                            @Html.TextBoxFor(m => m.Documento, new { @class = "form-control" })
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col col-md-6 col-12">
-                            <div class="form-group">
-                                @Html.LabelFor(m => m.FirstName, new { @class = "control-label" })
-                                @Html.TextBoxFor(m => m.FirstName, new { @class = "form-control" })
-                            </div>
-                        </div>
-                        <div class="col col-md-6 col-12">
-                            <div class="form-group">
-                                @Html.LabelFor(m => m.LastName, new { @class = "control-label" })
-                                @Html.TextBoxFor(m => m.LastName, new { @class = "form-control" })
-                            </div>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col col-md-12 col-12">
-                            <div class="form-group">
-                                @Html.LabelFor(m => m.Email, new { @class = "control-label" })
-                                @*<span class="input-group-text" id="basic-addon1">@</span>*@
-                                @Html.TextBoxFor(m => m.Email, new { @class = "form-control" })
-                            </div>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col col-md-6 col-12">
-                            <div class="form-group">
-                                @Html.LabelFor(m => m.Password, new { @class = "control-label" })
-                                @Html.PasswordFor(m => m.Password, new { @class = "form-control" })
-                            </div>
-                        </div>
-                        <div class="col col-md-6 col-12">
-                            <div class="form-group">
-                                @Html.LabelFor(m => m.ConfirmPassword, new { @class = "control-label" })
-                                @Html.PasswordFor(m => m.ConfirmPassword, new { @class = "form-control" })
-                            </div>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col col-md-6 col-12">
-                            @Html.LabelFor(m => m.CodDepartamentoExpedicion, new { @class = "control-label" })
-                            <select id="CmpCodDepartamentoExpedicion" name="CodDepartamentoExpedicion" class="form-control" onchange="CargarMunicipioExpedicion(this);" required>
-                                <option selected disabled>Seleccione una opción</option>
-                                @{
-                                    var Departamentos = ViewData["Departamento"] as List<SistemaEducativo.Models.General.ObDepartamento>;
                                     foreach (var Item in Departamentos)
                                     {
-
                                         if (Model.CodDepartamentoExpedicion != null && Model.CodDepartamentoExpedicion.Equals(Item.CodDepartamento))
                                         {
                                             <option value=@Item.CodDepartamento selected> @Item.NomDepartamento </option>
@@ -103,15 +54,14 @@
                             </select>
                         </div>
                         <div class="col col-md-6 col-12">
-                            @Html.LabelFor(m => m.CodMunicipioExpedicion, new { @class = "control-label" })
-                            <select id="CmpCodMunicipioExpedicion" name="CodMunicipioExpedicion" class="form-control" required>
+                            @Html.LabelFor(m => m.CodMunicipioExpedicion, new { @class = "control-label" })<span>&#42;</span>
+                            <select id="CodMunicipioExpedicion" name="CodMunicipioExpedicion" class="form-control" required>
                                 <option selected disabled>Seleccione una opción</option>
                                 @{
                                     var municipios = ViewData["Municipio"] as List<SistemaEducativo.Models.General.ObjMunicipio>;
                                     var municipiosDomicilio = municipios.Where(m => m.CodDepartamento.Equals(Model.CodDepartamentoExpedicion)).ToList();
                                     foreach (var Item in municipiosDomicilio)
                                     {
-
                                         if (Model.CodMunicipioExpedicion != null && Model.CodMunicipioExpedicion.Equals(Item.CodMunicipio))
                                         {
                                             <option value=@Item.CodMunicipio selected> @Item.NomMunicipio </option>
@@ -126,9 +76,37 @@
                         </div>
                     </div>
                     <div class="row">
+                        <div class="col col-md-6 col-12">
+                            <div class="form-group">
+                                @Html.LabelFor(m => m.PrimerNombre, new { @class = "control-label" })<span>&#42;</span>
+                                @Html.TextBoxFor(m => m.PrimerNombre, new { @class = "form-control", @oninput = "Mayuscyla(this);" })
+                            </div>
+                        </div>
+                        <div class="col col-md-6 col-12">
+                            <div class="form-group">
+                                @Html.LabelFor(m => m.SegundoNombre, new { @class = "control-label" })
+                                @Html.TextBoxFor(m => m.SegundoNombre, new { @class = "form-control", @oninput = "Mayuscyla(this);" })
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col col-md-6 col-12">
+                            <div class="form-group">
+                                @Html.LabelFor(m => m.PrimerApellido, new { @class = "control-label" })<span>&#42;</span>
+                                @Html.TextBoxFor(m => m.PrimerApellido, new { @class = "form-control", @oninput = "Mayuscyla(this);", @onchange = "ContrasenaPredeterminado();" })
+                            </div>
+                        </div>
+                        <div class="col col-md-6 col-12">
+                            <div class="form-group">
+                                @Html.LabelFor(m => m.SegundoApellido, new { @class = "control-label" })
+                                @Html.TextBoxFor(m => m.SegundoApellido, new { @class = "form-control", @oninput = "Mayuscyla(this);" })
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
                         <div class="col col-12 col-md-6">
                             <div class="form-group">
-                                @Html.LabelFor(m => m.FechaNacimiento, new { @class = "control-label" })
+                                @Html.LabelFor(m => m.FechaNacimiento, new { @class = "control-label" })<span>&#42;</span>
                                 <div class="input-group date" id="FechaNacimiento" data-target-input="nearest">
                                     <input type="date" id="CmpFechaNacimiento" name="FechaNacimiento" class="form-control" min="1960-01-01" value="@Model.FechaNacimiento.ToString("yyyy-MM-dd")" required>
                                 </div>
@@ -136,44 +114,204 @@
                             </div>
                         </div>
                         <div class="col col-12 col-md-6">
-                            @Html.LabelFor(m => m.CodMunicipioExpedicion, new { @class = "control-label" })
-                            <select id="CmpCodMunicipioExpedicion" name="CodMunicipioExpedicion" class="form-control" required>
-                                <option selected disabled>Seleccione una opción</option>
-                                @{
-                                    var municipios = ViewData["Municipio"] as List<SistemaEducativo.Models.General.ObjMunicipio>;
-                                    var municipiosDomicilio = municipios.Where(m => m.CodDepartamento.Equals(Model.CodDepartamentoExpedicion)).ToList();
-                                    foreach (var Item in municipiosDomicilio)
-                                    {
-
-                                        if (Model.CodMunicipioExpedicion != null && Model.CodMunicipioExpedicion.Equals(Item.CodMunicipio))
+                            <div class="form-group">
+                                @Html.LabelFor(m => m.FechaVinculacion, new { @class = "control-label" })<span>&#42;</span>
+                                <div class="input-group date" id="FechaNacimiento" data-target-input="nearest">
+                                    <input type="date" id="CmpFechaVinculacion" name="FechaVinculacion" class="form-control" min="1960-01-01" value="@Model.FechaNacimiento.ToString("yyyy-MM-dd")" required>
+                                </div>
+                                <small id="CmpIdSedeHelp">Ingrese su Fecha Nacimiento (DD/MM/AAAA)</small>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col col-12 col-md-6">
+                            <div class="form-group">
+                                @Html.LabelFor(m => m.ZonaAtender, new { @class = "control-label" })<span>&#42;</span>
+                                <select id="CmpZonaAtender" name="ZonaAtender" class="form-control" required>
+                                    <option selected disabled>Seleccione una opción</option>
+                                    @{
+                                        if (Model.ZonaAtender != null && Model.ZonaAtender.Equals("R"))
                                         {
-                                            <option value=@Item.CodMunicipio selected> @Item.NomMunicipio </option>
+                                            <option value="R" selected>Rural</option>
+                                            <option value="U">Urbano</option>
+                                        }
+                                        else if (Model.ZonaAtender != null && Model.ZonaAtender.Equals("U"))
+                                        {
+                                            <option value="R">Rural</option>
+                                            <option value="U" selected>Urbano</option>
                                         }
                                         else
                                         {
-                                            <option value=@Item.CodMunicipio> @Item.NomMunicipio </option>
+                                            <option value="R">Rural</option>
+                                            <option value="U">Urbano</option>
                                         }
                                     }
-                                }
-                            </select>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col col-12 col-md-6">
+                            <div class="form-group">
+                                @Html.LabelFor(m => m.CargoBase, new { @class = "control-label" })<span>&#42;</span> pendiente cargue lista
+                                @Html.DropDownListFor(m => m.CargoBase, new SelectList(TipoDocumento, "Tipo", "Desc_Tipo"), new { @class = "form-control select2" })
+                            </div>
                         </div>
                     </div>
                     <div class="row">
                         <div class="col col-12 col-md-6">
+                            <div class="form-group">
+                                @Html.LabelFor(m => m.Nivel, new { @class = "control-label" })<span>&#42;</span>
+                                <select id="CmpNivel" name="Nivel" class="form-control" required>
+                                    <option selected disabled>Seleccione una opción</option>
+                                    @{
+                                        var Niveles = ViewData["Nivel"] as List<SistemaEducativo.Models.Constantes.ObjNivelDocente>;
+                                        foreach (var Item in Niveles)
+                                        {
+                                            if (Model.Nivel == Item.Nivel)
+                                            {
+                                                <option selected> @Item.Nivel</option>
+                                            }
+                                            else
+                                            {
+                                                <option> @Item.Nivel</option>
+                                            }
+                                        }
+                                    }
+                                </select>
+                            </div>
                         </div>
                         <div class="col col-12 col-md-6">
+                            <div class="form-group">
+                                @Html.LabelFor(m => m.AreaDesempeno, new { @class = "control-label" })<span>&#42;</span> pendiente cargue lista
+                                @Html.DropDownListFor(m => m.AreaDesempeno, new SelectList(TipoDocumento, "Tipo", "Desc_Tipo"), new { @class = "form-control select2" })
+                            </div>
                         </div>
                     </div>
                     <div class="row">
                         <div class="col col-12 col-md-6">
+                            <div class="form-group">
+                                @Html.LabelFor(m => m.IdInstitucionEducativa, new { @class = "control-label" })<span>&#42;</span>
+                                <select id="CmpIdInstitucionEducativa" name="IdInstitucionEducativa" class="form-control" required onchange="CargarSede(this);">
+                                    <option selected disabled>Seleccione una opción</option>
+                                    @{
+                                        var Instituciones = ViewData["InstitucionEducativa"] as List<SistemaEducativo.Models.General.InstitucionEducativaViewModel>;
+                                        foreach (var Item in Instituciones)
+                                        {
+
+                                            if (Model.IdInstitucionEducativa.Equals(Item.Id))
+                                            {
+                                                <option value=@Item.Id selected> @Item.Nombre </option>
+                                            }
+                                            else
+                                            {
+                                                <option value=@Item.Id> @Item.Nombre </option>
+                                            }
+                                        }
+                                    }
+                                </select>
+                            </div>
                         </div>
                         <div class="col col-12 col-md-6">
+                            <div class="form-group">
+                                @Html.LabelFor(m => m.IdSede, new { @class = "control-label" })<span>&#42;</span>
+                                <select id="CmpIdSede" name="IdSede" class="form-control" required>
+                                    <option selected disabled>Seleccione una opción</option>
+                                    @{
+                                        var Sedes = ViewData["Sede"] as List<SistemaEducativo.Models.General.SedeViewModel>;
+                                        Sedes = Sedes.Where(m => m.IdInstitucionEducativa == Model.IdInstitucionEducativa).ToList();
+                                        foreach (var Item in Sedes)
+                                        {
+                                            if (Model.IdSede == Item.Id)
+                                            {
+                                                <option value=@Item.Id selected> @Item.Nombre </option>
+                                            }
+                                            else
+                                            {
+                                                <option value=@Item.Id> @Item.Nombre </option>
+                                            }
+                                        }
+                                    }
+                                </select>
+                            </div>
                         </div>
                     </div>
                     <div class="row">
                         <div class="col col-12 col-md-6">
+                            <div class="form-group">
+                                @Html.LabelFor(m => m.GradoEscalafon, new { @class = "control-label" })<span>&#42;</span>
+                                <select id="CmpGradoEscalafon" name="GradoEscalafon" class="form-control" required>
+                                    <option selected disabled>Seleccione una opción</option>
+                                    @{
+                                        var GradoEscalafon = ViewData["GradoEscalafon"] as List<SistemaEducativo.Models.Configuracion.GradoEscalafonViewModel>;
+                                        foreach (var Item in GradoEscalafon)
+                                        {
+                                            if (Model.GradoEscalafon == Item.Id)
+                                            {
+                                                <option value=@Item.Id selected> @Item.Nombre </option>
+                                            }
+                                            else
+                                            {
+                                                <option value=@Item.Id> @Item.Nombre </option>
+                                            }
+                                        }
+                                    }
+                                </select>
+                            </div>
                         </div>
                         <div class="col col-12 col-md-6">
+                            <div class="form-group">
+                                @Html.LabelFor(m => m.Titulo, new { @class = "control-label" })<span>&#42;</span>
+                                @Html.TextBoxFor(m => m.Titulo, new { @class = "form-control" })
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col col-md-12 col-12">
+                            <div class="form-group">
+                                @Html.LabelFor(m => m.Email, new { @class = "control-label" })<span>&#42;</span>
+                                @Html.TextBoxFor(m => m.Email, new { @class = "form-control" })
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col col-md-6 col-12">
+                            <div class="form-group">
+                                <label for="cmpPassword">Contraseña</label>
+                                <input id="cmpPassword" name="Password" type="password" class="form-control" readonly />
+                                @*@Html.LabelFor(m => m.Password, new { @class = "control-label" })
+                    @Html.PasswordFor(m => m.Password, new { @class = "form-control" })*@
+                            </div>
+                        </div>
+                        <div class="col col-md-6 col-12">
+                            <div class="form-group">
+                                <label for="cmpPassword">Contraseña</label>
+                                <input id="cmpPasswordConfirm" type="text" class="form-control" readonly />
+                                @*@Html.LabelFor(m => m.ConfirmPassword, new { @class = "control-label" })
+                    @Html.PasswordFor(m => m.ConfirmPassword, new { @class = "form-control" })*@
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col col-12 col-md-6">
+                            <div class="form-group">
+                                @Html.LabelFor(m => m.IdRol, new { @class = "control-label" })<span>&#42;</span>
+                                <select id="CmpIdRol" name="IdRol" class="form-control" required>
+                                    <option selected disabled>Seleccione una opción</option>
+                                    @{
+                                        var Roles = ViewData["Rol"] as List<SistemaEducativo.Models.Configuracion.RolViewModel>;
+                                        foreach (var Item in Roles)
+                                        {
+                                            if (Model.IdRol == Item.Id)
+                                            {
+                                                <option value=@Item.Id selected> @Item.Nombre</option>
+                                            }
+                                            else
+                                            {
+                                                <option value=@Item.Id> @Item.Nombre</option>
+                                            }
+                                        }
+                                    }
+                                </select>
+                            </div>
                         </div>
                     </div>
                     <br />
@@ -187,11 +325,10 @@
                         </div>
                     </div>
                 </div>
-                </div>
-                </div>
+            </div>
+        </div>
     </div>
 }
-
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")
 }

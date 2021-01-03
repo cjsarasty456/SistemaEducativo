@@ -8,22 +8,6 @@
       <Association Name="Rol_PerfilUsuario" Member="PerfilUsuario" ThisKey="Id" OtherKey="idRol" Type="PerfilUsuario" />
     </Type>
   </Table>
-  <Table Name="dbo.Sede" Member="Sede">
-    <Type Name="Sede">
-      <Column Name="Id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
-      <Column Name="Nombre" Type="System.String" DbType="VarChar(20) NOT NULL" CanBeNull="false" />
-      <Column Name="Eliminado" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
-      <Association Name="Sede_PerfilUsuario" Member="PerfilUsuario" ThisKey="Id" OtherKey="IdSede" Type="PerfilUsuario" />
-    </Type>
-  </Table>
-  <Table Name="dbo.InstitucionEducativa" Member="InstitucionEducativa">
-    <Type Name="InstitucionEducativa">
-      <Column Name="Id" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
-      <Column Name="NombreInstitucion" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
-      <Column Name="Eliminado" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
-      <Association Name="InstitucionEducativa_PerfilUsuario" Member="PerfilUsuario" ThisKey="Id" OtherKey="IdInstitucionEducativa" Type="PerfilUsuario" />
-    </Type>
-  </Table>
   <Table Name="dbo.TipoVInculacion" Member="TipoVInculacion">
     <Type Name="TipoVInculacion">
       <Column Name="IdVinculacion" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
@@ -48,6 +32,13 @@
       <Association Name="AspNetUsers_PerfilUsuario" Member="PerfilUsuario" ThisKey="Id" OtherKey="IdUser" Type="PerfilUsuario" />
     </Type>
   </Table>
+  <Table Name="dbo.Cargo" Member="Cargo">
+    <Type Name="Cargo">
+      <Column Name="Id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="Nombre" Type="System.String" DbType="VarChar(30) NOT NULL" CanBeNull="false" />
+      <Association Name="Cargo_PerfilUsuario" Member="PerfilUsuario" ThisKey="Id" OtherKey="CargoBase" Type="PerfilUsuario" />
+    </Type>
+  </Table>
   <Table Name="dbo.PerfilUsuario" Member="PerfilUsuario">
     <Type Name="PerfilUsuario">
       <Column Name="id" Type="System.String" DbType="NVarChar(128) NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
@@ -64,7 +55,7 @@
       <Column Name="FechaVinculacion" Type="System.DateTime" DbType="Date NOT NULL" CanBeNull="false" />
       <Column Name="IdTipoVinculacion" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
       <Column Name="ZonaAtender" Type="System.String" DbType="VarChar(2) NOT NULL" CanBeNull="false" />
-      <Column Name="CargoBase" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="CargoBase" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
       <Column Name="Nivel" Type="System.String" DbType="NChar(10)" CanBeNull="true" />
       <Column Name="AreaDesempeno" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
       <Column Name="IdInstitucionEducativa" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
@@ -77,9 +68,24 @@
       <Column Name="Eliminado" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
       <Association Name="TipoVInculacion_PerfilUsuario" Member="TipoVInculacion" ThisKey="IdTipoVinculacion" OtherKey="IdVinculacion" Type="TipoVInculacion" IsForeignKey="true" />
       <Association Name="AspNetUsers_PerfilUsuario" Member="AspNetUsers" ThisKey="IdUser" OtherKey="Id" Type="AspNetUsers" IsForeignKey="true" />
-      <Association Name="InstitucionEducativa_PerfilUsuario" Member="InstitucionEducativa" ThisKey="IdInstitucionEducativa" OtherKey="Id" Type="InstitucionEducativa" IsForeignKey="true" />
+      <Association Name="Cargo_PerfilUsuario" Member="Cargo" ThisKey="CargoBase" OtherKey="Id" Type="Cargo" IsForeignKey="true" />
       <Association Name="Rol_PerfilUsuario" Member="Rol" ThisKey="idRol" OtherKey="Id" Type="Rol" IsForeignKey="true" />
-      <Association Name="Sede_PerfilUsuario" Member="Sede" ThisKey="IdSede" OtherKey="Id" Type="Sede" IsForeignKey="true" />
+      <Association Name="TipoVInculacion1_PerfilUsuario" Member="TipoVInculacion1" ThisKey="IdTipoVinculacion" OtherKey="IdVinculacion" Type="TipoVInculacion1" IsForeignKey="true" />
+      <Association Name="GradoEscalafon_PerfilUsuario" Member="GradoEscalafon1" ThisKey="GradoEscalafon" OtherKey="Id" Type="GradoEscalafon" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.TipoVInculacion" Member="TipoVInculacion1">
+    <Type Name="TipoVInculacion1">
+      <Column Name="IdVinculacion" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="TipoVinculacion" Type="System.String" DbType="VarChar(15) NOT NULL" CanBeNull="false" />
+      <Association Name="TipoVInculacion1_PerfilUsuario" Member="PerfilUsuario" ThisKey="IdVinculacion" OtherKey="IdTipoVinculacion" Type="PerfilUsuario" />
+    </Type>
+  </Table>
+  <Table Name="dbo.GradoEscalafon" Member="GradoEscalafon">
+    <Type Name="GradoEscalafon">
+      <Column Name="Id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="Nombre" Type="System.String" DbType="VarChar(4) NOT NULL" CanBeNull="false" />
+      <Association Name="GradoEscalafon_PerfilUsuario" Member="PerfilUsuario" ThisKey="Id" OtherKey="GradoEscalafon" Type="PerfilUsuario" />
     </Type>
   </Table>
 </Database>

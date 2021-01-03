@@ -276,8 +276,10 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Configuracion.dbml</DependentUpon>
     </Compile>
+    <Compile Include="Models\Configuracion\RolControlador.cs" />
     <Compile Include="Models\Configuracion\UsuarioControlador.cs" />
     <Compile Include="Models\Constantes\AfiliacionSalud.cs" />
+    <Compile Include="Models\Constantes\NivelDocente.cs" />
     <Compile Include="Models\Constantes\NivelPersonal.cs" />
     <Compile Include="Models\Constantes\NivelEducativo.cs" />
     <Compile Include="Models\Constantes\Genero.cs" />
@@ -295,6 +297,9 @@
     <Compile Include="Models\Estudiante\Objetos\ObjEstudiante.cs" />
     <Compile Include="Models\Estudiante\Objetos\ObjPaginacion.cs" />
     <Compile Include="Models\Estudiante\Objetos\ObjSede.cs" />
+    <Compile Include="Models\Configuracion\GradoEscalafonControlador.cs" />
+    <Compile Include="Models\Configuracion\TipoVinculacionControlador.cs" />
+    <Compile Include="Models\General\InstitucionEducativaControlador.cs" />
     <Compile Include="Models\General\SedeControlador.cs" />
     <Compile Include="Models\General\GeneralModel.designer.cs">
       <AutoGen>True</AutoGen>
@@ -303,7 +308,6 @@
     </Compile>
     <Compile Include="Models\General\MunicipioControlador.cs" />
     <Compile Include="Models\General\Objetos\ObjMensaje.cs" />
-    <Compile Include="Models\General\SedeViewModel.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

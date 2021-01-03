@@ -167,8 +167,22 @@
     <div class="col col-md-6 col-12">
         <div class="form-group">
             <label for="CmpIdInstitucion">Institución Educativa</label>
-            <select id="CmpIdInstitucion" name="IdInstitucion" class="form-control" readonly value="@Model.Id">
-                <option value=1>San Luis Beltrán</option>
+            <select id="CmpIdInstitucion" name="IdInstitucion" class="form-control" disabled value="@Model.IdInstitucion">
+                @{
+                    var Instituciones = ViewData["InstitucionEducativa"] as List<SistemaEducativo.Models.General.InstitucionEducativaViewModel>;
+                    foreach (var Item in Instituciones)
+                    {
+
+                        if (Model.IdInstitucion.Equals(Item.Id))
+                        {
+                            <option value=@Item.Id selected> @Item.Nombre </option>
+                        }
+                        else
+                        {
+                            <option value=@Item.Id> @Item.Nombre </option>
+                        }
+                    }
+                }
             </select>
             <small id="CmpIdInstitucionHelp">Selecione su Institución</small>
         </div>

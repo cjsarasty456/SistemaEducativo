@@ -82,41 +82,31 @@ namespace SistemaEducativo.Models
         [Required]
         [Display(Name = "Municipio Expedición")]
         public string CodMunicipioExpedicion { get; set; }
-
-        [Required]
-        [Display(Name = "Nombres")]
-        public string FirstName { get; set; }
-
-        [Required]
-        [Display(Name = "Apellidos")]
-        public string LastName { get; set; }
         [Required]
         [Display(Name = "Fecha Nacimiento")]
         public DateTime FechaNacimiento { get; set; }
 
         [Required]
-        [EmailAddress]
-        [Display(Name = "Correo electrónico")]
-        public string Email { get; set; }
+        [Display(Name = "Primer Nombre")]
+        public string PrimerNombre { get; set; }
+
+        [Display(Name = "Segundo Nombre")]
+        public string SegundoNombre { get; set; }
 
         [Required]
-        [StringLength(100, ErrorMessage = "El número de caracteres de {0} debe ser al menos {2}.", MinimumLength = 6)]
-        [DataType(DataType.Password)]
-        [Display(Name = "Contraseña")]
-        public string Password { get; set; }
+        [Display(Name = "Primer Apellido")]
+        public string PrimerApellido { get; set; }
 
-        [DataType(DataType.Password)]
-        [Display(Name = "Confirmar contraseña")]
-        [Compare("Password", ErrorMessage = "La contraseña y la contraseña de confirmación no coinciden.")]
-        public string ConfirmPassword { get; set; }
-
-        [Required]
-        [Display(Name = "Tipo Vinculación")]
-        public int idTipoVinculacion { get; set; }
+        [Display(Name = "Segundo Apellido")]
+        public string SegundoApellido { get; set; }
 
         [Required]
         [Display(Name = "Fecha Vinculación")]
         public DateTime FechaVinculacion { get; set; }
+
+        [Required]
+        [Display(Name = "Tipo Vinculación")]
+        public int idTipoVinculacion { get; set; }
 
         [Required]
         [Display(Name = "Zona Atender")]
@@ -134,7 +124,7 @@ namespace SistemaEducativo.Models
         [Display(Name = "Área Desempeño")]
         public string AreaDesempeno { get; set; }
 
-        [Required]
+        [Required(ErrorMessage = "La institución Educativa es obligatoria")]
         [Display(Name = "Institución Educativa")]
         public int IdInstitucionEducativa { get; set; }
 
@@ -143,13 +133,29 @@ namespace SistemaEducativo.Models
         public int IdSede { get; set; }
 
         [Required]
-        [Display(Name = "Escalafón")]
+        [Display(Name = "Grado Escalafón")]
         public int GradoEscalafon { get; set; }
 
         [Required]
         [Display(Name = "Titulo")]
-        public int Titulo { get; set; }
+        public string Titulo { get; set; }
 
+        [Required]
+        [EmailAddress]
+        [Display(Name = "Correo electrónico")]
+        public string Email { get; set; }
+
+        [Required]
+        [StringLength(100, ErrorMessage = "El número de caracteres de {0} debe ser al menos {2}.", MinimumLength = 6)]
+        [DataType(DataType.Password)]
+        [Display(Name = "Contraseña")]
+        public string Password { get; set; }
+
+        [DataType(DataType.Password)]
+        [Display(Name = "Confirmar contraseña")]
+        //[Compare("Password", ErrorMessage = "La contraseña y la contraseña de confirmación no coinciden.")]
+        public string ConfirmPassword { get; set; }
+        
         [Required]
         [Display(Name = "Rol")]
         public int IdRol { get; set; }
