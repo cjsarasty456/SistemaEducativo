@@ -1,11 +1,7 @@
-﻿using System;
-using System.Globalization;
-using System.Linq;
-using System.Security.Claims;
+﻿using System.Linq;
 using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
-using System.Web.Security;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
@@ -13,6 +9,7 @@ using SistemaEducativo.Models;
 using SistemaEducativo.Models.Configuracion;
 using SistemaEducativo.Models.Constantes;
 using SistemaEducativo.Models.General;
+using SistemaEducativo.Email;
 
 namespace SistemaEducativo.Controllers
 {
@@ -25,7 +22,6 @@ namespace SistemaEducativo.Controllers
         public AccountController()
         {
         }
-
         [Authorize]
         [HttpPost]
         public JsonResult ConsultaListaMunicipio(string CodDepartamento)
@@ -54,12 +50,14 @@ namespace SistemaEducativo.Controllers
             ViewData["Grado"] = Grado.ConsultaListaGrado();
             ViewData["GradoEscalafon"] = GradoEscalafonControlador.ConsultaListaInstitucionEducativa();
             ViewData["TipoVinculacion"] = TipoVinculacionControlador.ConsultaListaTipoVinculacion();
-            ViewData["Nivel"] = NivelDocente.ConsultaListaNivelDocente();
             ViewData["Departamento"] = MunicipioControlador.ConsultaListaDepartamentos();
             ViewData["Municipio"] = MunicipioControlador.ConsultaListaMunicipio();
             ViewData["AfiliacionSalud"] = AfiliacionSalud.ConsultaListaAfiliacionSalud();
-            ViewData["NivelEducativo"] = NivelEducativo.ConsultaListaNivelEducativo();
+            ViewData["NivelEducativo"] = NivelDocente.ConsultaListaNivelDocente();
             ViewData["Rol"] = RolControlador.ConsultaListaRoles();
+            ViewData["CargoBase"] = CargoBaseControlador.ConsultaListaCargoBase();
+            ViewData["AreaDesempeno"] = AreaDesempenoControlador.ConsultaListaAreaDesempeno();
+            ViewData["Zona"] = Zona.ConsultaListaZona();
         }
 
         public ActionResult ListaUsuario()
@@ -192,7 +190,7 @@ namespace SistemaEducativo.Controllers
         public ActionResult Register()
         {
             CargarFormulario();
-            var model = new RegisterViewModel(); 
+            var model = new RegisterViewModel();
             return View(model);
         }
 
@@ -209,7 +207,10 @@ namespace SistemaEducativo.Controllers
                 var result = await UserManager.CreateAsync(user, model.Password);
                 if (result.Succeeded)
                 {
-                    await SignInManager.SignInAsync(user, isPersistent:false, rememberBrowser:false);
+                    model.IdUser = user.Id;
+                    UsuarioControlador.NuevoUsuario(model);
+                    GestorCorreo.EmailCuentaNueva(model.Email, model.Password);
+                    //await SignInManager.SignInAsync(user, isPersistent:false, rememberBrowser:false);
                     
                     // Para obtener más información sobre cómo habilitar la confirmación de cuentas y el restablecimiento de contraseña, visite https://go.microsoft.com/fwlink/?LinkID=320771
                     // Enviar correo electrónico con este vínculo
@@ -217,7 +218,7 @@ namespace SistemaEducativo.Controllers
                     // var callbackUrl = Url.Action("ConfirmEmail", "Account", new { userId = user.Id, code = code }, protocol: Request.Url.Scheme);
                     // await UserManager.SendEmailAsync(user.Id, "Confirmar cuenta", "Para confirmar la cuenta, haga clic <a href=\"" + callbackUrl + "\">aquí</a>");
 
-                    return RedirectToAction("Index", "Home");
+                    return RedirectToAction("ListaUsuario", "Account");
                 }
                 AddErrors(result);
             }
@@ -257,18 +258,24 @@ namespace SistemaEducativo.Controllers
             if (ModelState.IsValid)
             {
                 var user = await UserManager.FindByNameAsync(model.Email);
-                if (user == null || !(await UserManager.IsEmailConfirmedAsync(user.Id)))
+                if (user != null)
                 {
+                    //Para obtener más información sobre cómo habilitar la confirmación de cuentas y el restablecimiento de contraseña, visite https://go.microsoft.com/fwlink/?LinkID=320771
+                    //Enviar correo electrónico con este vínculo
+                    string code = await UserManager.GeneratePasswordResetTokenAsync(user.Id);
+                    RecuperacionContrasenaViewModel Recuperacion = new RecuperacionContrasenaViewModel();
+                    Recuperacion.IdUser = user.Id;
+                    Recuperacion.Token = code;
+                    RecuperacionContrasenaControlador.NuevaRecuperacionContrasena(Recuperacion);
+                    var callbackUrl = Url.Action("ResetPassword", "Account", new { userId = user.Id, code = code }, protocol: Request.Url.Scheme);
+                    GestorCorreo.EmailRecuperacionContrasena(model.Email, callbackUrl);
+                    //await UserManager.SendEmailAsync(user.Id, "Restablecer contraseña", "Para restablecer la contraseña, haga clic <a href=\"" + callbackUrl + "\">aquí</a>");
+                    
                     // No revelar que el usuario no existe o que no está confirmado
-                    return View("ForgotPasswordConfirmation");
+                    //return View("ForgotPasswordConfirmation");
                 }
+                return RedirectToAction("ForgotPasswordConfirmation", "Account");
 
-                // Para obtener más información sobre cómo habilitar la confirmación de cuentas y el restablecimiento de contraseña, visite https://go.microsoft.com/fwlink/?LinkID=320771
-                // Enviar correo electrónico con este vínculo
-                // string code = await UserManager.GeneratePasswordResetTokenAsync(user.Id);
-                // var callbackUrl = Url.Action("ResetPassword", "Account", new { userId = user.Id, code = code }, protocol: Request.Url.Scheme);		
-                // await UserManager.SendEmailAsync(user.Id, "Restablecer contraseña", "Para restablecer la contraseña, haga clic <a href=\"" + callbackUrl + "\">aquí</a>");
-                // return RedirectToAction("ForgotPasswordConfirmation", "Account");
             }
 
             // Si llegamos a este punto, es que se ha producido un error y volvemos a mostrar el formulario
@@ -308,12 +315,18 @@ namespace SistemaEducativo.Controllers
                 // No revelar que el usuario no existe
                 return RedirectToAction("ResetPasswordConfirmation", "Account");
             }
-            var result = await UserManager.ResetPasswordAsync(user.Id, model.Code, model.Password);
-            if (result.Succeeded)
+            var VerificacionCodigo = RecuperacionContrasenaControlador.ConsultaRecuperacionContrasena(user.Id, model.Code);
+            if (VerificacionCodigo != null)
             {
-                return RedirectToAction("ResetPasswordConfirmation", "Account");
-            }
+                var result = await UserManager.ResetPasswordAsync(user.Id, model.Code, model.Password);
+                if (result.Succeeded)
+                {
+                    RecuperacionContrasenaControlador.EliminarRecuperacion(user.Id);
+                    return RedirectToAction("ResetPasswordConfirmation", "Account");
+                }
             AddErrors(result);
+            }
+            
             return View();
         }
 

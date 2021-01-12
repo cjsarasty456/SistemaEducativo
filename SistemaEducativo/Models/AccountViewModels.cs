@@ -65,6 +65,11 @@ namespace SistemaEducativo.Models
 
     public class RegisterViewModel
     {
+        public RegisterViewModel()
+        {
+            FechaNacimiento = DateTime.Now;
+            FechaVinculacion = DateTime.Now;
+        }
         public string IdUser { get; set; }
 
         [Required]
@@ -114,7 +119,7 @@ namespace SistemaEducativo.Models
 
         [Required]
         [Display(Name = "Cargo Base")]
-        public string CargoBase { get; set; }
+        public int CargoBase { get; set; }
 
         [Required]
         [Display(Name = "Nivel")]
@@ -122,7 +127,7 @@ namespace SistemaEducativo.Models
 
         [Required]
         [Display(Name = "Área Desempeño")]
-        public string AreaDesempeno { get; set; }
+        public List<string> AreaDesempeno { get; set; }
 
         [Required(ErrorMessage = "La institución Educativa es obligatoria")]
         [Display(Name = "Institución Educativa")]

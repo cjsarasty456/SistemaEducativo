@@ -1,17 +1,7 @@
-﻿$(function () {
-    //Initialize Select2 Elements
-    $('.select2').select2()
-
-    //Initialize Select2 Elements
-    $('.select2bs4').select2({
-        theme: 'bootstrap4'
-    })
-
-})
-ContrasenaPredeterminado();
+﻿ContrasenaPredeterminado();
 
 function CargarMunicipioExpedicion(Departamento) {
-    var campo = document.getElementById('CmpCodMunicipioExpedicion');
+    var campo = document.getElementById('CodMunicipioExpedicion');
     var data = Departamento.value;
     var url = "/Account/ConsultaListaMunicipio";
     $.post(url, { "CodDepartamento": data }).done(function (data) {
@@ -21,12 +11,12 @@ function CargarMunicipioExpedicion(Departamento) {
 }
 
 function AgregarMuniciosExpedicion(item, index) {
-    var campo = document.getElementById('CmpCodMunicipioExpedicion');
+    var campo = document.getElementById('CodMunicipioExpedicion');
     campo.innerHTML += "<option value=" + item.CodMunicipio + ">" + item.NomMunicipio + "</option>";
 }
 
 function CargarSede(Institucion) {
-    var campo = document.getElementById('CmpIdSede');
+    var campo = document.getElementById('IdSede');
     var data = Institucion.value;
     var url = "/Account/ConsultaListaSedes";
     $.post(url, { "Institucion": data }).done(function (data) {
@@ -36,8 +26,8 @@ function CargarSede(Institucion) {
 }
 
 function AgregarSedes(item, index) {
-    var campo = document.getElementById('CmpIdSede');
-    campo.innerHTML += "<option value=" + item.id + ">" + item.Nombre + "</option>";
+    var campo = document.getElementById('IdSede');
+    campo.innerHTML += "<option value=" + item.Id + ">" + item.Nombre + "</option>";
 }
 
 function ContrasenaPredeterminado() {
@@ -50,6 +40,6 @@ function ContrasenaPredeterminado() {
 
 }
 
-function Mayuscyla(e) {
+function Mayuscula(e) {
     e.value = e.value.toUpperCase();
 }

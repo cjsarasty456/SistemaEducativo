@@ -42,15 +42,18 @@ namespace SistemaEducativo.Models.Configuracion
     partial void InsertCargo(Cargo instance);
     partial void UpdateCargo(Cargo instance);
     partial void DeleteCargo(Cargo instance);
-    partial void InsertPerfilUsuario(PerfilUsuario instance);
-    partial void UpdatePerfilUsuario(PerfilUsuario instance);
-    partial void DeletePerfilUsuario(PerfilUsuario instance);
-    partial void InsertTipoVInculacion1(TipoVInculacion1 instance);
-    partial void UpdateTipoVInculacion1(TipoVInculacion1 instance);
-    partial void DeleteTipoVInculacion1(TipoVInculacion1 instance);
     partial void InsertGradoEscalafon(GradoEscalafon instance);
     partial void UpdateGradoEscalafon(GradoEscalafon instance);
     partial void DeleteGradoEscalafon(GradoEscalafon instance);
+    partial void InsertPerfilUsuario(PerfilUsuario instance);
+    partial void UpdatePerfilUsuario(PerfilUsuario instance);
+    partial void DeletePerfilUsuario(PerfilUsuario instance);
+    partial void InsertAreaDesempeno(AreaDesempeno instance);
+    partial void UpdateAreaDesempeno(AreaDesempeno instance);
+    partial void DeleteAreaDesempeno(AreaDesempeno instance);
+    partial void InsertRecuperacionContrasena(RecuperacionContrasena instance);
+    partial void UpdateRecuperacionContrasena(RecuperacionContrasena instance);
+    partial void DeleteRecuperacionContrasena(RecuperacionContrasena instance);
     #endregion
 		
 		public ConfiguracionDataContext() : 
@@ -115,6 +118,14 @@ namespace SistemaEducativo.Models.Configuracion
 			}
 		}
 		
+		public System.Data.Linq.Table<GradoEscalafon> GradoEscalafon
+		{
+			get
+			{
+				return this.GetTable<GradoEscalafon>();
+			}
+		}
+		
 		public System.Data.Linq.Table<PerfilUsuario> PerfilUsuario
 		{
 			get
@@ -123,19 +134,27 @@ namespace SistemaEducativo.Models.Configuracion
 			}
 		}
 		
-		public System.Data.Linq.Table<TipoVInculacion1> TipoVInculacion1
+		public System.Data.Linq.Table<AreaDesempeno> AreaDesempeno
 		{
 			get
 			{
-				return this.GetTable<TipoVInculacion1>();
+				return this.GetTable<AreaDesempeno>();
 			}
 		}
 		
-		public System.Data.Linq.Table<GradoEscalafon> GradoEscalafon
+		public System.Data.Linq.Table<RegistroAreaDesempeno> RegistroAreaDesempeno
 		{
 			get
 			{
-				return this.GetTable<GradoEscalafon>();
+				return this.GetTable<RegistroAreaDesempeno>();
+			}
+		}
+		
+		public System.Data.Linq.Table<RecuperacionContrasena> RecuperacionContrasena
+		{
+			get
+			{
+				return this.GetTable<RecuperacionContrasena>();
 			}
 		}
 	}
@@ -424,6 +443,8 @@ namespace SistemaEducativo.Models.Configuracion
 		
 		private EntitySet<PerfilUsuario> _PerfilUsuario;
 		
+		private EntitySet<RecuperacionContrasena> _RecuperacionContrasena;
+		
     #region Definiciones de métodos de extensibilidad
     partial void OnLoaded();
     partial void OnValidate(System.Data.Linq.ChangeAction action);
@@ -457,6 +478,7 @@ namespace SistemaEducativo.Models.Configuracion
 		public AspNetUsers()
 		{
 			this._PerfilUsuario = new EntitySet<PerfilUsuario>(new Action<PerfilUsuario>(this.attach_PerfilUsuario), new Action<PerfilUsuario>(this.detach_PerfilUsuario));
+			this._RecuperacionContrasena = new EntitySet<RecuperacionContrasena>(new Action<RecuperacionContrasena>(this.attach_RecuperacionContrasena), new Action<RecuperacionContrasena>(this.detach_RecuperacionContrasena));
 			OnCreated();
 		}
 		
@@ -713,6 +735,19 @@ namespace SistemaEducativo.Models.Configuracion
 			}
 		}
 		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="AspNetUsers_RecuperacionContrasena", Storage="_RecuperacionContrasena", ThisKey="Id", OtherKey="idUser")]
+		public EntitySet<RecuperacionContrasena> RecuperacionContrasena
+		{
+			get
+			{
+				return this._RecuperacionContrasena;
+			}
+			set
+			{
+				this._RecuperacionContrasena.Assign(value);
+			}
+		}
+		
 		public event PropertyChangingEventHandler PropertyChanging;
 		
 		public event PropertyChangedEventHandler PropertyChanged;
@@ -740,6 +775,18 @@ namespace SistemaEducativo.Models.Configuracion
 		}
 		
 		private void detach_PerfilUsuario(PerfilUsuario entity)
+		{
+			this.SendPropertyChanging();
+			entity.AspNetUsers = null;
+		}
+		
+		private void attach_RecuperacionContrasena(RecuperacionContrasena entity)
+		{
+			this.SendPropertyChanging();
+			entity.AspNetUsers = this;
+		}
+		
+		private void detach_RecuperacionContrasena(RecuperacionContrasena entity)
 		{
 			this.SendPropertyChanging();
 			entity.AspNetUsers = null;
@@ -860,6 +907,120 @@ namespace SistemaEducativo.Models.Configuracion
 		}
 	}
 	
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.GradoEscalafon")]
+	public partial class GradoEscalafon : INotifyPropertyChanging, INotifyPropertyChanged
+	{
+		
+		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+		
+		private int _Id;
+		
+		private string _Nombre;
+		
+		private EntitySet<PerfilUsuario> _PerfilUsuario;
+		
+    #region Definiciones de métodos de extensibilidad
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void OnIdChanging(int value);
+    partial void OnIdChanged();
+    partial void OnNombreChanging(string value);
+    partial void OnNombreChanged();
+    #endregion
+		
+		public GradoEscalafon()
+		{
+			this._PerfilUsuario = new EntitySet<PerfilUsuario>(new Action<PerfilUsuario>(this.attach_PerfilUsuario), new Action<PerfilUsuario>(this.detach_PerfilUsuario));
+			OnCreated();
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Id", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
+		public int Id
+		{
+			get
+			{
+				return this._Id;
+			}
+			set
+			{
+				if ((this._Id != value))
+				{
+					this.OnIdChanging(value);
+					this.SendPropertyChanging();
+					this._Id = value;
+					this.SendPropertyChanged("Id");
+					this.OnIdChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Nombre", DbType="VarChar(4) NOT NULL", CanBeNull=false)]
+		public string Nombre
+		{
+			get
+			{
+				return this._Nombre;
+			}
+			set
+			{
+				if ((this._Nombre != value))
+				{
+					this.OnNombreChanging(value);
+					this.SendPropertyChanging();
+					this._Nombre = value;
+					this.SendPropertyChanged("Nombre");
+					this.OnNombreChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="GradoEscalafon_PerfilUsuario", Storage="_PerfilUsuario", ThisKey="Id", OtherKey="GradoEscalafon")]
+		public EntitySet<PerfilUsuario> PerfilUsuario
+		{
+			get
+			{
+				return this._PerfilUsuario;
+			}
+			set
+			{
+				this._PerfilUsuario.Assign(value);
+			}
+		}
+		
+		public event PropertyChangingEventHandler PropertyChanging;
+		
+		public event PropertyChangedEventHandler PropertyChanged;
+		
+		protected virtual void SendPropertyChanging()
+		{
+			if ((this.PropertyChanging != null))
+			{
+				this.PropertyChanging(this, emptyChangingEventArgs);
+			}
+		}
+		
+		protected virtual void SendPropertyChanged(String propertyName)
+		{
+			if ((this.PropertyChanged != null))
+			{
+				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+			}
+		}
+		
+		private void attach_PerfilUsuario(PerfilUsuario entity)
+		{
+			this.SendPropertyChanging();
+			entity.GradoEscalafon1 = this;
+		}
+		
+		private void detach_PerfilUsuario(PerfilUsuario entity)
+		{
+			this.SendPropertyChanging();
+			entity.GradoEscalafon1 = null;
+		}
+	}
+	
 	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.PerfilUsuario")]
 	public partial class PerfilUsuario : INotifyPropertyChanging, INotifyPropertyChanged
 	{
@@ -898,8 +1059,6 @@ namespace SistemaEducativo.Models.Configuracion
 		
 		private string _Nivel;
 		
-		private string _AreaDesempeno;
-		
 		private int _IdInstitucionEducativa;
 		
 		private int _IdSede;
@@ -920,13 +1079,11 @@ namespace SistemaEducativo.Models.Configuracion
 		
 		private EntityRef<AspNetUsers> _AspNetUsers;
 		
+		private EntityRef<GradoEscalafon> _GradoEscalafon1;
+		
 		private EntityRef<Cargo> _Cargo;
 		
 		private EntityRef<Rol> _Rol;
-		
-		private EntityRef<TipoVInculacion1> _TipoVInculacion1;
-		
-		private EntityRef<GradoEscalafon> _GradoEscalafon1;
 		
     #region Definiciones de métodos de extensibilidad
     partial void OnLoaded();
@@ -964,8 +1121,6 @@ namespace SistemaEducativo.Models.Configuracion
     partial void OnCargoBaseChanged();
     partial void OnNivelChanging(string value);
     partial void OnNivelChanged();
-    partial void OnAreaDesempenoChanging(string value);
-    partial void OnAreaDesempenoChanged();
     partial void OnIdInstitucionEducativaChanging(int value);
     partial void OnIdInstitucionEducativaChanged();
     partial void OnIdSedeChanging(int value);
@@ -988,10 +1143,9 @@ namespace SistemaEducativo.Models.Configuracion
 		{
 			this._TipoVInculacion = default(EntityRef<TipoVInculacion>);
 			this._AspNetUsers = default(EntityRef<AspNetUsers>);
+			this._GradoEscalafon1 = default(EntityRef<GradoEscalafon>);
 			this._Cargo = default(EntityRef<Cargo>);
 			this._Rol = default(EntityRef<Rol>);
-			this._TipoVInculacion1 = default(EntityRef<TipoVInculacion1>);
-			this._GradoEscalafon1 = default(EntityRef<GradoEscalafon>);
 			OnCreated();
 		}
 		
@@ -1250,7 +1404,7 @@ namespace SistemaEducativo.Models.Configuracion
 			{
 				if ((this._IdTipoVinculacion != value))
 				{
-					if ((this._TipoVInculacion.HasLoadedOrAssignedValue || this._TipoVInculacion1.HasLoadedOrAssignedValue))
+					if (this._TipoVInculacion.HasLoadedOrAssignedValue)
 					{
 						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
 					}
@@ -1323,26 +1477,6 @@ namespace SistemaEducativo.Models.Configuracion
 					this._Nivel = value;
 					this.SendPropertyChanged("Nivel");
 					this.OnNivelChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_AreaDesempeno", DbType="VarChar(50)")]
-		public string AreaDesempeno
-		{
-			get
-			{
-				return this._AreaDesempeno;
-			}
-			set
-			{
-				if ((this._AreaDesempeno != value))
-				{
-					this.OnAreaDesempenoChanging(value);
-					this.SendPropertyChanging();
-					this._AreaDesempeno = value;
-					this.SendPropertyChanged("AreaDesempeno");
-					this.OnAreaDesempenoChanged();
 				}
 			}
 		}
@@ -1583,6 +1717,40 @@ namespace SistemaEducativo.Models.Configuracion
 			}
 		}
 		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="GradoEscalafon_PerfilUsuario", Storage="_GradoEscalafon1", ThisKey="GradoEscalafon", OtherKey="Id", IsForeignKey=true)]
+		public GradoEscalafon GradoEscalafon1
+		{
+			get
+			{
+				return this._GradoEscalafon1.Entity;
+			}
+			set
+			{
+				GradoEscalafon previousValue = this._GradoEscalafon1.Entity;
+				if (((previousValue != value) 
+							|| (this._GradoEscalafon1.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._GradoEscalafon1.Entity = null;
+						previousValue.PerfilUsuario.Remove(this);
+					}
+					this._GradoEscalafon1.Entity = value;
+					if ((value != null))
+					{
+						value.PerfilUsuario.Add(this);
+						this._GradoEscalafon = value.Id;
+					}
+					else
+					{
+						this._GradoEscalafon = default(int);
+					}
+					this.SendPropertyChanged("GradoEscalafon1");
+				}
+			}
+		}
+		
 		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Cargo_PerfilUsuario", Storage="_Cargo", ThisKey="CargoBase", OtherKey="Id", IsForeignKey=true)]
 		public Cargo Cargo
 		{
@@ -1651,74 +1819,6 @@ namespace SistemaEducativo.Models.Configuracion
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="TipoVInculacion1_PerfilUsuario", Storage="_TipoVInculacion1", ThisKey="IdTipoVinculacion", OtherKey="IdVinculacion", IsForeignKey=true)]
-		public TipoVInculacion1 TipoVInculacion1
-		{
-			get
-			{
-				return this._TipoVInculacion1.Entity;
-			}
-			set
-			{
-				TipoVInculacion1 previousValue = this._TipoVInculacion1.Entity;
-				if (((previousValue != value) 
-							|| (this._TipoVInculacion1.HasLoadedOrAssignedValue == false)))
-				{
-					this.SendPropertyChanging();
-					if ((previousValue != null))
-					{
-						this._TipoVInculacion1.Entity = null;
-						previousValue.PerfilUsuario.Remove(this);
-					}
-					this._TipoVInculacion1.Entity = value;
-					if ((value != null))
-					{
-						value.PerfilUsuario.Add(this);
-						this._IdTipoVinculacion = value.IdVinculacion;
-					}
-					else
-					{
-						this._IdTipoVinculacion = default(int);
-					}
-					this.SendPropertyChanged("TipoVInculacion1");
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="GradoEscalafon_PerfilUsuario", Storage="_GradoEscalafon1", ThisKey="GradoEscalafon", OtherKey="Id", IsForeignKey=true)]
-		public GradoEscalafon GradoEscalafon1
-		{
-			get
-			{
-				return this._GradoEscalafon1.Entity;
-			}
-			set
-			{
-				GradoEscalafon previousValue = this._GradoEscalafon1.Entity;
-				if (((previousValue != value) 
-							|| (this._GradoEscalafon1.HasLoadedOrAssignedValue == false)))
-				{
-					this.SendPropertyChanging();
-					if ((previousValue != null))
-					{
-						this._GradoEscalafon1.Entity = null;
-						previousValue.PerfilUsuario.Remove(this);
-					}
-					this._GradoEscalafon1.Entity = value;
-					if ((value != null))
-					{
-						value.PerfilUsuario.Add(this);
-						this._GradoEscalafon = value.Id;
-					}
-					else
-					{
-						this._GradoEscalafon = default(int);
-					}
-					this.SendPropertyChanged("GradoEscalafon1");
-				}
-			}
-		}
-		
 		public event PropertyChangingEventHandler PropertyChanging;
 		
 		public event PropertyChangedEventHandler PropertyChanged;
@@ -1740,122 +1840,8 @@ namespace SistemaEducativo.Models.Configuracion
 		}
 	}
 	
-	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.TipoVInculacion")]
-	public partial class TipoVInculacion1 : INotifyPropertyChanging, INotifyPropertyChanged
-	{
-		
-		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
-		
-		private int _IdVinculacion;
-		
-		private string _TipoVinculacion;
-		
-		private EntitySet<PerfilUsuario> _PerfilUsuario;
-		
-    #region Definiciones de métodos de extensibilidad
-    partial void OnLoaded();
-    partial void OnValidate(System.Data.Linq.ChangeAction action);
-    partial void OnCreated();
-    partial void OnIdVinculacionChanging(int value);
-    partial void OnIdVinculacionChanged();
-    partial void OnTipoVinculacionChanging(string value);
-    partial void OnTipoVinculacionChanged();
-    #endregion
-		
-		public TipoVInculacion1()
-		{
-			this._PerfilUsuario = new EntitySet<PerfilUsuario>(new Action<PerfilUsuario>(this.attach_PerfilUsuario), new Action<PerfilUsuario>(this.detach_PerfilUsuario));
-			OnCreated();
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_IdVinculacion", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
-		public int IdVinculacion
-		{
-			get
-			{
-				return this._IdVinculacion;
-			}
-			set
-			{
-				if ((this._IdVinculacion != value))
-				{
-					this.OnIdVinculacionChanging(value);
-					this.SendPropertyChanging();
-					this._IdVinculacion = value;
-					this.SendPropertyChanged("IdVinculacion");
-					this.OnIdVinculacionChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_TipoVinculacion", DbType="VarChar(15) NOT NULL", CanBeNull=false)]
-		public string TipoVinculacion
-		{
-			get
-			{
-				return this._TipoVinculacion;
-			}
-			set
-			{
-				if ((this._TipoVinculacion != value))
-				{
-					this.OnTipoVinculacionChanging(value);
-					this.SendPropertyChanging();
-					this._TipoVinculacion = value;
-					this.SendPropertyChanged("TipoVinculacion");
-					this.OnTipoVinculacionChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="TipoVInculacion1_PerfilUsuario", Storage="_PerfilUsuario", ThisKey="IdVinculacion", OtherKey="IdTipoVinculacion")]
-		public EntitySet<PerfilUsuario> PerfilUsuario
-		{
-			get
-			{
-				return this._PerfilUsuario;
-			}
-			set
-			{
-				this._PerfilUsuario.Assign(value);
-			}
-		}
-		
-		public event PropertyChangingEventHandler PropertyChanging;
-		
-		public event PropertyChangedEventHandler PropertyChanged;
-		
-		protected virtual void SendPropertyChanging()
-		{
-			if ((this.PropertyChanging != null))
-			{
-				this.PropertyChanging(this, emptyChangingEventArgs);
-			}
-		}
-		
-		protected virtual void SendPropertyChanged(String propertyName)
-		{
-			if ((this.PropertyChanged != null))
-			{
-				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
-			}
-		}
-		
-		private void attach_PerfilUsuario(PerfilUsuario entity)
-		{
-			this.SendPropertyChanging();
-			entity.TipoVInculacion1 = this;
-		}
-		
-		private void detach_PerfilUsuario(PerfilUsuario entity)
-		{
-			this.SendPropertyChanging();
-			entity.TipoVInculacion1 = null;
-		}
-	}
-	
-	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.GradoEscalafon")]
-	public partial class GradoEscalafon : INotifyPropertyChanging, INotifyPropertyChanged
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.AreaDesempeno")]
+	public partial class AreaDesempeno : INotifyPropertyChanging, INotifyPropertyChanged
 	{
 		
 		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
@@ -1863,8 +1849,6 @@ namespace SistemaEducativo.Models.Configuracion
 		private int _Id;
 		
 		private string _Nombre;
-		
-		private EntitySet<PerfilUsuario> _PerfilUsuario;
 		
     #region Definiciones de métodos de extensibilidad
     partial void OnLoaded();
@@ -1876,9 +1860,8 @@ namespace SistemaEducativo.Models.Configuracion
     partial void OnNombreChanged();
     #endregion
 		
-		public GradoEscalafon()
+		public AreaDesempeno()
 		{
-			this._PerfilUsuario = new EntitySet<PerfilUsuario>(new Action<PerfilUsuario>(this.attach_PerfilUsuario), new Action<PerfilUsuario>(this.detach_PerfilUsuario));
 			OnCreated();
 		}
 		
@@ -1902,7 +1885,7 @@ namespace SistemaEducativo.Models.Configuracion
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Nombre", DbType="VarChar(4) NOT NULL", CanBeNull=false)]
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Nombre", DbType="VarChar(50) NOT NULL", CanBeNull=false)]
 		public string Nombre
 		{
 			get
@@ -1919,19 +1902,6 @@ namespace SistemaEducativo.Models.Configuracion
 					this.SendPropertyChanged("Nombre");
 					this.OnNombreChanged();
 				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="GradoEscalafon_PerfilUsuario", Storage="_PerfilUsuario", ThisKey="Id", OtherKey="GradoEscalafon")]
-		public EntitySet<PerfilUsuario> PerfilUsuario
-		{
-			get
-			{
-				return this._PerfilUsuario;
-			}
-			set
-			{
-				this._PerfilUsuario.Assign(value);
 			}
 		}
 		
@@ -1954,17 +1924,225 @@ namespace SistemaEducativo.Models.Configuracion
 				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
 			}
 		}
+	}
+	
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.RegistroAreaDesempeno")]
+	public partial class RegistroAreaDesempeno
+	{
 		
-		private void attach_PerfilUsuario(PerfilUsuario entity)
+		private string _IdUsuario;
+		
+		private int _IdAreaDesempeno;
+		
+		public RegistroAreaDesempeno()
 		{
-			this.SendPropertyChanging();
-			entity.GradoEscalafon1 = this;
 		}
 		
-		private void detach_PerfilUsuario(PerfilUsuario entity)
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_IdUsuario", DbType="NVarChar(128) NOT NULL", CanBeNull=false)]
+		public string IdUsuario
 		{
-			this.SendPropertyChanging();
-			entity.GradoEscalafon1 = null;
+			get
+			{
+				return this._IdUsuario;
+			}
+			set
+			{
+				if ((this._IdUsuario != value))
+				{
+					this._IdUsuario = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_IdAreaDesempeno", DbType="Int NOT NULL")]
+		public int IdAreaDesempeno
+		{
+			get
+			{
+				return this._IdAreaDesempeno;
+			}
+			set
+			{
+				if ((this._IdAreaDesempeno != value))
+				{
+					this._IdAreaDesempeno = value;
+				}
+			}
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.RecuperacionContrasena")]
+	public partial class RecuperacionContrasena : INotifyPropertyChanging, INotifyPropertyChanged
+	{
+		
+		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+		
+		private string _id;
+		
+		private string _idUser;
+		
+		private string _Token;
+		
+		private System.DateTime _Vencimiento;
+		
+		private EntityRef<AspNetUsers> _AspNetUsers;
+		
+    #region Definiciones de métodos de extensibilidad
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void OnidChanging(string value);
+    partial void OnidChanged();
+    partial void OnidUserChanging(string value);
+    partial void OnidUserChanged();
+    partial void OnTokenChanging(string value);
+    partial void OnTokenChanged();
+    partial void OnVencimientoChanging(System.DateTime value);
+    partial void OnVencimientoChanged();
+    #endregion
+		
+		public RecuperacionContrasena()
+		{
+			this._AspNetUsers = default(EntityRef<AspNetUsers>);
+			OnCreated();
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_id", DbType="NVarChar(128) NOT NULL", CanBeNull=false, IsPrimaryKey=true)]
+		public string id
+		{
+			get
+			{
+				return this._id;
+			}
+			set
+			{
+				if ((this._id != value))
+				{
+					this.OnidChanging(value);
+					this.SendPropertyChanging();
+					this._id = value;
+					this.SendPropertyChanged("id");
+					this.OnidChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_idUser", DbType="NVarChar(128) NOT NULL", CanBeNull=false)]
+		public string idUser
+		{
+			get
+			{
+				return this._idUser;
+			}
+			set
+			{
+				if ((this._idUser != value))
+				{
+					if (this._AspNetUsers.HasLoadedOrAssignedValue)
+					{
+						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+					}
+					this.OnidUserChanging(value);
+					this.SendPropertyChanging();
+					this._idUser = value;
+					this.SendPropertyChanged("idUser");
+					this.OnidUserChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Token", DbType="NVarChar(258) NOT NULL", CanBeNull=false)]
+		public string Token
+		{
+			get
+			{
+				return this._Token;
+			}
+			set
+			{
+				if ((this._Token != value))
+				{
+					this.OnTokenChanging(value);
+					this.SendPropertyChanging();
+					this._Token = value;
+					this.SendPropertyChanged("Token");
+					this.OnTokenChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Vencimiento", DbType="DateTime NOT NULL")]
+		public System.DateTime Vencimiento
+		{
+			get
+			{
+				return this._Vencimiento;
+			}
+			set
+			{
+				if ((this._Vencimiento != value))
+				{
+					this.OnVencimientoChanging(value);
+					this.SendPropertyChanging();
+					this._Vencimiento = value;
+					this.SendPropertyChanged("Vencimiento");
+					this.OnVencimientoChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="AspNetUsers_RecuperacionContrasena", Storage="_AspNetUsers", ThisKey="idUser", OtherKey="Id", IsForeignKey=true)]
+		public AspNetUsers AspNetUsers
+		{
+			get
+			{
+				return this._AspNetUsers.Entity;
+			}
+			set
+			{
+				AspNetUsers previousValue = this._AspNetUsers.Entity;
+				if (((previousValue != value) 
+							|| (this._AspNetUsers.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._AspNetUsers.Entity = null;
+						previousValue.RecuperacionContrasena.Remove(this);
+					}
+					this._AspNetUsers.Entity = value;
+					if ((value != null))
+					{
+						value.RecuperacionContrasena.Add(this);
+						this._idUser = value.Id;
+					}
+					else
+					{
+						this._idUser = default(string);
+					}
+					this.SendPropertyChanged("AspNetUsers");
+				}
+			}
+		}
+		
+		public event PropertyChangingEventHandler PropertyChanging;
+		
+		public event PropertyChangedEventHandler PropertyChanged;
+		
+		protected virtual void SendPropertyChanging()
+		{
+			if ((this.PropertyChanging != null))
+			{
+				this.PropertyChanging(this, emptyChangingEventArgs);
+			}
+		}
+		
+		protected virtual void SendPropertyChanged(String propertyName)
+		{
+			if ((this.PropertyChanged != null))
+			{
+				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+			}
 		}
 	}
 }

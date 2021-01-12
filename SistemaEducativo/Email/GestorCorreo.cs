@@ -67,6 +67,23 @@ namespace SistemaEducativo.Email
             GestorCorreo gestor = new GestorCorreo();
             gestor.EnviarCorreo(Mail);
         }
+        public static void EmailRecuperacionContrasena(string Correo, string Enlace)
+        {
+            Mail Mail = new Mail();
+            Mail.EmailTo = Correo;
+            Mail.Subjet = "Notificación Sistema Educativo";
+            Mail.Body = "<body>" +
+            "<h1>Cambio Contraseña</h1>" +
+            "<p>" +
+            "Que se ha solicitado recuperación de contraseña para reestablecer la contraseña ingrese al siguiente enlace: " +
+            "haga clic <a href=\"" + Enlace + "\">aquí</a></p>" +
+            "<p>El enlace solo tiene vigencia de 2 horas.</p>" +
+            "<p><img src='https://localhost:44358/resourse/imagenes/Logo.jpg'> Sistema Educativo</p>" +
+            "<small>Derechos reservados © " + DateTime.Now.Year.ToString() + "</small>" +
+            "</body>";
+            GestorCorreo gestor = new GestorCorreo();
+            gestor.EnviarCorreo(Mail);
+        }
     }
 
 }

@@ -267,24 +267,30 @@
     <Compile Include="Controllers\EstudianteController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
+    <Compile Include="Email\GestorCorreo.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\AccountViewModels.cs" />
+    <Compile Include="Models\Configuracion\CargoBaseControlador.cs" />
     <Compile Include="Models\Configuracion\Configuracion.designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>Configuracion.dbml</DependentUpon>
     </Compile>
     <Compile Include="Models\Configuracion\RolControlador.cs" />
+    <Compile Include="Models\Configuracion\AreaDesempenoControlador.cs" />
+    <Compile Include="Models\Configuracion\RegistroAreaDesempenoControlador.cs" />
+    <Compile Include="Models\Configuracion\RecuperacionContrasenaControlador.cs" />
     <Compile Include="Models\Configuracion\UsuarioControlador.cs" />
     <Compile Include="Models\Constantes\AfiliacionSalud.cs" />
+    <Compile Include="Models\Constantes\Jornada.cs" />
     <Compile Include="Models\Constantes\NivelDocente.cs" />
     <Compile Include="Models\Constantes\NivelPersonal.cs" />
     <Compile Include="Models\Constantes\NivelEducativo.cs" />
     <Compile Include="Models\Constantes\Genero.cs" />
     <Compile Include="Models\Constantes\Grado.cs" />
-    <Compile Include="Models\Constantes\Jornada.cs" />
+    <Compile Include="Models\Constantes\Zona.cs" />
     <Compile Include="Models\Constantes\Modalidad.cs" />
     <Compile Include="Models\Constantes\TipoDocumento.cs" />
     <Compile Include="Models\Estudiante\EstudianteControlador.cs" />
@@ -2037,6 +2043,7 @@
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
+    <Content Include="Scripts\Account\ListaUsuario.js" />
     <Content Include="Scripts\Account\Register.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
@@ -2292,7 +2299,6 @@
     <Content Include="Views\Shared\Lockout.cshtml" />
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
     <Content Include="Views\Estudiante\Delete.cshtml" />
-    <Content Include="Views\Estudiante\Details.cshtml" />
     <Content Include="Views\Estudiante\Index.cshtml" />
     <Content Include="Views\Estudiante\New.cshtml" />
     <Content Include="Views\Estudiante\_ActaAcuerdo.cshtml" />
@@ -2311,6 +2317,7 @@
     <Content Include="Views\Sede\NuevaSede.cshtml" />
     <Content Include="Views\Account\Usuario.cshtml" />
     <Content Include="Views\Account\ListaUsuario.cshtml" />
+    <Content Include="Views\Estudiante\Details.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
