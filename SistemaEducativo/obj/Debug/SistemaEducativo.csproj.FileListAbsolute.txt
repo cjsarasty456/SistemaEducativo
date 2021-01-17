@@ -368,3 +368,5 @@ D:\desarrollo\ASP.NET\SistemaEducativo\SistemaEducativo\SistemaEducativo\obj\Deb
 D:\desarrollo\ASP.NET\SistemaEducativo\SistemaEducativo\SistemaEducativo\obj\Debug\SistemaEducativo.dll
 D:\desarrollo\ASP.NET\SistemaEducativo\SistemaEducativo\SistemaEducativo\obj\Debug\SistemaEducativo.pdb
 D:\desarrollo\ASP.NET\SistemaEducativo\SistemaEducativo\SistemaEducativo\obj\Debug\SistemaEducativo.csprojAssemblyReference.cache
+D:\desarrollo\ASP.NET\SistemaEducativo\SistemaEducativo\SistemaEducativo\obj\Debug\SistemaEducativo.Migrations.octubre.resources
+D:\desarrollo\ASP.NET\SistemaEducativo\SistemaEducativo\SistemaEducativo\obj\Debug\SistemaEducativo.csproj.GenerateResource.cache
