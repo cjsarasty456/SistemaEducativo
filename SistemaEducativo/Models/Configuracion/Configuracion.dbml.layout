@@ -38,7 +38,7 @@
         <elementListCompartment Id="86091444-5e8d-4c51-9d7a-23bb21c27ea4" absoluteBounds="0.51500000000000012, 1.335, 1.9700000000000002, 4.8646240234375" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
       </nestedChildShapes>
     </classShape>
-    <associationConnector edgePoints="[(5.25 : 4.09699625651042); (2.5 : 4.09699625651042)]" fixedFrom="NotFixed" fixedTo="NotFixed">
+    <associationConnector edgePoints="[(5.25 : 4.09699625651042); (2.5 : 4.09699625651042)]" fixedFrom="Algorithm" fixedTo="Algorithm">
       <AssociationMoniker Name="/ConfiguracionDataContext/TipoVInculacion/TipoVInculacion_PerfilUsuario" />
       <nodes>
         <classShapeMoniker Id="e0b01c41-cc7d-4403-92e8-68408d5bdf93" />
@@ -59,7 +59,7 @@
         <classShapeMoniker Id="84dc1220-656e-4fbd-97e2-96662310ca95" />
       </nodes>
     </associationConnector>
-    <associationConnector edgePoints="[(5.25 : 5.65625); (2.5 : 5.65625)]" fixedFrom="NotFixed" fixedTo="NotFixed">
+    <associationConnector edgePoints="[(5.25 : 5.77481201171875); (2.5 : 5.77481201171875)]" fixedFrom="Algorithm" fixedTo="Algorithm">
       <AssociationMoniker Name="/ConfiguracionDataContext/Cargo/Cargo_PerfilUsuario" />
       <nodes>
         <classShapeMoniker Id="222fa1af-ee1c-4ab7-bc31-6301770cccd7" />
@@ -92,7 +92,7 @@
         <classShapeMoniker Id="afc91757-0883-44c1-8b23-6da65327f016" />
       </nodes>
     </associationConnector>
-    <associationConnector edgePoints="[(2.625 : 9.47199625651042); (4.875 : 9.47199625651042)]" fixedFrom="NotFixed" fixedTo="NotFixed">
+    <associationConnector edgePoints="[(2.625 : 9.56174967447917); (4.875 : 9.56174967447917)]" fixedFrom="Algorithm" fixedTo="Algorithm">
       <AssociationMoniker Name="/ConfiguracionDataContext/AspNetUsers/AspNetUsers_RegistroAreaDesempeno" />
       <nodes>
         <classShapeMoniker Id="dbf343bb-a6f4-4bf6-9ba9-b34667a4bd87" />
@@ -105,7 +105,7 @@
         <elementListCompartment Id="f348e481-ce12-4de1-b1be-e146552eed05" absoluteBounds="4.89, 11.585, 1.9700000000000002, 1.0185953776041665" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
       </nestedChildShapes>
     </classShape>
-    <associationConnector edgePoints="[(1.625 : 10.3670068359375); (1.625 : 11.9142976888021); (4.875 : 11.9142976888021)]" fixedFrom="Algorithm" fixedTo="Algorithm">
+    <associationConnector edgePoints="[(2.59375 : 10.3670068359375); (2.59375 : 11.71875); (4.875 : 11.71875)]" fixedFrom="Algorithm" fixedTo="Algorithm">
       <AssociationMoniker Name="/ConfiguracionDataContext/AspNetUsers/AspNetUsers_RecuperacionContrasena" />
       <nodes>
         <classShapeMoniker Id="dbf343bb-a6f4-4bf6-9ba9-b34667a4bd87" />

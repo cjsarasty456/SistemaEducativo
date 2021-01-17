@@ -271,8 +271,16 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202101151556051_octubre.cs" />
+    <Compile Include="Migrations\202101151556051_octubre.Designer.cs">
+      <DependentUpon>202101151556051_octubre.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\Configuracion\CargoBaseControlador.cs" />
+    <Compile Include="Models\Configuracion\Configuracion.cs">
+      <DependentUpon>Configuracion.dbml</DependentUpon>
+    </Compile>
     <Compile Include="Models\Configuracion\Configuracion.designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -415,8 +423,6 @@
     <Content Include="admin-lte\js\adminlte.js" />
     <Content Include="admin-lte\js\adminlte.min.js" />
     <Content Include="admin-lte\js\demo.js" />
-    <Content Include="admin-lte\js\pages\dashboard.js" />
-    <Content Include="admin-lte\js\pages\dashboard2.js" />
     <Content Include="admin-lte\plugins\bootstrap-colorpicker\css\bootstrap-colorpicker.css" />
     <Content Include="admin-lte\plugins\bootstrap-colorpicker\css\bootstrap-colorpicker.min.css" />
     <Content Include="admin-lte\plugins\bootstrap-colorpicker\js\bootstrap-colorpicker.js" />
@@ -2238,7 +2244,6 @@
     <Content Include="Scripts\Sede\New.js" />
     <Content Include="Scripts\Estudiante\Details.js" />
     <Content Include="Scripts\Estudiante\index.js" />
-    <Content Include="Scripts\Estudiante\New.js" />
     <Content Include="Models\General\GeneralModel.dbml">
       <Generator>MSLinqToSQLGenerator</Generator>
       <LastGenOutput>GeneralModel.designer.cs</LastGenOutput>
@@ -2292,7 +2297,6 @@
     <Content Include="Views\Account\VerifyCode.cshtml" />
     <Content Include="Views\Manage\AddPhoneNumber.cshtml" />
     <Content Include="Views\Manage\ChangePassword.cshtml" />
-    <Content Include="Views\Manage\Index.cshtml" />
     <Content Include="Views\Manage\ManageLogins.cshtml" />
     <Content Include="Views\Manage\SetPassword.cshtml" />
     <Content Include="Views\Manage\VerifyPhoneNumber.cshtml" />
@@ -2300,7 +2304,6 @@
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
     <Content Include="Views\Estudiante\Delete.cshtml" />
     <Content Include="Views\Estudiante\Index.cshtml" />
-    <Content Include="Views\Estudiante\New.cshtml" />
     <Content Include="Views\Estudiante\_ActaAcuerdo.cshtml" />
     <Content Include="Views\Estudiante\_EntornoEducativo.cshtml" />
     <Content Include="Views\Estudiante\_EntornoHogar.cshtml" />
@@ -2318,6 +2321,7 @@
     <Content Include="Views\Account\Usuario.cshtml" />
     <Content Include="Views\Account\ListaUsuario.cshtml" />
     <Content Include="Views\Estudiante\Details.cshtml" />
+    <Content Include="Views\Manage\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -2344,6 +2348,11 @@
     <Service Include="{3259AA49-8AA1-44D3-9025-A0B520596A8C}" />
     <Service Include="{4A0DDDB5-7A95-4FBF-97CC-616D07737A77}" />
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Migrations\202101151556051_octubre.resx">
+      <DependentUpon>202101151556051_octubre.cs</DependentUpon>
+    </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

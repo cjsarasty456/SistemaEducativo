@@ -165,7 +165,7 @@
                         <div class="col col-12 col-md-6">
                             <div class="form-group">
                                 @Html.LabelFor(m => m.GradoEscalafon, new { @class = "control-label" })<span>&#42;</span>
-                                @Html.DropDownListFor(m => m.GradoEscalafon, new SelectList(GradoEscalafon, "Id", "Nombre"), new { @class = "selectpicker form-control", @title = "Seleccione una opción", @onchange = "CargarSede(this);" })
+                                @Html.DropDownListFor(m => m.GradoEscalafon, new SelectList(GradoEscalafon, "Id", "Nombre"), new { @class = "selectpicker form-control", @title = "Seleccione una opción"})
                             </div>
                         </div>
                         <div class="col col-12 col-md-6">

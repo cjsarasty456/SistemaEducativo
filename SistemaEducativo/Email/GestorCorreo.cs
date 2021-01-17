@@ -29,7 +29,6 @@ namespace SistemaEducativo.Email
         }
         public void EnviarCorreo(Mail Mail)
         {
-            
             msg.To.Add(Mail.EmailTo);
             msg.Subject = Mail.Subjet;
             msg.IsBodyHtml = true;
@@ -87,21 +86,3 @@ namespace SistemaEducativo.Email
     }
 
 }
-
-//string body =
-//    "<body>" +
-//    "<h1>Hola</h1>" +
-//    "<p>Este es un correo de prueba</p>" +
-//    "</body>";
-//SmtpClient Smtp = new SmtpClient("smtp.gmail.com",587);
-//Smtp.Credentials = new NetworkCredential("cjsarasty@gmail.com", "Carlos123,");
-//Smtp.DeliveryMethod = SmtpDeliveryMethod.Network;
-//Smtp.EnableSsl = true;
-//Smtp.UseDefaultCredentials = false;
-//MailMessage mail = new MailMessage();
-//mail.From = new MailAddress("cjsarasty@gmail.com", "Prueba Nombre");
-//mail.To.Add(new MailAddress("cjcs.cadenasarasty8@gmail.com"));
-//mail.Subject = "Mensaje de Bienvenida";
-//mail.IsBodyHtml = true;
-//mail.Body = body;
-//Smtp.Send(mail);

@@ -36,7 +36,7 @@ namespace SistemaEducativo.Models.Estudiante
     #endregion
 		
 		public ModelEstudianteDataContext() : 
-				base(global::System.Configuration.ConfigurationManager.ConnectionStrings["PIARConnectionString2"].ConnectionString, mappingSource)
+				base(global::System.Configuration.ConfigurationManager.ConnectionStrings["DefaultConnection"].ConnectionString, mappingSource)
 		{
 			OnCreated();
 		}

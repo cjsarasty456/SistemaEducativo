@@ -1,87 +1,173 @@
-﻿@model SistemaEducativo.Models.IndexViewModel
+﻿@model SistemaEducativo.Models.UpdateRegisterViewModel
 @{
-    ViewBag.Title = "Administrar";
+    ViewBag.Title = "Administrar Usuario";
+    var TipoDocumento = ViewData["TipoDocumento"] as List<SistemaEducativo.Models.Constantes.ObjTipoDocumento>;
+    var Departamentos = ViewData["Departamento"] as List<SistemaEducativo.Models.General.ObDepartamento>;
+    var municipios = ViewData["Municipio"] as List<SistemaEducativo.Models.General.ObjMunicipio>;
+    var municipiosExpedicion = municipios.Where(m => m.CodDepartamento.Equals(Model.CodDepartamentoExpedicion)).ToList();
+    var NivelEducativo = ViewData["NivelEducativo"] as List<SistemaEducativo.Models.Constantes.ObjNivelDocente>;
+    var CargoBase = ViewData["CargoBase"] as List<SistemaEducativo.Models.Configuracion.CargoBaseViewModel>;
+
+    var TipoVinculacion = ViewData["TipoVinculacion"] as List<SistemaEducativo.Models.Configuracion.TipoVinculacionViewModel>;
+    var Zona = ViewData["Zona"] as List<SistemaEducativo.Models.Constantes.ObjZona>;
+    var AreaDesempeno = ViewData["AreaDesempeno"] as List<SistemaEducativo.Models.Configuracion.AreaDesempenoViewModel>;
+    var Instituciones = ViewData["InstitucionEducativa"] as List<SistemaEducativo.Models.General.InstitucionEducativaViewModel>;
+    var Sedes = ViewData["Sede"] as List<SistemaEducativo.Models.General.SedeViewModel>;
+    Sedes = Sedes.Where(m => m.IdInstitucionEducativa == Model.IdInstitucionEducativa).ToList();
+    var GradoEscalafon = ViewData["GradoEscalafon"] as List<SistemaEducativo.Models.Configuracion.GradoEscalafonViewModel>;
 }
 
-<h2>@ViewBag.Title.</h2>
+@*@using (Html.BeginForm())*@
+@using (Html.BeginForm("Index", "Manage", FormMethod.Post, new { @class = "needs-validation", role = "form" }))
+{
 
-<p class="text-success">@ViewBag.StatusMessage</p>
+    <div class="container">
+        <h4>@ViewBag.Title</h4>
+        <h4>Cambiar la configuración de la cuenta</h4>
+        <hr />
+        @*@Html.LabelFor(model => model.IdUser, htmlAttributes: new { @class = "control-label col-md-2" })
+            @Html.EditorFor(model => model.IdUser, new { htmlAttributes = new { @class = "form-control" } })*@
+        @Html.HiddenFor(model => model.Id)
+        @Html.ValidationSummary("", new { @class = "text-danger" })
+        <div class="row">
+            <div class="col col-12 col-md-4">
+                <div class="card">
+                    <div class="card-body">
+                        <div class="nav flex-column nav-pills" id="v-pills-tab" role="tablist" aria-orientation="vertical">
+                            <a class="nav-link active" id="v-pills-Datos-tab" data-toggle="pill" href="#v-pills-Datos" role="tab" aria-controls="v-pills-Datos" aria-selected="true"><i class="fas fa-address-card"> Datos Generales</i></a>
+                            <a class="nav-link" id="v-pills-Vinculacion-tab" data-toggle="pill" href="#v-pills-Vinculacion" role="tab" aria-controls="v-pills-Vinculacion" aria-selected="false"><i class="fas fa-school"> Vinculación</i></a>
+                            <a class="nav-link" id="v-pills-Perfil-tab" data-toggle="pill" href="#v-pills-Perfil" role="tab" aria-controls="v-pills-Perfil" aria-selected="false"><i class="fas fa-user"> Usuario</i></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col col-12 col-md-8">
+                <div class="card">
+                    <div class="card-body">
+                        <input type="submit" class="btn btn-success" value="Guardar" />
+                        <div class="tab-content" id="v-pills-tabContent">
+                            <div class="tab-pane fade show active" id="v-pills-Datos" role="tabpanel" aria-labelledby="v-pills-Datos-tab">
+                                <div class="form-group">
+                                    @Html.LabelFor(model => model.TipoDocumento, htmlAttributes: new { @class = "control-label" })
+                                    @Html.EditorFor(model => model.TipoDocumento, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly" } })
+                                    @Html.ValidationMessageFor(model => model.TipoDocumento, "", new { @class = "text-danger" })
+                                </div>
+                                <div class="form-group">
+                                    @Html.LabelFor(model => model.Documento, htmlAttributes: new { @class = "control-label" })
+                                    @Html.EditorFor(model => model.Documento, new { htmlAttributes = new { @class = "form-control" } })
+                                    @Html.ValidationMessageFor(model => model.Documento, "", new { @class = "text-danger" })
+                                </div>
+                                <div class="form-group">
+                                    @Html.LabelFor(model => model.CodDepartamentoExpedicion, htmlAttributes: new { @class = "control-label" })
+                                    @*@Html.EditorFor(model => model.CodDepartamentoExpedicion, new { htmlAttributes = new { @class = "form-control" } })*@
+                                    @Html.DropDownListFor(m => m.CodDepartamentoExpedicion, new SelectList(Departamentos, "CodDepartamento", "NomDepartamento"), new { @class = "selectpicker form-control", @title = "Seleccione una opción", @onchange = "CargarMunicipioExpedicion(this);" })
+                                    @Html.ValidationMessageFor(model => model.CodDepartamentoExpedicion, "", new { @class = "text-danger" })
+                                </div>
+                                <div class="form-group">
+                                    @Html.LabelFor(model => model.CodMunicipioExpedicion, htmlAttributes: new { @class = "control-label" })
+                                    @Html.DropDownListFor(m => m.CodMunicipioExpedicion, new SelectList(municipiosExpedicion, "CodMunicipio", "NomMunicipio"), new { @class = "selectpicker form-control", @title = "Seleccione una opción" })
+                                    @Html.ValidationMessageFor(model => model.CodMunicipioExpedicion, "", new { @class = "text-danger" })
+                                </div>
+                                <div class="form-group">
+                                    @Html.LabelFor(model => model.FechaNacimiento, htmlAttributes: new { @class = "control-label" })
+                                    <input type="date" id="CmpFechaVinculacion" name="FechaVinculacion" class="form-control" min="1960-01-01" value="@Model.FechaNacimiento.ToString("yyyy-MM-dd")" required>
+                                    <!--<div class="input-group date" id="FechaNacimiento" data-target-input="nearest">
+                                        @Html.EditorFor(model => model.FechaNacimiento, new { htmlAttributes = new { @class = "form-control", @type="date"}})-->
+                                        @*<input type="date" id="CmpFechaVinculacion" name="FechaVinculacion" class="form-control" min="1960-01-01" value="@Model.FechaNacimiento.ToString("yyyy-MM-dd")" required>*@
+                                    <!--</div>-->
+                                    @Html.ValidationMessageFor(model => model.FechaNacimiento, "", new { @class = "text-danger" })
+                                </div>
+                                <div class="form-group">
+                                    @Html.LabelFor(model => model.PrimerNombre, htmlAttributes: new { @class = "control-label" })
+                                    @Html.EditorFor(model => model.PrimerNombre, new { htmlAttributes = new { @class = "form-control" } })
+                                    @Html.ValidationMessageFor(model => model.PrimerNombre, "", new { @class = "text-danger" })
+                                </div>
+                                <div class="form-group">
+                                    @Html.LabelFor(model => model.SegundoNombre, htmlAttributes: new { @class = "control-label" })
+                                    @Html.EditorFor(model => model.SegundoNombre, new { htmlAttributes = new { @class = "form-control" } })
+                                    @Html.ValidationMessageFor(model => model.SegundoNombre, "", new { @class = "text-danger" })
+                                </div>
+                                <div class="form-group">
+                                    @Html.LabelFor(model => model.PrimerApellido, htmlAttributes: new { @class = "control-label" })
+                                    @Html.EditorFor(model => model.PrimerApellido, new { htmlAttributes = new { @class = "form-control" } })
+                                    @Html.ValidationMessageFor(model => model.PrimerApellido, "", new { @class = "text-danger" })
+                                </div>
+                                <div class="form-group">
+                                    @Html.LabelFor(model => model.SegundoApellido, htmlAttributes: new { @class = "control-label" })
+                                    @Html.EditorFor(model => model.SegundoApellido, new { htmlAttributes = new { @class = "form-control" } })
+                                    @Html.ValidationMessageFor(model => model.SegundoApellido, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                            <div class="tab-pane fade" id="v-pills-Vinculacion" role="tabpanel" aria-labelledby="v-pills-Vinculacion-tab">
+                                <div class="form-group">
+                                    @Html.LabelFor(model => model.FechaVinculacion, htmlAttributes: new { @class = "control-label" })
+                                    @Html.EditorFor(model => model.FechaVinculacion, new { htmlAttributes = new { @class = "form-control" } })
+                                    @Html.ValidationMessageFor(model => model.FechaVinculacion, "", new { @class = "text-danger" })
+                                </div>
+                                <div class="form-group">
+                                    @Html.LabelFor(model => model.idTipoVinculacion, htmlAttributes: new { @class = "control-label" })
+                                    @Html.EditorFor(model => model.idTipoVinculacion, new { htmlAttributes = new { @class = "form-control" } })
+                                    @Html.ValidationMessageFor(model => model.idTipoVinculacion, "", new { @class = "text-danger" })
+                                </div>
+                                <div class="form-group">
+                                    @Html.LabelFor(model => model.ZonaAtender, htmlAttributes: new { @class = "control-label" })
+                                    @Html.EditorFor(model => model.ZonaAtender, new { htmlAttributes = new { @class = "form-control" } })
+                                    @Html.ValidationMessageFor(model => model.ZonaAtender, "", new { @class = "text-danger" })
+                                </div>
+                                <div class="form-group">
+                                    @Html.LabelFor(model => model.CargoBase, htmlAttributes: new { @class = "control-label" })
+                                    @Html.EditorFor(model => model.CargoBase, new { htmlAttributes = new { @class = "form-control" } })
+                                    @Html.ValidationMessageFor(model => model.CargoBase, "", new { @class = "text-danger" })
+                                </div>
+                                <div class="form-group">
+                                    @Html.LabelFor(model => model.Nivel, htmlAttributes: new { @class = "control-label" })
+                                    @Html.EditorFor(model => model.Nivel, new { htmlAttributes = new { @class = "form-control" } })
+                                    @Html.ValidationMessageFor(model => model.Nivel, "", new { @class = "text-danger" })
+                                </div>
+                                <div class="form-group">
+                                    @Html.LabelFor(model => model.IdInstitucionEducativa, htmlAttributes: new { @class = "control-label" })
+                                    @Html.EditorFor(model => model.IdInstitucionEducativa, new { htmlAttributes = new { @class = "form-control" } })
+                                    @Html.ValidationMessageFor(model => model.IdInstitucionEducativa, "", new { @class = "text-danger" })
+                                </div>
+                                <div class="form-group">
+                                    @Html.LabelFor(model => model.IdSede, htmlAttributes: new { @class = "control-label" })
+                                    @Html.EditorFor(model => model.IdSede, new { htmlAttributes = new { @class = "form-control" } })
+                                    @Html.ValidationMessageFor(model => model.IdSede, "", new { @class = "text-danger" })
+                                </div>
+                                <div class="form-group">
+                                    @Html.LabelFor(model => model.GradoEscalafon, htmlAttributes: new { @class = "control-label" })
+                                    @Html.EditorFor(model => model.GradoEscalafon, new { htmlAttributes = new { @class = "form-control" } })
+                                    @Html.ValidationMessageFor(model => model.GradoEscalafon, "", new { @class = "text-danger" })
+                                </div>
+                                <div class="form-group">
+                                    @Html.LabelFor(model => model.Titulo, htmlAttributes: new { @class = "control-label" })
+                                    @Html.EditorFor(model => model.Titulo, new { htmlAttributes = new { @class = "form-control" } })
+                                    @Html.ValidationMessageFor(model => model.Titulo, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                            <div class="tab-pane fade" id="v-pills-Perfil" role="tabpanel" aria-labelledby="v-pills-Perfil-tab">
+                                <div class="form-group">
+                                    @Html.LabelFor(model => model.Email, htmlAttributes: new { @class = "control-label" })
+                                    @Html.EditorFor(model => model.Email, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly" } })
+                                    @Html.ValidationMessageFor(model => model.Email, "", new { @class = "text-danger" })
+                                </div>
+                                <div class="form-group">
+                                    @Html.LabelFor(model => model.IdRol, htmlAttributes: new { @class = "control-label" })
+                                    @Html.EditorFor(model => model.IdRol, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly" } })
+                                    @Html.ValidationMessageFor(model => model.IdRol, "", new { @class = "text-danger" })
+                                </div>
+                                Contraseña: <input type="password" class="form-control" value="Hello World" disabled readonly />
+                                [
+                                @Html.ActionLink("Cambiar la contraseña", "ChangePassword")
+                                ]
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+}
 <div>
-    <h4>Cambiar la configuración de la cuenta</h4>
-    <hr />
-    <dl class="dl-horizontal">
-        <dt>Contraseña:</dt>
-        <dd>
-            [
-            @if (Model.HasPassword)
-            {
-                @Html.ActionLink("Cambiar la contraseña", "ChangePassword")
-            }
-            else
-            {
-                @Html.ActionLink("Crear", "SetPassword")
-            }
-            ]
-        </dd>
-        <dt>Inicios de sesión externos:</dt>
-        <dd>
-            @Model.Logins.Count [
-            @Html.ActionLink("Administrar", "ManageLogins") ]
-        </dd>
-        @*
-            Los números de teléfono se pueden usar como una segunda fase de comprobación en un sistema de autenticación en dos fases.
-             
-             Consulte <a href="https://go.microsoft.com/fwlink/?LinkId=403804">este artículo</a>
-                para obtener detalles sobre cómo configurar esta aplicación ASP.NET para que sea compatible con la autenticación en dos fases mediante SMS.
-             
-             Quite la marca de comentario del bloque siguiente después de configurar la autenticación en dos fases
-        *@
-        @*  
-            <dt>Número de teléfono:</dt>
-            <dd>
-                @(Model.PhoneNumber ?? "None")
-                @if (Model.PhoneNumber != null)
-                {
-                    <br />
-                    <text>[&nbsp;&nbsp;@Html.ActionLink("Change", "AddPhoneNumber")&nbsp;&nbsp;]</text>
-                    using (Html.BeginForm("RemovePhoneNumber", "Manage", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
-                    {
-                        @Html.AntiForgeryToken()
-                        <text>[<input type="submit" value="Quitar" class="btn-link" />]</text>
-                    }
-                }
-                else
-                {
-                    <text>[&nbsp;&nbsp;@Html.ActionLink("Add", "AddPhoneNumber")
-                }
-            </dd>
-        *@
-        <dt>Autenticación de dos factores:</dt>
-        <dd>
-            <p>
-                No hay ningún proveedor de autenticación en dos fases configurado. Consulte <a href="https://go.microsoft.com/fwlink/?LinkId=403804">este artículo</a>
-                para obtener detalles sobre cómo configurar esta aplicación ASP.NET para que sea compatible con la autenticación en dos fases.
-            </p>
-            @*@if (Model.TwoFactor)
-                {
-                    using (Html.BeginForm("DisableTwoFactorAuthentication", "Manage", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
-                    {
-                        @Html.AntiForgeryToken()
-                        <text>Habilitado
-                        <input type="submit" value="Deshabilitar" class="btn btn-link" />
-                        </text>
-                    }
-                }
-                else
-                {
-                    using (Html.BeginForm("EnableTwoFactorAuthentication", "Manage", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
-                    {
-                        @Html.AntiForgeryToken()
-                        <text>Deshabilitada
-                        <input type="submit" value="Habilitar" class="btn btn-link" />
-                        </text>
-                    }
-                }*@
-        </dd>
-    </dl>
+    @Html.ActionLink("Back to List", "Index")
 </div>

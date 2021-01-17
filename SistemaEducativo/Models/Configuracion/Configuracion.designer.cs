@@ -57,7 +57,7 @@ namespace SistemaEducativo.Models.Configuracion
     #endregion
 		
 		public ConfiguracionDataContext() : 
-				base(global::System.Configuration.ConfigurationManager.ConnectionStrings["PIARConnectionString2"].ConnectionString, mappingSource)
+				base(global::System.Configuration.ConfigurationManager.ConnectionStrings["DefaultConnection"].ConnectionString, mappingSource)
 		{
 			OnCreated();
 		}

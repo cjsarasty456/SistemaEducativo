@@ -20,13 +20,13 @@ namespace SistemaEducativo.Models.Constantes
 
         public static List<ObjNivelDocente> ConsultaListaNivelDocente()
         {
-            List<ObjNivelDocente> ListaGenero = new List<ObjNivelDocente>() ;
-            ListaGenero.Add(new ObjNivelDocente() { Nivel = NoAplica});
-            ListaGenero.Add(new ObjNivelDocente() { Nivel = Preescolar });
-            ListaGenero.Add(new ObjNivelDocente() { Nivel = Primaria });
-            ListaGenero.Add(new ObjNivelDocente() { Nivel = Secundaria });
-            ListaGenero.Add(new ObjNivelDocente() { Nivel = MediaTecnica });
-            return ListaGenero;
+            List<ObjNivelDocente> ListaNivel = new List<ObjNivelDocente>() ;
+            ListaNivel.Add(new ObjNivelDocente() { Nivel = NoAplica});
+            ListaNivel.Add(new ObjNivelDocente() { Nivel = Preescolar });
+            ListaNivel.Add(new ObjNivelDocente() { Nivel = Primaria });
+            ListaNivel.Add(new ObjNivelDocente() { Nivel = Secundaria });
+            ListaNivel.Add(new ObjNivelDocente() { Nivel = MediaTecnica });
+            return ListaNivel;
         }
     }
 }

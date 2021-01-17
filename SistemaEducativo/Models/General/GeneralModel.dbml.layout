@@ -2,42 +2,42 @@
 <ordesignerObjectsDiagram dslVersion="1.0.0.0" absoluteBounds="0, 0, 11, 8.5" name="GeneralModel">
   <DataContextMoniker Name="/GeneralModelDataContext" />
   <nestedChildShapes>
-    <classShape Id="025a8e7f-9f35-407f-af69-50db14e92282" absoluteBounds="0.5, 0.625, 2, 1.3862939453125">
-      <DataClassMoniker Name="/GeneralModelDataContext/Departamento" />
-      <nestedChildShapes>
-        <elementListCompartment Id="e22074d4-2038-4cc4-bace-10ad7df8194c" absoluteBounds="0.51500000000000012, 1.085, 1.9700000000000002, 0.8262939453125" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
-      </nestedChildShapes>
-    </classShape>
-    <classShape Id="8a018ddf-946f-4c2e-931a-affd7d616940" absoluteBounds="3.25, 0.5, 2, 1.5785953776041664">
-      <DataClassMoniker Name="/GeneralModelDataContext/Municipio" />
-      <nestedChildShapes>
-        <elementListCompartment Id="d0266dae-9d22-4a4c-bf9d-b55b30dbc25e" absoluteBounds="3.2649999999999997, 0.96, 1.9700000000000002, 1.0185953776041665" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
-      </nestedChildShapes>
-    </classShape>
-    <associationConnector edgePoints="[(2.5 : 1.31814697265625); (3.25 : 1.31814697265625)]" fixedFrom="Algorithm" fixedTo="Algorithm">
-      <AssociationMoniker Name="/GeneralModelDataContext/Departamento/Departamento_Municipio" />
-      <nodes>
-        <classShapeMoniker Id="025a8e7f-9f35-407f-af69-50db14e92282" />
-        <classShapeMoniker Id="8a018ddf-946f-4c2e-931a-affd7d616940" />
-      </nodes>
-    </associationConnector>
-    <classShape Id="f27e06e3-c844-4246-b429-bffebae42f69" absoluteBounds="0.5, 2.375, 2, 1.3862939453125005">
-      <DataClassMoniker Name="/GeneralModelDataContext/InstitucionEducativa" />
-      <nestedChildShapes>
-        <elementListCompartment Id="215cd07c-d9e5-4d0b-90d8-e7c78a7d6591" absoluteBounds="0.515, 2.835, 1.9700000000000002, 0.8262939453125" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
-      </nestedChildShapes>
-    </classShape>
-    <classShape Id="d02122da-7664-4625-b3b9-2a21d6b0a754" absoluteBounds="3.25, 2.25, 2, 1.5785953776041666">
+    <classShape Id="6b57a75b-f2ff-4efd-a6a1-ae5a1c9a26c0" absoluteBounds="3.5, 0.875, 2, 1.5785953776041664">
       <DataClassMoniker Name="/GeneralModelDataContext/Sede" />
       <nestedChildShapes>
-        <elementListCompartment Id="84c5ff11-97d1-491e-ba1e-3ab85a0ea1a9" absoluteBounds="3.265, 2.71, 1.9700000000000002, 1.0185953776041665" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+        <elementListCompartment Id="4a615c8c-b25a-4948-ae9f-e467eeb4a734" absoluteBounds="3.515, 1.335, 1.9700000000000002, 1.0185953776041665" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
       </nestedChildShapes>
     </classShape>
-    <associationConnector edgePoints="[(2.5 : 3.06814697265625); (3.25 : 3.06814697265625)]" fixedFrom="Algorithm" fixedTo="Algorithm">
+    <classShape Id="59415d33-5f77-458c-bfaa-d91aeea56ff7" absoluteBounds="0.75, 1, 2, 1.3862939453125">
+      <DataClassMoniker Name="/GeneralModelDataContext/InstitucionEducativa" />
+      <nestedChildShapes>
+        <elementListCompartment Id="675c1f27-3b99-4118-8f0e-4f0ebeda91eb" absoluteBounds="0.765, 1.46, 1.9700000000000002, 0.8262939453125" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <associationConnector edgePoints="[(2.75 : 1.69314697265625); (3.5 : 1.69314697265625)]" fixedFrom="Algorithm" fixedTo="Algorithm">
       <AssociationMoniker Name="/GeneralModelDataContext/InstitucionEducativa/InstitucionEducativa_Sede" />
       <nodes>
-        <classShapeMoniker Id="f27e06e3-c844-4246-b429-bffebae42f69" />
-        <classShapeMoniker Id="d02122da-7664-4625-b3b9-2a21d6b0a754" />
+        <classShapeMoniker Id="59415d33-5f77-458c-bfaa-d91aeea56ff7" />
+        <classShapeMoniker Id="6b57a75b-f2ff-4efd-a6a1-ae5a1c9a26c0" />
+      </nodes>
+    </associationConnector>
+    <classShape Id="ced7fc75-3e55-4fa2-b3cc-1beb81403a00" absoluteBounds="3.5, 3.875, 2, 1.5785953776041666">
+      <DataClassMoniker Name="/GeneralModelDataContext/Municipio" />
+      <nestedChildShapes>
+        <elementListCompartment Id="dad43725-1ae4-4be6-b543-55b498776750" absoluteBounds="3.515, 4.335, 1.9700000000000002, 1.0185953776041665" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="7f742b79-a248-4af6-9b84-eb20768b1b57" absoluteBounds="0.75, 4, 2, 1.3862939453125005">
+      <DataClassMoniker Name="/GeneralModelDataContext/Departamento" />
+      <nestedChildShapes>
+        <elementListCompartment Id="fc4c7568-9f58-4839-88e8-9cc7c1b65124" absoluteBounds="0.765, 4.46, 1.9700000000000002, 0.8262939453125" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <associationConnector edgePoints="[(2.75 : 4.69314697265625); (3.5 : 4.69314697265625)]" fixedFrom="Algorithm" fixedTo="Algorithm">
+      <AssociationMoniker Name="/GeneralModelDataContext/Departamento/Departamento_Municipio" />
+      <nodes>
+        <classShapeMoniker Id="7f742b79-a248-4af6-9b84-eb20768b1b57" />
+        <classShapeMoniker Id="ced7fc75-3e55-4fa2-b3cc-1beb81403a00" />
       </nodes>
     </associationConnector>
   </nestedChildShapes>

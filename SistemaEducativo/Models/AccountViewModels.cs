@@ -70,6 +70,7 @@ namespace SistemaEducativo.Models
             FechaNacimiento = DateTime.Now;
             FechaVinculacion = DateTime.Now;
         }
+        public string Id { get; set; }
         public string IdUser { get; set; }
 
         [Required]
@@ -127,7 +128,7 @@ namespace SistemaEducativo.Models
 
         [Required]
         [Display(Name = "Área Desempeño")]
-        public List<string> AreaDesempeno { get; set; }
+        public List<int> AreaDesempeno { get; set; }
 
         [Required(ErrorMessage = "La institución Educativa es obligatoria")]
         [Display(Name = "Institución Educativa")]
@@ -164,6 +165,98 @@ namespace SistemaEducativo.Models
         [Required]
         [Display(Name = "Rol")]
         public int IdRol { get; set; }
+        public DateTime FechaCreacion { get; set; }
+        public DateTime FechaModificacion { get; set; }
+
+    }
+    public class UpdateRegisterViewModel
+    {
+        public string Id { get; set; }
+        public string IdUser { get; set; }
+
+        [Required]
+        [Display(Name = "Tipo de Documento")]
+        public string TipoDocumento { get; set; }
+
+        [Required]
+        [Display(Name = "Documento")]
+        public string Documento { get; set; }
+
+        [Required]
+        [Display(Name = "Departamento Expedición")]
+        public string CodDepartamentoExpedicion { get; set; }
+
+        [Required]
+        [Display(Name = "Municipio Expedición")]
+        public string CodMunicipioExpedicion { get; set; }
+        [Required]
+        [Display(Name = "Fecha Nacimiento")]
+        public DateTime FechaNacimiento { get; set; }
+
+        [Required]
+        [Display(Name = "Primer Nombre")]
+        public string PrimerNombre { get; set; }
+
+        [Display(Name = "Segundo Nombre")]
+        public string SegundoNombre { get; set; }
+
+        [Required]
+        [Display(Name = "Primer Apellido")]
+        public string PrimerApellido { get; set; }
+
+        [Display(Name = "Segundo Apellido")]
+        public string SegundoApellido { get; set; }
+
+        [Required]
+        [Display(Name = "Fecha Vinculación")]
+        public DateTime FechaVinculacion { get; set; }
+
+        [Required]
+        [Display(Name = "Tipo Vinculación")]
+        public int idTipoVinculacion { get; set; }
+
+        [Required]
+        [Display(Name = "Zona Atender")]
+        public string ZonaAtender { get; set; }
+
+        [Required]
+        [Display(Name = "Cargo Base")]
+        public int CargoBase { get; set; }
+
+        [Required]
+        [Display(Name = "Nivel")]
+        public string Nivel { get; set; }
+
+        [Required]
+        [Display(Name = "Área Desempeño")]
+        public List<int> AreaDesempeno { get; set; }
+
+        [Required(ErrorMessage = "La institución Educativa es obligatoria")]
+        [Display(Name = "Institución Educativa")]
+        public int IdInstitucionEducativa { get; set; }
+
+        [Required]
+        [Display(Name = "Sede")]
+        public int IdSede { get; set; }
+
+        [Required]
+        [Display(Name = "Grado Escalafón")]
+        public int GradoEscalafon { get; set; }
+
+        [Required]
+        [Display(Name = "Titulo")]
+        public string Titulo { get; set; }
+
+        [Required]
+        [EmailAddress]
+        [Display(Name = "Correo electrónico")]
+        public string Email { get; set; }
+
+        [Required]
+        [Display(Name = "Rol")]
+        public int IdRol { get; set; }
+        public DateTime FechaCreacion { get; set; }
+        public DateTime FechaModificacion { get; set; }
 
     }
 

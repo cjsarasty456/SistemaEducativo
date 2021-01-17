@@ -7,6 +7,9 @@ using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
 using SistemaEducativo.Models;
+using SistemaEducativo.Models.General;
+using SistemaEducativo.Models.Constantes;
+using SistemaEducativo.Models.Configuracion;
 
 namespace SistemaEducativo.Controllers
 {
@@ -19,6 +22,45 @@ namespace SistemaEducativo.Controllers
         public ManageController()
         {
         }
+
+        [Authorize]
+        [HttpPost]
+        public JsonResult ConsultaListaMunicipio(string CodDepartamento)
+        {
+            var Lista = MunicipioControlador.ConsultaListaMunicipioPorDepartamento(CodDepartamento);
+
+            return Json(Lista);
+        }
+
+        [Authorize]
+        [HttpPost]
+        public JsonResult ConsultaListaSedes(int Institucion)
+        {
+            var Lista = SedeControlador.ConsultaListaSedesPorIntitucion(Institucion);
+
+            return Json(Lista);
+        }
+
+        public void CargarFormulario()
+        {
+            ViewData["TipoDocumento"] = TipoDocumento.ConsultaListaTipoDocumento();
+            ViewData["Genero"] = Genero.ConsultaListaGenero();
+            ViewData["Jornada"] = Jornada.ConsultaListaJornada();
+            ViewData["InstitucionEducativa"] = InstitucionEducativaControlador.ConsultaListaInstitucionEducativa();
+            ViewData["Sede"] = SedeControlador.ConsultaListaSedes();
+            ViewData["Grado"] = Grado.ConsultaListaGrado();
+            ViewData["GradoEscalafon"] = GradoEscalafonControlador.ConsultaListaInstitucionEducativa();
+            ViewData["TipoVinculacion"] = TipoVinculacionControlador.ConsultaListaTipoVinculacion();
+            ViewData["Departamento"] = MunicipioControlador.ConsultaListaDepartamentos();
+            ViewData["Municipio"] = MunicipioControlador.ConsultaListaMunicipio();
+            ViewData["AfiliacionSalud"] = AfiliacionSalud.ConsultaListaAfiliacionSalud();
+            ViewData["NivelEducativo"] = NivelDocente.ConsultaListaNivelDocente();
+            ViewData["Rol"] = RolControlador.ConsultaListaRoles();
+            ViewData["CargoBase"] = CargoBaseControlador.ConsultaListaCargoBase();
+            ViewData["AreaDesempeno"] = AreaDesempenoControlador.ConsultaListaAreaDesempeno();
+            ViewData["Zona"] = Zona.ConsultaListaZona();
+        }
+
 
         public ManageController(ApplicationUserManager userManager, ApplicationSignInManager signInManager)
         {
@@ -49,30 +91,46 @@ namespace SistemaEducativo.Controllers
                 _userManager = value;
             }
         }
-
-        //
-        // GET: /Manage/Index
-        public async Task<ActionResult> Index(ManageMessageId? message)
+        public ActionResult Index(ManageMessageId? message)
         {
             ViewBag.StatusMessage =
-                message == ManageMessageId.ChangePasswordSuccess ? "Su contraseña se ha cambiado."
-                : message == ManageMessageId.SetPasswordSuccess ? "Su contraseña se ha establecido."
-                : message == ManageMessageId.SetTwoFactorSuccess ? "Su proveedor de autenticación de dos factores se ha establecido."
-                : message == ManageMessageId.Error ? "Se ha producido un error."
-                : message == ManageMessageId.AddPhoneSuccess ? "Se ha agregado su número de teléfono."
-                : message == ManageMessageId.RemovePhoneSuccess ? "Se ha quitado su número de teléfono."
-                : "";
-
-            var userId = User.Identity.GetUserId();
-            var model = new IndexViewModel
+      message == ManageMessageId.ChangePerfilSuccess ? "Perfil Actualizado."
+      : message == ManageMessageId.ChangePasswordSuccess ? "Su contraseña se ha cambiado."
+      : message == ManageMessageId.SetPasswordSuccess ? "Su contraseña se ha establecido."
+      : message == ManageMessageId.SetTwoFactorSuccess ? "Su proveedor de autenticación de dos factores se ha establecido."
+      : message == ManageMessageId.Error ? "Se ha producido un error."
+      : message == ManageMessageId.AddPhoneSuccess ? "Se ha agregado su número de teléfono."
+      : message == ManageMessageId.RemovePhoneSuccess ? "Se ha quitado su número de teléfono."
+      : "";
+            //var userId = User.Identity.GetUserId();
+            //var model = new IndexViewModel
+            //{
+            //    HasPassword = HasPassword(),
+            //    PhoneNumber = await UserManager.GetPhoneNumberAsync(userId),
+            //    TwoFactor = await UserManager.GetTwoFactorEnabledAsync(userId),
+            //    Logins = await UserManager.GetLoginsAsync(userId),
+            //    BrowserRemembered = await AuthenticationManager.TwoFactorBrowserRememberedAsync(userId)
+            //};
+            CargarFormulario();
+            var Usuario = UsuarioControlador.ConsultaUsuario(User.Identity.GetUserId());
+            return View(Usuario);
+        }
+            // Post: /Manage/Index
+        [HttpPost]
+        public ActionResult Index(UpdateRegisterViewModel Model)
+        {
+            if (ModelState.IsValid)
             {
-                HasPassword = HasPassword(),
-                PhoneNumber = await UserManager.GetPhoneNumberAsync(userId),
-                TwoFactor = await UserManager.GetTwoFactorEnabledAsync(userId),
-                Logins = await UserManager.GetLoginsAsync(userId),
-                BrowserRemembered = await AuthenticationManager.TwoFactorBrowserRememberedAsync(userId)
-            };
-            return View(model);
+                UsuarioControlador.ActualizarPefil(Model);
+                var message = ManageMessageId.ChangePerfilSuccess;
+                RedirectToAction("Index", new { Message = message });
+                return View();
+            }
+            else
+            {
+                CargarFormulario();
+                return View(Model);
+            }
         }
 
         //
@@ -377,6 +435,7 @@ namespace SistemaEducativo.Controllers
         {
             AddPhoneSuccess,
             ChangePasswordSuccess,
+            ChangePerfilSuccess,
             SetTwoFactorSuccess,
             SetPasswordSuccess,
             RemoveLoginSuccess,

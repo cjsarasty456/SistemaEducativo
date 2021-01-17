@@ -68,7 +68,6 @@ namespace SistemaEducativo.Controllers
 
         public ActionResult Usuario()
         {
-            var prueba = User.Identity.GetUserId();
             return View();
         }
 
@@ -322,6 +321,7 @@ namespace SistemaEducativo.Controllers
                 if (result.Succeeded)
                 {
                     RecuperacionContrasenaControlador.EliminarRecuperacion(user.Id);
+                    GestorCorreo.EmailCambioContrasena(model.Email);
                     return RedirectToAction("ResetPasswordConfirmation", "Account");
                 }
             AddErrors(result);
@@ -340,14 +340,14 @@ namespace SistemaEducativo.Controllers
 
         //
         // POST: /Account/ExternalLogin
-        [HttpPost]
-        [AllowAnonymous]
-        [ValidateAntiForgeryToken]
-        public ActionResult ExternalLogin(string provider, string returnUrl)
-        {
-            // Solicitar redireccionamiento al proveedor de inicio de sesión externo
-            return new ChallengeResult(provider, Url.Action("ExternalLoginCallback", "Account", new { ReturnUrl = returnUrl }));
-        }
+        //[HttpPost]
+        //[AllowAnonymous]
+        //[ValidateAntiForgeryToken]
+        //public ActionResult ExternalLogin(string provider, string returnUrl)
+        //{
+        //    // Solicitar redireccionamiento al proveedor de inicio de sesión externo
+        //    return new ChallengeResult(provider, Url.Action("ExternalLoginCallback", "Account", new { ReturnUrl = returnUrl }));
+        //}
 
         //
         // GET: /Account/SendCode
